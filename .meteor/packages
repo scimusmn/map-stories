@@ -20,3 +20,5 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 autopublish             # Publish all data to the clients (for prototyping)
 react-meteor-data
 insecure
+accounts-ui
+accounts-password
