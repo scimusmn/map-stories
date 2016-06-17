@@ -6,6 +6,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Locations } from '../api/locations.js';
 
 import Location from './Location.jsx';
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 // App component - represents the whole app
 class App extends Component {
@@ -63,6 +64,8 @@ class App extends Component {
               />
               Hide Completed Locations
             </label>
+
+            <AccountsUIWrapper />
 
             <form className="new-location" onSubmit={this.handleSubmit.bind(this)} >
               <input
