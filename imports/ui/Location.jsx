@@ -32,8 +32,9 @@ export default class Location extends Component {
           onClick={this.toggleChecked.bind(this)}
           />
 
-        <span className="text">{this.props.location.text}</span>
-
+        <span className="text">
+          <strong>{this.props.location.username}</strong>: {this.props.location.text}
+        </span>
       </li>
     );
   }

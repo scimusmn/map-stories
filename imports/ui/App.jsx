@@ -32,6 +32,8 @@ class App extends Component {
     Locations.insert({
       text,
       createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username,
     });
 
     // Clear form
@@ -67,13 +69,15 @@ class App extends Component {
 
             <AccountsUIWrapper />
 
-            <form className="new-location" onSubmit={this.handleSubmit.bind(this)} >
-              <input
-                type="text"
-                ref="textInput"
-                placeholder="Type to add new locations"
-              />
-            </form>
+            { this.props.currentUser ?
+              <form className="new-location" onSubmit={this.handleSubmit.bind(this)} >
+                <input
+                  type="text"
+                  ref="textInput"
+                  placeholder="Type to add new locations"
+                  />
+              </form> : ''
+            }
         </header>
 
         <ul>
@@ -87,9 +91,11 @@ class App extends Component {
 App.propTypes = {
   locations: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
+  currentUser: PropTypes.object,
 };
 
 export default createContainer(() => ({
   locations: Locations.find({}, { sort: { createdAt: -1 } }).fetch(),
   incompleteCount: Locations.find({ checked: { $ne: true } }).count(),
+  currentUser: Meteor.user(),
 }), App);
