@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Locations } from '../../api/locations.js';
 
-// if the database is empty on server start, create some sample data.
+// If the database is empty on server start, create some sample data.
 Meteor.startup(() => {
   if (Locations.find().count() === 0) {
     const data = [
