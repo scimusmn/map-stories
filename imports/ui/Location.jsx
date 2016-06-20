@@ -33,7 +33,7 @@ export default class Location extends Component {
           />
 
         <span className="text">
-          <strong>{this.props.location.username}</strong>: {this.props.location.text}
+          <strong>{this.props.location.username}</strong>: {this.props.location.name}
         </span>
       </li>
     );
