@@ -7,6 +7,7 @@ import { Index } from '../../ui/components/index.jsx';
 
 import { One } from '../../ui/components/one.jsx';
 import { Two } from '../../ui/components/two.jsx';
+import { Hello } from '../../ui/pages/hello.jsx';
 import { NotFound } from '../../ui/components/notFound.jsx';
 
 Meteor.startup(() => {
@@ -16,6 +17,7 @@ Meteor.startup(() => {
         <IndexRoute component={ Index } />
         <Route path="/one" component={ One } />
         <Route path="/two" component={ Two } />
+        <Route path="/hello/:name" component={ Hello } />
       </Route>
       <Route path="*" component={ NotFound } />
     </Router>,
