@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Locations } from '../api/locations/locations.js';
+import { Places } from '../api/places/places.js';
 
-import Location from './Location.jsx';
+import Place from './Place.jsx';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 // App component - represents the whole app
@@ -29,7 +29,7 @@ class App extends Component {
 
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
-    Locations.insert({
+    Places.insert({
       text,
       createdAt: new Date(),
       owner: Meteor.userId(),
@@ -41,14 +41,14 @@ class App extends Component {
 
   }
 
-  renderLocations() {
-    let filteredLocations = this.props.locations;
+  renderPlaces() {
+    let filteredPlaces = this.props.places;
     if (this.state.hideCompleted) {
-      filteredLocations = filteredLocations.filter(location => !location.checked);
+      filteredPlaces = filteredPlaces.filter(place => !place.checked);
     }
 
-    return filteredLocations.map((location) => (
-      <Location key={location._id} location={location} />
+    return filteredPlaces.map((place) => (
+      <Place key={place._id} place={place} />
     ));
   }
 
@@ -64,24 +64,24 @@ class App extends Component {
                 checked={this.state.hideCompleted}
                 onClick={this.toggleHideCompleted.bind(this)}
               />
-              Hide Completed Locations
+              Hide Completed Places
             </label>
 
             <AccountsUIWrapper />
 
             { this.props.currentUser ?
-              <form className="new-location" onSubmit={this.handleSubmit.bind(this)} >
+              <form className="new-place" onSubmit={this.handleSubmit.bind(this)} >
                 <input
                   type="text"
                   ref="textInput"
-                  placeholder="Type to add new locations"
+                  placeholder="Type to add new places"
                   />
               </form> : ''
             }
         </header>
 
         <ul>
-          {this.renderLocations()}
+          {this.renderPlaces()}
         </ul>
       </div>
     );
@@ -89,13 +89,13 @@ class App extends Component {
 }
 
 App.propTypes = {
-  locations: PropTypes.array.isRequired,
+  places: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
   currentUser: PropTypes.object,
 };
 
 export default createContainer(() => ({
-  locations: Locations.find({}, { sort: { createdAt: -1 } }).fetch(),
-  incompleteCount: Locations.find({ checked: { $ne: true } }).count(),
+  places: Places.find({}, { sort: { createdAt: -1 } }).fetch(),
+  incompleteCount: Places.find({ checked: { $ne: true } }).count(),
   currentUser: Meteor.user(),
 }), App);

@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
-import { Locations } from '../../api/locations/locations.js';
+import { Places } from '../../api/places/places.js';
 
 // If the database is empty on server start, create some sample data.
 Meteor.startup(() => {
-  Locations.remove({});
-  if (Locations.find().count() === 0) {
+  Places.remove({});
+  if (Places.find().count() === 0) {
     const data = [
       {
         name: 'Pike Island',
@@ -18,8 +18,8 @@ Meteor.startup(() => {
       },
     ];
 
-    data.forEach((location) => {
-      Locations.insert(location);
+    data.forEach((place) => {
+      Places.insert(place);
 
     });
   }

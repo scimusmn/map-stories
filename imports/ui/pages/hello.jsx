@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const Hello = ({ params, location }) => (
-  <h3>Howdy, {params.name}! You like {location.query.food}.</h3>
+export const Hello = ({ params, place }) => (
+  <h3>Howdy, {params.name}! You like {place.query.food}.</h3>
 );

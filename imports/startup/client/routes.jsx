@@ -1,8 +1,10 @@
-import React  from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import { App } from '../../ui/layouts/app.jsx';
+import AppContainer from '../../ui/containers/AppContainer.jsx';
+
+import { App } from '../../ui/layouts/App.jsx';
 import { Index } from '../../ui/components/index.jsx';
 
 import { One } from '../../ui/components/one.jsx';
@@ -12,12 +14,12 @@ import { NotFound } from '../../ui/components/notFound.jsx';
 
 export const renderRoutes = () => (
   <Router history={ browserHistory }>
-      <Route path="/" component={ App }>
-        <IndexRoute component={ Index } />
-        <Route path="/one" component={ One } />
-        <Route path="/two" component={ Two } />
-        <Route path="/hello/:name" component={ Hello } />
-      </Route>
-      <Route path="*" component={ NotFound } />
-    </Router>,
+    <Route path="/" component={ AppContainer }>
+      <IndexRoute component={ Index } />
+      <Route path="/one" component={ One } />
+      <Route path="/two" component={ Two } />
+      <Route path="/hello/:name" component={ Hello } />
+    </Route>
+    <Route path="*" component={ NotFound } />
+  </Router>
 );
