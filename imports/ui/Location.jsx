@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-
 import { Locations } from '../api/locations.js';
 
 // Location component - represents a single location item
