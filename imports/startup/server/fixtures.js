@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Locations } from '../../api/locations.js';
+import { Locations } from '../../api/locations/locations.js';
 
 // If the database is empty on server start, create some sample data.
 Meteor.startup(() => {

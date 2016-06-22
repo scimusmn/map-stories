@@ -10,9 +10,8 @@ import { Two } from '../../ui/components/two.jsx';
 import { Hello } from '../../ui/pages/hello.jsx';
 import { NotFound } from '../../ui/components/notFound.jsx';
 
-Meteor.startup(() => {
-  render(
-    <Router history={ browserHistory }>
+export const renderRoutes = () => (
+  <Router history={ browserHistory }>
       <Route path="/" component={ App }>
         <IndexRoute component={ Index } />
         <Route path="/one" component={ One } />
@@ -21,6 +20,4 @@ Meteor.startup(() => {
       </Route>
       <Route path="*" component={ NotFound } />
     </Router>,
-    document.getElementById('react-root')
-  );
-});
+);

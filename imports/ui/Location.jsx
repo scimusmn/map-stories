@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { Locations } from '../api/locations.js';
+import { Locations } from '../api/locations/locations.js';
 
 // Location component - represents a single location item
 export default class Location extends Component {
+
   toggleChecked() {
     Locations.update(this.props.location._id, {
       $set: { checked: !this.props.location.checked },
