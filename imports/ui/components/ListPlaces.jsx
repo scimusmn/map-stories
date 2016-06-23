@@ -22,7 +22,6 @@ export default class ListPlaces extends React.Component {
         </ul>
       </div>
     );
-
   }
 
 }
