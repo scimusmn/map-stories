@@ -15,7 +15,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Navigation />
-        <h3>App component</h3>
+        <h3>List of places</h3>
         <ListPlaces places={places}/>
       </div>
     );
