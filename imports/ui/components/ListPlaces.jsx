@@ -14,7 +14,6 @@ export default class ListPlaces extends React.Component {
     const { places } = this.props;
     return (
       <div>
-        <p>List of Places</p>
         <ul>
           {places.map(place => (
             <li> {place.name} </li>
