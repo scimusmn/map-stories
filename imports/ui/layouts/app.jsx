@@ -21,9 +21,18 @@ export default class App extends React.Component {
 }
 
 App.propTypes = {
-  user: React.PropTypes.object,      // current meteor user
-  connected: React.PropTypes.bool,   // server connection status
-  loading: React.PropTypes.bool,     // subscription status
-  menuOpen: React.PropTypes.bool,    // is side menu open?
-  places: React.PropTypes.object,      // all places visible to the current user
+  // current meteor user
+  user: React.PropTypes.object,
+
+  // server connection status
+  connected: React.PropTypes.bool,
+
+  // subscription status
+  loading: React.PropTypes.bool,
+
+  // is side menu open?
+  menuOpen: React.PropTypes.bool,
+
+  // All the places visible to the current user
+  places: React.PropTypes.object,
 };
