@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+/**
+ * List of places component
+ */
 export default class ListPlaces extends React.Component {
 
   constructor(props) {
