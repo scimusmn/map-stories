@@ -4,8 +4,12 @@ import { Places } from '../../api/places/places.js';
 
 import ListPlaces from '../components/ListPlaces.jsx';
 
+/**
+ * Highest level presentational component
+ *
+ * Contains all of our dynamic components
+ */
 export default class App extends React.Component {
-
   render() {
     const { places } = this.props;
     return (
@@ -15,9 +19,7 @@ export default class App extends React.Component {
         <ListPlaces places={places}/>
       </div>
     );
-
   }
-
 }
 
 App.propTypes = {
