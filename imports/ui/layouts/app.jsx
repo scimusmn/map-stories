@@ -36,5 +36,5 @@ App.propTypes = {
   menuOpen: React.PropTypes.bool,
 
   // All the places visible to the current user
-  places: React.PropTypes.object,
+  places: React.PropTypes.array,
 };
