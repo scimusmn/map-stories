@@ -19,8 +19,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Navigation />
-        <h3>List of places</h3>
-        <ListPlaces places={places}/>
+        {children}
       </div>
     );
   }
