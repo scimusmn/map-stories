@@ -11,7 +11,10 @@ import ListPlaces from '../components/ListPlaces.jsx';
  */
 export default class App extends React.Component {
   render() {
-    const { places } = this.props;
+    // Load data from props
+    const { children, places } = this.props;
+
+    // Presentation layout
     return (
       <div>
         <Navigation />
@@ -37,4 +40,8 @@ App.propTypes = {
 
   // All the places visible to the current user
   places: React.PropTypes.array,
+
+  // IndexRoute children
+  children: React.PropTypes.element.isRequired,
+
 };
