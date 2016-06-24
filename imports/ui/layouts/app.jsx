@@ -11,6 +11,7 @@ import ListPlaces from '../components/ListPlaces.jsx';
  */
 export default class App extends React.Component {
   render() {
+
     // Load data from props
     const { children, places } = this.props;
 
