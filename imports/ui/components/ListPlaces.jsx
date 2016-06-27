@@ -13,7 +13,7 @@ export default class ListPlaces extends React.Component {
   render() {
     const { places } = this.props;
     return (
-      <div>
+      <div className="container container-map map-base">
         <h3>List of places</h3>
         <ul>
           {places.map(place => (

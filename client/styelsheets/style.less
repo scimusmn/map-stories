@@ -1,0 +1,204 @@
+/* Project styles */
+@import "_colors.import.less";
+@import "_sizes.import.less";
+@import "_fonts.import.less";
+@import "_animate.import.less";
+
+body {
+  background: @base-drk-blue, 10%;
+  background-image: url("/images/map-base-v01.jpg");
+  color: white;
+  margin: 0;
+  padding: 0;
+  font-family: 'proximaNova', sans-serif;
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body.kiosk-mode {
+  cursor: none;
+}
+
+h1, h2, h3 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 60px;
+  background: lighten(@base-drk-blue, 10%);
+  padding: 20px;
+  // width: 550px;
+  // padding: 20px;
+  font-family: 'national-medium', sans-serif;
+  box-shadow: 6px 6px 20px #222222;
+}
+
+#screensaver {
+  width: @screen-width;
+  max-width: @screen-width;
+  height: @screen-height;
+  padding: 0;
+  background: white;
+  font-size: 80px;
+  color: #FFF;
+  z-index: 9999;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none;
+}
+/**
+ * ----------------------------------------------------------------------------
+ * Map container
+ * ----------------------------------------------------------------------------
+ */
+.container {
+  width: @screen-width;
+  height: @screen-height;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Single location page
+ * ----------------------------------------------------------------------------
+ */
+.location {
+  opacity: 0;
+  width: 1870px;
+  height: 980px;
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  bottom: 0;
+  right: 0;
+}
+
+.location > * {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+h3.location-headline {
+  position: absolute;
+  top: -40px;
+  left: -5px;
+  opacity: 1;
+  padding: 45px 45px 25px 40px;
+  font-family: 'FuturaTS-Demibold', sans-serif;
+  font-size: 45px;
+  box-shadow: 6px 6px 20px #222222;
+  background:
+    url("/images/redox_02.jpg");
+}
+
+.location-footer {
+  position: absolute;
+  top: 950px;
+  left: 28px;
+  height: 110px;
+  width: 110px;
+  background: #e2d9c2;
+  margin: 20px auto 0 auto;
+  text-align: center;
+  font-size: 35px;
+  box-shadow: 4px 4px 20px #222222;
+  padding-top: 20px;
+  font-size: 50px;
+}
+
+.location-footer,
+.location-footer a {
+  color: darken(@base-drk-blue, 5%);
+}
+
+.location-footer a {
+  display: block;
+  width: 100%;
+  padding-top: 9px;
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Image detail on location page
+ * ----------------------------------------------------------------------------
+ */
+.image-detail {
+  position: absolute;
+  top: 30px;
+  left: 65px;
+  background-image: url("/images/lightpaperfibers.jpg");
+  padding: 15px;
+  color: darken(@base-drk-blue, 5%);
+  font-size: 15px;
+  overflow: hidden;
+  width: 710px;
+  height: 610px;
+  box-shadow: 4px 4px 20px #222222;
+}
+
+.image-detail-contents {
+  border: 2px solid darken(@base-drk-blue, 5%);
+  padding: 20px;
+  height: 580px;
+  bakground: rgba(255, 255, 255, .4);
+}
+
+.image-fullsize {
+  display: block;
+  float: right;
+  padding: 10px;
+  background: lighten(@background-tan, 20%);
+  transform: rotate(1deg);
+  margin-top: -40px;
+  margin-right: 50px;
+  box-shadow: 4px 4px 20px #222222;
+}
+
+.image-description,
+.image-description-es {
+  font-size: 26px;
+}
+
+.image-location {
+  font-size: 35px;
+  font-family: 'FuturaTS-Medium', sans-serif;
+}
+
+.image-date {
+  font-size: 32px;
+  font-family: 'FuturaTS-Medium', sans-serif;
+}
+
+.image-credit-line {
+  position: absolute;
+  top: auto;
+  bottom: 30px;
+  right: 55px;
+  left: auto;
+  font-size: 18px;
+  text-align: right;
+  width: 700px;
+}
+
+.info-heading {
+  text-align: center;
+}
+
+.image-description-es,
+.image-description {
+  float: left;
+  width: 100%;
+  padding-right: 50px;
+  margin-bottom: 20px;
+  clear: both;
+}
+
+.image-description-es {
+  color: black;
+}
