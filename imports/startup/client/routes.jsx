@@ -9,7 +9,6 @@ import PlaceContainer from '../../ui/containers/PlaceContainer.jsx';
 import { App } from '../../ui/layouts/App.jsx';
 import { Index } from '../../ui/components/index.jsx';
 
-import { Place } from '../../ui/pages/place.jsx';
 import { NotFound } from '../../ui/components/notFound.jsx';
 import ListPlaces from '../../ui/components/ListPlaces.jsx';
 
