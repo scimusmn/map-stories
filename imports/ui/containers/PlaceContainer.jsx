@@ -15,7 +15,8 @@ const composer = (props, onData) => {
   const subscription = Meteor.subscribe('places');
   if (subscription.ready()) {
     const places = Places.find({ slug: props.params.slug }).fetch();
-    onData(null, { places });
+    const initialRectWidth = 300;
+    onData(null, { places, initialRectWidth });
   }
 };
 
