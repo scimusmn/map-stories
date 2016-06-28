@@ -5,9 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "canvas": "^1.4.0",
     "jsdom": "^9.3.0",
-    "konva": "^0.15.0",
     "lodash": "^4.13.1",
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.1.0",
@@ -19,10 +17,8 @@
     "react-addons-test-utils": "^15.1.0",
     "react-addons-transition-group": "^15.1.0",
     "react-addons-update": "^15.1.0",
-    "react-canvas-component": "0.0.8",
     "react-dom": "^15.1.0",
     "react-komposer": "^1.11.0",
-    "react-konva": "^1.0.1",
     "react-router": "^2.4.1"
   }
 }

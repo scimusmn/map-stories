@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Loading } from '../../ui/components/loading.js';
-import { Layer, Rect, Stage, Group } from 'react-konva';
 
 export var SinglePlace = React.createClass({
   getInitialState: function () {
@@ -21,14 +20,6 @@ export var SinglePlace = React.createClass({
       {places.map((place) => (
         <div key={ place._id } >
           <h2>{place.name}</h2>
-          <Stage width={700} height={700}>
-            <Layer>
-              <Rect
-                onClick={this.handleClick}
-                fill="pink"
-                x={10} y={10} width={this.state.rectWidth} height={300}/>
-            </Layer>
-          </Stage>
         </div>
         ))}
       </div> :

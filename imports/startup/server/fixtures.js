@@ -10,13 +10,13 @@ Meteor.startup(() => {
     const data = [
       {
         name: 'Pike Island',
-        lat: 44.892222,
-        long: -93.165278,
+        x: 100,
+        y: 400,
       },
       {
         name: 'Fort Snelling',
-        lat: 44.892778,
-        long: -93.180556,
+        x: 600,
+        y: 700,
       },
     ];
 
