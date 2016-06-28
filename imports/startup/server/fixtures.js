@@ -12,11 +12,13 @@ Meteor.startup(() => {
         name: 'Pike Island',
         x: 100,
         y: 400,
+        color: 'purple',
       },
       {
         name: 'Fort Snelling',
         x: 600,
         y: 700,
+        color: 'yellow',
       },
     ];
 

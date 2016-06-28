@@ -16,9 +16,9 @@ export default class App extends React.Component {
     const { children, places } = this.props;
 
     // Presentation layout
+    // We removed the <Navigation /> componet until the UI is better developed
     return (
       <div>
-        <Navigation />
         {children}
       </div>
     );

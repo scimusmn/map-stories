@@ -10,18 +10,26 @@ export default class ListPlaces extends React.Component {
     super(props);
   }
 
+  clickPlace(event, place) {
+    console.log('event: ', event);
+    console.log('place: ', place);
+  }
+
   render() {
     const { places } = this.props;
     return (
       <div className="container container-map map-base">
-        <h3>List of places</h3>
-        <ul>
+        <h3>MNRRA</h3>
+        <svg width="1920" height="1080">
           {places.map(place => (
-            <li key={place._id}>
-              <Link to={'/place/' + place.slug}>{place.name}</Link>
-            </li>
+            <circle
+              key={place._id}
+              cx={place.x} cy={place.y}
+              r={10} fill={place.color}
+              onClick={this.clickPlace.bind(this, event)}
+            />
           ))}
-        </ul>
+        </svg>
       </div>
     );
   }
