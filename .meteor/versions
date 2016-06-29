@@ -21,6 +21,7 @@ caching-compiler@1.0.5_1
 caching-html-compiler@1.0.6
 callback-hook@1.0.9
 check@1.2.3
+d3js:d3@3.5.8
 ddp@1.2.5
 ddp-client@1.2.8_1
 ddp-common@1.2.6
@@ -74,6 +75,7 @@ modules@0.6.4
 modules-runtime@0.6.4_1
 mongo@1.1.9_1
 mongo-id@1.0.5
+mrt:topojson@1.6.8
 msavin:jetsetter@2.0.0
 msavin:mongol@2.0.1
 npm-bcrypt@0.8.6_1
