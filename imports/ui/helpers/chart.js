@@ -37,36 +37,32 @@ d3Chart.destroy = function (el) {
 };
 
 d3Chart._drawMap = function (el, places, settings, data) {
+
+  // Set up map projection
   var projection = d3.geo.mercator()
       .scale(settings.mapScale)
       .center([settings.mapX, settings.mapY])
       .precision(0.1);
-  var path = d3.geo.path()
-    .projection(projection);
 
-  var g = d3.select(el).selectAll('.d3-map');
-
+  // Draw county boundaries
+  var path = d3.geo.path().projection(projection);
+  var mapG = d3.select(el).selectAll('.d3-map');
   d3.json('/data/counties.json', function (error, counties) {
-    g.append('path')
+    mapG.append('path')
     .datum(topojson.feature(counties, counties.objects.counties))
     .attr('d', path)
     .attr('class', 'states');
   });
 
-  var point = g.selectAll('.d3-points')
-    .data(places, function (d) { return d.id; });
-
-  point.enter().append('circle')
-    .attr('cx', function (d) {
-      const latLong = [d.long, d.lat];
-      return projection(latLong)[0];
-    })
-    .attr('cy', function (d) {
-      const latLong = [d.long, d.lat];
-      return projection(latLong)[1];
-    })
-    .attr('r', '8px')
-    .attr('fill', 'red');
+  // Draw points at each location
+  var pointG = d3.select(el).selectAll('.d3-points');
+  var point = pointG.selectAll('dot')
+      .data(places)
+    .enter().append('circle')
+      .attr('cx', function (d) { return projection([d.long, d.lat])[0]; })
+      .attr('cy', function (d) { return projection([d.long, d.lat])[1]; })
+      .attr('r', '8px')
+      .attr('fill', 'red');
 };
 
 export default d3Chart;
