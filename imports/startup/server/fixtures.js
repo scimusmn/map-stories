@@ -9,6 +9,16 @@ Meteor.startup(() => {
 
     const data = [
       {
+        name: 'Coon Rapids',
+        lat: 45.12,
+        long: -93.2875,
+      },
+      {
+        name: 'Saint Anthony Falls',
+        lat: 44.981667,
+        long: -93.258611,
+      },
+      {
         name: 'Pike Island',
         lat: 44.892222,
         long: -93.165278,
