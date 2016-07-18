@@ -13,15 +13,16 @@ export default class ListPlaces extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      places: props.places,
       data: [
         { id: '5fbmzmtc', x: 13, y: 30, z: 6 },
         { id: 's4f8phwm', x: 14.2, y: 30, z: 9 },
       ],
       domain: { x: [0, 30], y: [0, 100] },
       settings: {
-        mapScale: 9000,
-        mapX: -100,
-        mapY: 34,
+        mapScale: 68300,
+        mapX: -93.535,
+        mapY: 45.1215,
       },
     };
   }
@@ -49,18 +50,21 @@ export default class ListPlaces extends React.Component {
         <div className="map-details">
           <form className="map-details-form">
             <h4>Change map details</h4>
-            <input type="text" data-tag="mapScale" ref="mapScale"
+            Zoom: <input type="text" data-tag="mapScale" ref="mapScale"
               onChange={this.handleChange.bind(this)}
               defaultValue={this.state.settings.mapScale}/><br/>
-            <input type="text" data-tag="mapX" ref="mapX"
+            X: <input type="text" data-tag="mapX" ref="mapX"
               onChange={this.handleChange.bind(this)}
               defaultValue={this.state.settings.mapX}/><br/>
-            <input type="text" data-tag="mapY" ref="mapY"
+            Y: <input type="text" data-tag="mapY" ref="mapY"
               onChange={this.handleChange.bind(this)}
               defaultValue={this.state.settings.mapY}/><br/>
           </form>
         </div>
-        <Chart settings={this.state.settings} data={this.state.data} domain={this.state.domain} />
+        <Chart places={this.state.places}
+          settings={this.state.settings}
+          data={this.state.data}
+          domain={this.state.domain} />
       </div>
     );
   }

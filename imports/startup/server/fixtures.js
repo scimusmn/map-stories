@@ -10,17 +10,15 @@ Meteor.startup(() => {
     const data = [
       {
         name: 'Pike Island',
-        x: 100,
-        y: 400,
-        color: 'purple',
+        lat: 44.892222,
+        long: -93.165278,
       },
       {
         name: 'Fort Snelling',
-        x: 600,
-        y: 700,
-        color: 'yellow',
+        lat: 44.892778,
+        long: -93.180556,
       },
-    ];
+    ];;
 
     data.forEach((place) => {
       place.slug = _.kebabCase(place.name);

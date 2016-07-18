@@ -7,6 +7,7 @@ import d3Chart from '../helpers/chart.js';
  */
 var Chart = React.createClass({
   propTypes: {
+    places: React.PropTypes.object,
     settings: React.PropTypes.object,
     data: React.PropTypes.array,
     domain: React.PropTypes.object,
@@ -21,13 +22,13 @@ var Chart = React.createClass({
   },
 
   componentDidUpdate: function () {
-    console.log('this: ', this);
     var el = ReactDOM.findDOMNode(this);
     d3Chart.update(el, this.getChartState());
   },
 
   getChartState: function () {
     return {
+      places: this.props.places,
       settings: this.props.settings,
       data: this.props.data,
       domain: this.props.domain,
