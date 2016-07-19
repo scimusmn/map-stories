@@ -11,11 +11,11 @@ Meteor.startup(() => {
     const data = [
       {
         place: 'Coon Rapids',
-        imgTitle: 'Dam',
+        name: 'Dam',
       },
       {
         place: 'Coon Rapids',
-        imgTitle: 'Men Lounging',
+        name: 'Men Lounging',
       },
     ];
 
