@@ -17,9 +17,7 @@ d3Chart.create = function (el, props, state) {
   svg.append('g')
       .attr('class', 'd3-points');
 
-  console.log('state', state);
-
-  this._drawMap(el, state.places, state.settings, state.data);
+  this._drawMap(el, state);
 };
 
 /**
@@ -28,14 +26,17 @@ d3Chart.create = function (el, props, state) {
 d3Chart.update = function (el, state) {
   const mapPath = d3.select('path.states');
   mapPath.remove();
-  this._drawMap(el, state.places, state.settings, state.data);
+  this._drawMap(el, state);
 };
 
 d3Chart.destroy = function (el) {
   // Clean up chart
 };
 
-d3Chart._drawMap = function (el, places, settings, data) {
+d3Chart._drawMap = function (el, state) {
+  var places = state.places;
+  var images = state.images;
+  var settings = state.settings;
 
   // Set up map projection
   var projection = d3.geo.mercator()
