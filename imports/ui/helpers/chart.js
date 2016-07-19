@@ -48,7 +48,7 @@ d3Chart._drawMap = function (el, places, settings, data) {
 
   _.each(places, function (place) {
     drawDot(el, projection, place);
-
+    drawPlace(el, projection, place);
   });
 
 };
@@ -61,16 +61,47 @@ d3Chart._drawMap = function (el, places, settings, data) {
  *
  * @param  {object} el Top level react DOM parent for our SVG elements
  * @param  {object} projection D3 map projection object
+ * @param  {object} place Place object data from Meteor
  */
 function drawDot(el, projection, place) {
   console.log('place', place);
   var placeGroup = d3.select(el).selectAll('.d3-points')
-    .append('g');
+    .append('g')
+    .classed('place-dot', true);
   placeGroup.append('circle')
-    .attr('r', '8px')
-    .attr('fill', 'red');
+    .attr('r', '10px')
+    .classed('map-dot', true);
   translateX = projection([place.long, place.lat])[0];
   translateY = projection([place.long, place.lat])[1];
+  placeGroup.attr('transform', 'translate(' + translateX + ',' + translateY + ')');
+}
+
+/**
+ * Draw individual location label group
+ *
+ * Draw the text label, picture, and clickable box near each location dot
+ *
+ * @param  {object} el Top level react DOM parent for our SVG elements
+ * @param  {object} projection D3 map projection object
+ * @param  {object} place Place object data from Meteor
+ */
+function drawPlace(el, projection, place) {
+  groupWidth = 300;
+  groupHeight = 100;
+  console.log('place', place);
+  var placeGroup = d3.select(el).selectAll('.d3-points')
+    .append('g')
+    .classed('place-group', true);
+  placeGroup.append('rect')
+    .attr('width', groupWidth + 'px')
+    .attr('height', groupHeight + 'px')
+    .classed('map-box', true);
+  let translateX = projection([place.long, place.lat])[0] + place.offsetX;
+  let translateY = projection([place.long, place.lat])[1] + place.offsetY;
+  if (place.alignH == 'right') {
+    translateX = translateX - groupWidth;
+  }
+
   placeGroup.attr('transform', 'translate(' + translateX + ',' + translateY + ')');
 }
 
