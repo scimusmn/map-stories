@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Places } from '../../../api/images/images.js';
+import { Images } from '../../../api/images/images.js';
 import _ from 'lodash';
 
 // If the database is empty on server start, create some sample data.
