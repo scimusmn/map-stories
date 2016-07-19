@@ -11,7 +11,7 @@ import ListPlaces from '../components/ListPlaces.jsx';
  * Pass the data along to the ListPlaces react component, using the react-komposer idiom
  */
 const composer = (props, onData) => {
-  const subscription = Meteor.subscribe('places');
+  const subscription = Meteor.subscribe('placesImages');
   if (subscription.ready()) {
     const places = Places.find({}).fetch();
     const images = Images.find({}).fetch();
