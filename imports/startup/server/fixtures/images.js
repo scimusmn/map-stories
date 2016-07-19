@@ -12,10 +12,12 @@ Meteor.startup(() => {
       {
         place: 'Coon Rapids',
         name: 'Dam',
+        filename: 'CoonRdsDam1928.jpg',
       },
       {
         place: 'Coon Rapids',
         name: 'Men Lounging',
+        filename: 'HE2 1 r30.jpg',
       },
     ];
 
