@@ -67,8 +67,6 @@ function drawDot(el, projection, place) {
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g');
   placeGroup.append('circle')
-    .attr('cx', 0)
-    .attr('cy', 0)
     .attr('r', '8px')
     .attr('fill', 'red');
   translateX = projection([place.long, place.lat])[0];
