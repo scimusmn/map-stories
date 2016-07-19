@@ -1,5 +1,5 @@
 // Starting data
-import './fixtures.js';
+import './fixtures/places.js';
 
 // Interface with the data
 import './api.js';
