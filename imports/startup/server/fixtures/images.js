@@ -19,6 +19,16 @@ Meteor.startup(() => {
         name: 'Men Lounging',
         filename: 'HE2 1 r30.jpg',
       },
+      {
+        place: 'Pike Island',
+        name: 'Nothing',
+        filename: 'nothing.jpg',
+      },
+      {
+        place: 'Pike Island',
+        name: 'Something',
+        filename: 'something.jpg',
+      },
     ];
 
     data.forEach((image) => {
