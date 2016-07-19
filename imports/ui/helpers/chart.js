@@ -92,10 +92,40 @@ function drawPlace(el, projection, place) {
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g')
     .classed('place-group', true);
+
+  // Drop shadow
+  placeGroup.append('defs')
+    .append('filter')
+    .attr('id', 'blur')
+    .append('feGaussianBlur')
+    .attr('stdDeviation', 5);
+  placeGroup.append('rect')
+    .attr('width', groupWidth)
+    .attr('height', groupHeight)
+    .attr('opacity', '1')
+    .attr('x', 3)
+    .attr('y', 3)
+    .style('fill', '#000')
+    .attr('filter', 'url(#blur)');
+
+  // White box
   placeGroup.append('rect')
     .attr('width', groupWidth + 'px')
     .attr('height', groupHeight + 'px')
     .classed('map-box', true);
+
+  // Label
+  placeGroup.append('text')
+    .text(place.name)
+    .attr('x', '20px')
+    .attr('y', '40px')
+    .attr('font-family', 'national-medium')
+    .attr('font-size', '40px')
+    .attr('fill', 'black')
+    .attr('stroke-width', 1.5)
+    .attr('stroke', '#000');
+
+  // Move group into position
   let translateX = projection([place.long, place.lat])[0] + place.offsetX;
   let translateY = projection([place.long, place.lat])[1] + place.offsetY;
   if (place.alignH == 'right') {
