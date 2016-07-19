@@ -50,8 +50,21 @@ d3Chart._drawMap = function (el, state) {
   }
 
   _.each(places, function (place) {
+    // Find the images for this location
+    const placeImages = _.filter(images, function (o) {
+      if (o.place == place.name) {
+        return true;
+      }
+    });
+
+    // Select a random image
+    const placeImage = _.sample(placeImages);
+
+    // Draw map dots, for each location
     drawDot(el, projection, place);
-    drawPlace(el, projection, place);
+
+    // Draw the location labels and images
+    drawPlace(el, projection, place, placeImage);
   });
 
 };
