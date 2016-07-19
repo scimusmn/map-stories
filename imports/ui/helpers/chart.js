@@ -63,6 +63,46 @@ d3Chart._drawMap = function (el, places, settings, data) {
       .attr('cy', function (d) { return projection([d.long, d.lat])[1]; })
       .attr('r', '8px')
       .attr('fill', 'red');
+
+  // Selection markers
+  var squares = pointG.selectAll('squares')
+      .data(places)
+    .enter().append('rect')
+      .attr('x', function (d) {
+        var x = projection([d.long, d.lat])[0];
+        return x + d.offsetX;
+      })
+      .attr('y', function (d) {
+        var y = projection([d.long, d.lat])[1];
+        return y + d.offsetY;
+      })
+      .attr('width', '40px')
+      .attr('height', '40px')
+      .attr('fill', function (d) {
+        if (d.color) {
+          return d.color;
+        } else {
+          return 'orange';
+        }
+      });
+
+  var label = pointG.selectAll('labels')
+      .data(places)
+    .enter().append('text')
+    .text(function (d) {
+      return d.name;
+    })
+    .attr('x', function (d) {
+      var x = projection([d.long, d.lat])[0];
+      return x + d.offsetX;
+    })
+    .attr('y', function (d) {
+      var y = projection([d.long, d.lat])[1];
+      return y + d.offsetY;
+    })
+    .attr('font-family', 'sans-serif')
+    .attr('font-size', '20px')
+    .attr('fill', 'black');
 };
 
 export default d3Chart;
