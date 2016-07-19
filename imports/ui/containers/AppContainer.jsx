@@ -22,5 +22,6 @@ export default createContainer(() => {
     connected: Meteor.status().connected,
     menuOpen: Session.get('menuOpen'),
     places: Places.find({}).fetch(),
+    images: Images.find({}).fetch(),
   };
 }, App);

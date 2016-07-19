@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigation } from '../components/navigation.jsx';
+import { Images } from '../../api/images/images.js';
 import { Places } from '../../api/places/places.js';
 
 import ListPlaces from '../components/ListPlaces.jsx';
@@ -13,7 +14,7 @@ export default class App extends React.Component {
   render() {
 
     // Load data from props
-    const { children, places } = this.props;
+    const { children, places, images } = this.props;
 
     // Presentation layout
     // We removed the <Navigation /> componet until the UI is better developed
@@ -37,6 +38,9 @@ App.propTypes = {
 
   // is side menu open?
   menuOpen: React.PropTypes.bool,
+
+  // All the places visible to the current user
+  images: React.PropTypes.array,
 
   // All the places visible to the current user
   places: React.PropTypes.array,

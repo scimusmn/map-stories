@@ -16,7 +16,7 @@ const composer = (props, onData) => {
     const places = Places.find({}).fetch();
     const images = Images.find({}).fetch();
     console.log('images', images);
-    onData(null, { places });
+    onData(null, { places, images });
   }
 };
 
