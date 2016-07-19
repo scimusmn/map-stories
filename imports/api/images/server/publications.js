@@ -1,4 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Places } from '../images.js';
+import { Images } from '../images.js';
 
 Meteor.publish('images', () => Images.find());
