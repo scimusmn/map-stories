@@ -17,6 +17,8 @@ d3Chart.create = function (el, props, state) {
   svg.append('g')
       .attr('class', 'd3-points');
 
+  console.log('state', state);
+
   this._drawMap(el, state.places, state.settings, state.data);
 };
 
@@ -64,7 +66,6 @@ d3Chart._drawMap = function (el, places, settings, data) {
  * @param  {object} place Place object data from Meteor
  */
 function drawDot(el, projection, place) {
-  console.log('place', place);
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g')
     .classed('place-dot', true);
@@ -88,7 +89,6 @@ function drawDot(el, projection, place) {
 function drawPlace(el, projection, place) {
   groupWidth = 300;
   groupHeight = 100;
-  console.log('place', place);
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g')
     .classed('place-group', true);

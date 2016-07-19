@@ -8,6 +8,7 @@ import d3Chart from '../helpers/chart.js';
 var Chart = React.createClass({
   propTypes: {
     places: React.PropTypes.array,
+    images: React.PropTypes.array,
     settings: React.PropTypes.object,
     data: React.PropTypes.array,
     domain: React.PropTypes.object,
@@ -29,6 +30,7 @@ var Chart = React.createClass({
   getChartState: function () {
     return {
       places: this.props.places,
+      images: this.props.images,
       settings: this.props.settings,
       data: this.props.data,
       domain: this.props.domain,

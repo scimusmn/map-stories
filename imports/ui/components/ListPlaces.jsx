@@ -13,6 +13,7 @@ export default class ListPlaces extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      images: props.images,
       places: props.places,
       data: [
         { id: '5fbmzmtc', x: 13, y: 30, z: 6 },
@@ -43,7 +44,7 @@ export default class ListPlaces extends React.Component {
   }
 
   render() {
-    const { places } = this.props;
+    const { places, images } = this.props;
     return (
       <div className="container container-map map-base">
         <h3>MNRRA</h3>
@@ -61,7 +62,9 @@ export default class ListPlaces extends React.Component {
               defaultValue={this.state.settings.mapY}/><br/>
           </form>
         </div>
-        <Chart places={this.state.places}
+        <Chart
+          places={this.state.places}
+          images={this.state.images}
           settings={this.state.settings}
           data={this.state.data}
           domain={this.state.domain} />
@@ -73,6 +76,7 @@ export default class ListPlaces extends React.Component {
 
 ListPlaces.propTypes = {
   places: React.PropTypes.array,
+  images: React.PropTypes.array,
 };
 
 ListPlaces.contextTypes = {
