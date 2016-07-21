@@ -100,7 +100,7 @@ function drawDot(el, projection, place) {
  * @param  {object} projection D3 map projection object
  * @param  {object} place Place object data from Meteor
  */
-function drawPlace(el, projection, place) {
+function drawPlace(el, projection, place, placeImage) {
   groupWidth = 300;
   groupHeight = 100;
   var placeGroup = d3.select(el).selectAll('.d3-points')
@@ -122,11 +122,28 @@ function drawPlace(el, projection, place) {
     .style('fill', '#000')
     .attr('filter', 'url(#blur)');
 
+  var defs = placeGroup.append('svg:defs');
+
+  defs.append('svg:pattern')
+    .attr('id', placeImage.slug)
+    .attr('width', 400)
+    .attr('height', 200)
+    .attr('patternUnits', 'userSpaceOnUse')
+    .append('svg:image')
+    .attr('xlink:href', '/images/collection/' + placeImage.filename)
+    .attr('width', 400)
+    .attr('height', 200)
+    .attr('x', 0)
+    .attr('y', 0);
+
   // White box
-  placeGroup.append('rect')
+  var placeGroupRect = placeGroup.append('rect')
     .attr('width', groupWidth + 'px')
     .attr('height', groupHeight + 'px')
-    .classed('map-box', true);
+    // .classed('map-box', true)
+    .attr('fill', 'url(#' + placeImage.slug + ')');
+
+  // Apply the background image as a pattern for the rectangle
 
   // Label
   placeGroup.append('text')
