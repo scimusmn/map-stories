@@ -60,14 +60,51 @@ d3Chart._drawMap = function (el, state) {
     // Select a random image
     const placeImage = _.sample(placeImages);
 
+    // Image width
+    const maxWidth = 250;
+
+    // Draw map dots, for each location
+    drawLine(el, projection, place, maxWidth);
+
     // Draw map dots, for each location
     drawDot(el, projection, place);
 
     // Draw the location labels and images
-    drawPlace(el, projection, place, placeImage);
+    drawPlace(el, projection, place, placeImage, maxWidth);
+
   });
 
 };
+
+/**
+ * Draw a line between the dot and the picture
+ *
+ * This helps people know which picture goes with which spot
+ *
+ * @param el Parent SVG element
+ * @param projection
+ * @param place
+ * @param maxWidth
+ */
+function drawLine(el, projection, place, maxWidth) {
+  var placeGroup = d3.select(el).selectAll('.d3-points')
+    .append('g')
+    .classed('place-line', true);
+  line = {};
+  line.x1 = projection([place.long, place.lat])[0];
+  line.y1 = projection([place.long, place.lat])[1];
+  line.x2 = line.x1 + place.offsetX + (maxWidth / 2);
+  line.y2 = line.y1 + place.offsetY + (maxWidth / 2);
+
+  placeGroup.append('line')
+    .attr('x1', line.x1)
+    .attr('y1', line.y1)
+    .attr('x2', line.x2)
+    .attr('y2', line.y2)
+    .attr('stroke-width', 4)
+    .attr('stroke', 'black')
+    .classed('map-line', true);
+}
 
 /**
  * Draw individual location dot
@@ -84,7 +121,7 @@ function drawDot(el, projection, place) {
     .append('g')
     .classed('place-dot', true);
   placeGroup.append('circle')
-    .attr('r', '10px')
+    .attr('r', '5px')
     .classed('map-dot', true);
   translateX = projection([place.long, place.lat])[0];
   translateY = projection([place.long, place.lat])[1];
@@ -99,8 +136,52 @@ function drawDot(el, projection, place) {
  * @param  {object} el Top level react DOM parent for our SVG elements
  * @param  {object} projection D3 map projection object
  * @param  {object} place Place object data from Meteor
+ * @param  {object} placeImage TODO: add description
+ * @param  {object} maxWidth Maximum width for the image
  */
-function drawPlace(el, projection, place, placeImage) {
+function drawPlace(el, projection, place, placeImage, maxWidth) {
+  let translateX = projection([place.long, place.lat])[0] + place.offsetX;
+  let translateY = projection([place.long, place.lat])[1] + place.offsetY;
+
+  // Parent group div for picture and the labels
+  var xStyle = ['left', translateX + 'px'];
+  var yStyle = ['top', translateY + 'px'];
+
+  var $newDiv = $('<div/>')
+   .attr('id', place.slug)
+   .addClass('place-label')
+   .css(yStyle[0], yStyle[1])
+   .css(xStyle[0], xStyle[1]);
+
+  var backgroundImage = '/images/collection/' + placeImage.filename;
+
+  let displayWidth = placeImage.width;
+  let displayHeight = placeImage.height;
+  if (placeImage.width >= maxWidth) {
+    displayWidth = maxWidth;
+    displayHeight = displayWidth;
+
+    // displayHeight = ((displayWidth * placeImage.height) / placeImage.width);
+  }
+
+  var $placeLabelBackground = $('<div/>')
+   .addClass('place-label-background')
+   .css('background-image', 'url(' + backgroundImage + ')')
+   .css('width', displayWidth + 'px')
+   .css('height', displayHeight + 'px');
+
+  var $placeLabelText = $('<div/>')
+    .addClass('place-label-text')
+
+    // .css('width', displayWidth - 12 + 'px')
+    .html(place.name);
+
+  $placeLabelBackground.append($placeLabelText);
+  $newDiv.append($placeLabelBackground);
+  $('.Chart').append($newDiv);
+}
+
+function drawPlaceD3(el, projection, place, placeImage) {
   groupWidth = 300;
   groupHeight = 100;
   var placeGroup = d3.select(el).selectAll('.d3-points')
@@ -140,7 +221,6 @@ function drawPlace(el, projection, place, placeImage) {
   var placeGroupRect = placeGroup.append('rect')
     .attr('width', groupWidth + 'px')
     .attr('height', groupHeight + 'px')
-    // .classed('map-box', true)
     .attr('fill', 'url(#' + placeImage.slug + ')');
 
   // Apply the background image as a pattern for the rectangle
