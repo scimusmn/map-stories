@@ -10,25 +10,61 @@ Meteor.startup(() => {
   if (Images.find().count() === 0) {
 
     const data = [
+      // Coon rapids
       {
         place: 'Coon Rapids',
         name: 'Coon Rapids Dam',
         filename: 'CoonRdsDam1928.jpg',
-      },
-      {
-        place: 'Saint Anthony Falls',
-        name: 'Saint Anthony Falls Dam',
-        filename: 'example.jpg',
-      },
-      {
-        place: 'Fort Snelling',
-        name: 'Fort Snelling Dam',
-        filename: 'example.jpg',
+        type: 'historic',
       },
       {
         place: 'Coon Rapids',
         name: 'Men Lounging',
-        filename: 'HE2 1 r30.jpg',
+        filename: 'HE21r30.jpg',
+        type: 'historic',
+      },
+
+      // Bohemian Flats
+      {
+        place: 'Bohemian Flats',
+        name: 'I 35 Bridge Collapse',
+        filename: 'I35_Bridge_Collapse_4crop.jpg',
+        type: 'historic',
+      },
+      {
+        place: 'Bohemian Flats',
+        name: 'Collecting wood',
+        filename: 'GT2-52-p17.jpg',
+        type: 'historic',
+      },
+
+      // SAFL
+      {
+        place: 'Saint Anthony Falls',
+        name: 'Old Bridge',
+        filename: 'SprtIslnd-669-B.jpg',
+      },
+      {
+        place: 'Saint Anthony Falls',
+        name: 'Washburn poster',
+        filename: 'Washbrn-Postr.jpg',
+      },
+      {
+        place: 'Saint Anthony Falls',
+        name: 'Washburn A Mill',
+        filename: 'Washburnamill.jpg',
+      },
+
+      // Fort Snelling
+      {
+        place: 'Fort Snelling',
+        name: 'Fot Snelling',
+        filename: 'AV1988-45-18.jpg',
+      },
+      {
+        place: 'Fort Snelling',
+        name: 'Fot Snelling Settlers',
+        filename: 'FortSnellingHeadofNavigation.jpg',
       },
       {
         place: 'Pike Island',
