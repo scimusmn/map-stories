@@ -4,9 +4,9 @@
 @import "_fonts.import.less";
 
 body {
-  background: @base-drk-blue, 10%;
-  background-image: url("/images/map-base-v03.jpg");
-  color: white;
+  background: @drk-blue, 10%;
+  background-image: url("/images/mnrra_b82a74.png");
+  color: #e5e5e5;
   margin: 0;
   padding: 0;
   font-family: 'proximaNova', sans-serif;
@@ -23,18 +23,18 @@ body.kiosk-mode {
   cursor: none;
 }
 
-h1, h2, h3 {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  font-size: 60px;
-  background: lighten(@base-drk-blue, 10%);
-  padding: 20px;
-  // width: 550px;
-  // padding: 20px;
-  font-family: 'national-medium', sans-serif;
-  box-shadow: 6px 6px 20px #222222;
-}
+//h1, h2, h3 {
+//  position: absolute;
+//  top: 0px;
+//  left: 0px;
+//  font-size: 60px;
+//  background: lighten(@drk-blue, 10%);
+//  padding: 20px;
+//  // width: 550px;
+//  // padding: 20px;
+//  font-family: 'national-medium', sans-serif;
+//  box-shadow: 6px 6px 20px #222222;
+//}
 
 #screensaver {
   width: @screen-width;
@@ -42,13 +42,52 @@ h1, h2, h3 {
   height: @screen-height;
   padding: 0;
   background: white;
-  font-size: 80px;
-  color: #FFF;
   z-index: 9999;
   position: absolute;
   top: 0px;
   left: 0px;
   display: none;
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Map info
+ * ----------------------------------------------------------------------------
+ */
+.map-info-background,
+.map-info {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 60px;
+  width: 440px;
+  height: 1080px;
+  padding: 40px;
+  font-family: 'national-medium', sans-serif;
+  box-shadow: 6px 6px 20px #222222;
+  color: @tan;
+}
+
+.map-info-background {
+  background-color: #233D49;
+  opacity: .8;
+  //background-color: darken(@med-green-grey, 8%);
+  //background-color: @drk-blue;
+  //mix-blend-mode: multiply;
+  //background-color: @drk-blue;
+  //mix-blend-mode: screen;
+}
+
+.map-info h3 {
+}
+
+.map-info h3 {
+  margin: 5px;
+}
+
+.map-info p {
+  font-family: national-bold;
+  font-size: 20px;
 }
 
 /**
@@ -114,7 +153,7 @@ h3.location-headline {
 
 .location-footer,
 .location-footer a {
-  color: darken(@base-drk-blue, 5%);
+  color: darken(@drk-blue, 5%);
 }
 
 .location-footer a {
@@ -134,7 +173,7 @@ h3.location-headline {
   left: 65px;
   background-image: url("/images/lightpaperfibers.jpg");
   padding: 15px;
-  color: darken(@base-drk-blue, 5%);
+  color: darken(@drk-blue, 5%);
   font-size: 15px;
   overflow: hidden;
   width: 710px;
@@ -143,7 +182,7 @@ h3.location-headline {
 }
 
 .image-detail-contents {
-  border: 2px solid darken(@base-drk-blue, 5%);
+  border: 2px solid darken(@drk-blue, 5%);
   padding: 20px;
   height: 580px;
   bakground: rgba(255, 255, 255, .4);
@@ -209,7 +248,7 @@ h3.location-headline {
  */
 .states {
   fill: none;
-  stroke: lighten(@base-drk-blue, 10%);
+  stroke: lighten(@drk-blue, 10%);
   stroke: purple;
   stroke-width: 5;
 }
@@ -223,7 +262,7 @@ h3.location-headline {
 .map-line,
 .map-dot {
   fill: white;
-  stroke: #555;
+  stroke: #062926;
   stroke-width: 4;
 }
 
@@ -245,7 +284,7 @@ h3.location-headline {
 
 .place-label-background {
   position: relative;
-  border: 6px solid #DDD;
+  border: 6px solid #062926;
   font-size: 30px;
   background: #FFF;
   color: #FFF;
@@ -256,10 +295,22 @@ h3.location-headline {
   border-radius: 50%;
   text-align: center;
   background-position: 0px 0px;
-	background-repeat: repeat-x;
-	animation: animatedBackground 40s linear infinite;
+  background-repeat: repeat-x;
+  animation: animatedBackground 40s linear infinite;
   background-position: center;
   background-size: 600px;
+}
+
+.place-label-background:before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 12px solid #ffea00;
+  border-radius: 50%;
 }
 
 .place-label-text {
@@ -290,7 +341,7 @@ h3.location-headline {
   right: 50px;
   font-size: 20px;
   background: white;
-  color: @base-drk-blue;
+  color: @drk-blue;
   margin: 20px;
   padding: 0 20px 20px 20px;
   text-align: center;
