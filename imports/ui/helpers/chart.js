@@ -61,7 +61,7 @@ d3Chart._drawMap = function (el, state) {
     const placeImage = _.sample(placeImages);
 
     // Image width
-    const maxWidth = 250;
+    const maxWidth = 200;
 
     // Draw map dots, for each location
     drawLine(el, projection, place, maxWidth);
@@ -101,8 +101,6 @@ function drawLine(el, projection, place, maxWidth) {
     .attr('y1', line.y1)
     .attr('x2', line.x2)
     .attr('y2', line.y2)
-    .attr('stroke-width', 4)
-    .attr('stroke', 'black')
     .classed('map-line', true);
 }
 
@@ -165,10 +163,10 @@ function drawPlace(el, projection, place, placeImage, maxWidth) {
   }
 
   var $placeLabelBackground = $('<div/>')
-   .addClass('place-label-background')
-   .css('background-image', 'url(' + backgroundImage + ')')
-   .css('width', displayWidth + 'px')
-   .css('height', displayHeight + 'px');
+    .addClass('place-label-background')
+    .css('background-image', 'url(' + backgroundImage + ')')
+    .css('width', displayWidth + 'px')
+    .css('height', displayHeight + 'px');
 
   var $placeLabelText = $('<div/>')
     .addClass('place-label-text')

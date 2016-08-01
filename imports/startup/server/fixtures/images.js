@@ -38,6 +38,13 @@ Meteor.startup(() => {
         type: 'historic',
       },
 
+      // Ford and Meeker Island
+      {
+        place: 'Ford and Meeker Island',
+        name: 'Meeker',
+        filename: 'Meeker.jpg',
+      },
+
       // SAFL
       {
         place: 'Saint Anthony Falls',
@@ -63,19 +70,45 @@ Meteor.startup(() => {
       },
       {
         place: 'Fort Snelling',
-        name: 'Fot Snelling Settlers',
+        name: 'Fort Snelling Settlers',
         filename: 'FortSnellingHeadofNavigation.jpg',
       },
       {
-        place: 'Pike Island',
+        place: 'Saint Paul',
         name: 'Nothing',
         filename: 'example.jpg',
       },
       {
-        place: 'Pike Island',
+        place: 'Saint Paul',
         name: 'Something',
         filename: 'example.jpg',
         otherthing: 'test',
+      },
+
+      // Hastings
+      {
+        place: 'Hastings',
+        name: 'Something',
+        filename: 'Hastings1850-60.jpg',
+      },
+
+      // Mendota
+      {
+        place: 'Mendota',
+        name: 'Something',
+        filename: 'AV2004-88.jpg',
+      },
+      {
+        place: 'Mendota',
+        name: 'Something',
+        filename: 'SibleyHse1888.jpg',
+      },
+
+      // Mounds
+      {
+        place: 'Mounds Park',
+        name: 'Something',
+        filename: 'AV1991-85-33.jpg',
       },
     ];
 

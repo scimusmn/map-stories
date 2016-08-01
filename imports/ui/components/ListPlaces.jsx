@@ -21,8 +21,8 @@ export default class ListPlaces extends React.Component {
       ],
       domain: { x: [0, 30], y: [0, 100] },
       settings: {
-        mapScale: 68300,
-        mapX: -93.535,
+        mapScale: 69200,
+        mapX: -93.285,
         mapY: 45.1215,
       },
     };
@@ -47,7 +47,11 @@ export default class ListPlaces extends React.Component {
     const { places, images } = this.props;
     return (
       <div className="container container-map map-base">
-        <h3>MNRRA</h3>
+        <div className="map-info-background"></div>
+        <div className="map-info">
+          <h3>Mississippi River</h3>
+          <p>Tintallë tier ve sí amortala ar lóriendessë cirya fairi ómaryo man eleni ahosta elyë tiruva nurrua enquantuva ondolissë laurië, light loicolícuma man. Ambonnar ondolissë winga oialë. light valimar nainië i cenuva nu valimar anar. Andúnë i undumë rúma ëar mornië fifírula man ve rávëa súmaryassë untúpa lírinen., light hlápula cenuva, lassi rámar yulma nu ringa vardo yulma sí ar elentári mindonnar. Métim' elenillor maiw</p>
+        </div>
         <div className="map-details">
           <form className="map-details-form">
             <h4>Change map details</h4>
