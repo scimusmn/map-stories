@@ -38,9 +38,9 @@ Meteor.startup(() => {
         type: 'historic',
       },
 
-      // Ford and Meeker Island
+      // Lock and Dam #1
       {
-        place: 'Ford and Meeker Island',
+        place: 'Lock and Dam #1',
         name: 'Meeker',
         filename: 'Meeker.jpg',
       },

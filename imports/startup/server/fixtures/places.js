@@ -31,7 +31,7 @@ Meteor.startup(() => {
         color: 'purple',
       },
       {
-        name: 'Ford and Meeker Island',
+        name: 'Lock and Dam #1',
         lat: 44.915270,
         long: -93.200567,
         offsetX: -400,
@@ -52,13 +52,6 @@ Meteor.startup(() => {
         offsetY: -300,
       },
       {
-        name: 'Hastings',
-        lat: 44.759722,
-        long: -92.868611,
-        offsetX: 100,
-        offsetY: -150,
-      },
-      {
         name: 'Mendota',
         lat: 44.885963,
         long: -93.161747,
@@ -71,6 +64,13 @@ Meteor.startup(() => {
         long: -93.053611,
         offsetX: 80,
         offsetY: -125,
+      },
+      {
+        name: 'Hastings',
+        lat: 44.759722,
+        long: -92.868611,
+        offsetX: 100,
+        offsetY: -150,
       },
     ];
 
