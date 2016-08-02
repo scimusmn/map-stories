@@ -70,7 +70,7 @@ d3Chart._drawMap = function (el, state) {
     drawDot(el, projection, place);
 
     // Draw the location labels and images
-    drawPlace(el, projection, place, placeImage, maxWidth);
+    drawPlace(projection, place, placeImage, maxWidth);
 
   });
 
@@ -90,7 +90,7 @@ function drawLine(el, projection, place, maxWidth) {
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g')
     .classed('place-line', true);
-  line = {};
+  var line = {};
   line.x1 = projection([place.long, place.lat])[0];
   line.y1 = projection([place.long, place.lat])[1];
   line.x2 = line.x1 + place.offsetX + (maxWidth / 2);
@@ -107,11 +107,11 @@ function drawLine(el, projection, place, maxWidth) {
 /**
  * Draw individual location dot
  *
- * We draw this seperately since we don't want any other transformations to
+ * We draw this separately since we don't want any other transformations to
  * move the lat/long based map dot.
  *
  * @param  {object} el Top level react DOM parent for our SVG elements
- * @param  {object} projection D3 map projection object
+ * @param  {function} projection D3 map projection object
  * @param  {object} place Place object data from Meteor
  */
 function drawDot(el, projection, place) {
@@ -121,23 +121,22 @@ function drawDot(el, projection, place) {
   placeGroup.append('circle')
     .attr('r', '5px')
     .classed('map-dot', true);
-  translateX = projection([place.long, place.lat])[0];
-  translateY = projection([place.long, place.lat])[1];
+  var translateX = projection([place.long, place.lat])[0];
+  var translateY = projection([place.long, place.lat])[1];
   placeGroup.attr('transform', 'translate(' + translateX + ',' + translateY + ')');
 }
 
 /**
  * Draw individual location label group
  *
- * Draw the text label, picture, and clickable box near each location dot
+ * Draw the text label, picture, and click-able box near each location dot
  *
- * @param  {object} el Top level react DOM parent for our SVG elements
- * @param  {object} projection D3 map projection object
+ * @param  {function} projection D3 map projection object
  * @param  {object} place Place object data from Meteor
  * @param  {object} placeImage TODO: add description
  * @param  {object} maxWidth Maximum width for the image
  */
-function drawPlace(el, projection, place, placeImage, maxWidth) {
+function drawPlace(projection, place, placeImage, maxWidth) {
   let translateX = projection([place.long, place.lat])[0] + place.offsetX;
   let translateY = projection([place.long, place.lat])[1] + place.offsetY;
 
@@ -153,20 +152,16 @@ function drawPlace(el, projection, place, placeImage, maxWidth) {
 
   var backgroundImage = '/images/collection/' + placeImage.filename;
 
-  let displayWidth = placeImage.width;
-  let displayHeight = placeImage.height;
+  let displayDimension = placeImage.width;
   if (placeImage.width >= maxWidth) {
-    displayWidth = maxWidth;
-    displayHeight = displayWidth;
-
-    // displayHeight = ((displayWidth * placeImage.height) / placeImage.width);
+    displayDimension = maxWidth;
   }
 
   var $placeLabelBackground = $('<div/>')
     .addClass('place-label-background')
     .css('background-image', 'url(' + backgroundImage + ')')
-    .css('width', displayWidth + 'px')
-    .css('height', displayHeight + 'px');
+    .css('width', displayDimension + 'px')
+    .css('height', displayDimension + 'px');
 
   var $placeLabelText = $('<div/>')
     .addClass('place-label-text')
