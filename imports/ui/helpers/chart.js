@@ -165,8 +165,6 @@ function drawPlace(projection, place, placeImage, maxWidth) {
 
   var $placeLabelText = $('<div/>')
     .addClass('place-label-text')
-
-    // .css('width', displayWidth - 12 + 'px')
     .html(place.name);
 
   $placeLabelBackground.append($placeLabelText);
