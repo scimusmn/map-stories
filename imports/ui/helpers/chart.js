@@ -74,6 +74,12 @@ d3Chart._drawMap = function (el, state) {
 
   });
 
+  $('.place-label').click(function (e) {
+    var $clickedId = $(this).attr('id');
+    window.location.href = '/place/' + $clickedId;
+  });
+
+  var items = document.getElementsByClassName('place-label')[0];
 };
 
 /**
