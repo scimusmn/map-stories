@@ -9,31 +9,27 @@ d3Chart.create = function (el, props, state) {
       .attr('width', props.width)
       .attr('height', props.height);
 
-  // Add a group for the map
-  svg.append('g')
-      .attr('class', 'd3-map');
-
   // Add a group for the points
   svg.append('g')
       .attr('class', 'd3-points');
 
-  this._drawMap(el, state);
+  this._drawMap(el, props, state);
 };
 
 /**
  * Update the D3 chart when the React props change
  */
-d3Chart.update = function (el, state) {
+d3Chart.update = function (el, props, state) {
   const mapPath = d3.select('path.states');
   mapPath.remove();
-  this._drawMap(el, state);
+  this._drawMap(el, props, state);
 };
 
 d3Chart.destroy = function (el) {
   // Clean up chart
 };
 
-d3Chart._drawMap = function (el, state) {
+d3Chart._drawMap = function (el, props, state) {
   var places = state.places;
   var images = state.images;
   var settings = state.settings;
@@ -46,31 +42,46 @@ d3Chart._drawMap = function (el, state) {
 
   // Draw county boundaries in dev mode
   if (Meteor.settings.public.dev == 'true') {
-    drawCounties(el, projection);
+    drawCounties(el, props, projection);
   }
 
-  _.each(places, function (place) {
-    // Find the images for this location
-    const placeImages = _.filter(images, function (o) {
-      if (o.place == place.name) {
-        return true;
-      }
-    });
+  _.each(_.shuffle(places), function (place, i) {
+    setTimeout(
+      function () {
+        // Find the images for this location
+        const placeImages = _.filter(images, function (o) {
+          if (o.place == place.name) {
+            return true;
+          }
+        });
 
-    // Select a random image
-    const placeImage = _.sample(placeImages);
+        // Select a random image
+        const placeImage = _.sample(placeImages);
 
-    // Image width
-    const maxWidth = 200;
+        // Image width
+        const maxWidth = 200;
 
-    // Draw map dots, for each location
-    drawLine(el, projection, place, maxWidth);
+        // Line delay
+        // Time for the image to fade in, before drawing line
+        const picDur = 400;
 
-    // Draw map dots, for each location
-    drawDot(el, projection, place);
+        // Line animation duration
+        const lineDur = 1200;
 
-    // Draw the location labels and images
-    drawPlace(projection, place, placeImage, maxWidth);
+        // Draw the location labels and images
+        drawPlace(projection, place, placeImage, maxWidth, picDur);
+
+        // Wait for the images to load before drawing map points
+        setTimeout(function () {
+          // Draw map dots, for each location
+          drawLine(el, projection, place, maxWidth, i, lineDur);
+
+          // Draw map dots, for each location
+          drawDot(el, projection, place, maxWidth, i, lineDur);
+
+        }, picDur);
+      },
+    1000 * i);
 
   });
 
@@ -92,22 +103,32 @@ d3Chart._drawMap = function (el, state) {
  * @param place
  * @param maxWidth
  */
-function drawLine(el, projection, place, maxWidth) {
+function drawLine(el, projection, place, maxWidth, i, dur) {
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g')
     .classed('place-line', true);
+  var line = linePoints(projection, place, maxWidth);
+
+  placeGroup.append('line')
+    .attr('x1', line.x2)
+    .attr('y1', line.y2)
+    .attr('x2', line.x2)
+    .attr('y2', line.y2)
+    .classed('map-line', true)
+      .transition()
+        .duration(dur)
+        .delay(i * 30)
+        .attr('x1', line.x1)
+        .attr('y1', line.y1);
+}
+
+function linePoints(projection, place, maxWidth) {
   var line = {};
   line.x1 = projection([place.long, place.lat])[0];
   line.y1 = projection([place.long, place.lat])[1];
   line.x2 = line.x1 + place.offsetX + (maxWidth / 2);
   line.y2 = line.y1 + place.offsetY + (maxWidth / 2);
-
-  placeGroup.append('line')
-    .attr('x1', line.x1)
-    .attr('y1', line.y1)
-    .attr('x2', line.x2)
-    .attr('y2', line.y2)
-    .classed('map-line', true);
+  return line;
 }
 
 /**
@@ -120,16 +141,22 @@ function drawLine(el, projection, place, maxWidth) {
  * @param  {function} projection D3 map projection object
  * @param  {object} place Place object data from Meteor
  */
-function drawDot(el, projection, place) {
+function drawDot(el, projection, place, maxWidth, i, dur) {
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g')
     .classed('place-dot', true);
   placeGroup.append('circle')
     .attr('r', '5px')
     .classed('map-dot', true);
-  var translateX = projection([place.long, place.lat])[0];
-  var translateY = projection([place.long, place.lat])[1];
-  placeGroup.attr('transform', 'translate(' + translateX + ',' + translateY + ')');
+
+  var line = linePoints(projection, place, maxWidth);
+  placeGroup.attr('transform', 'translate(' + line.x2 + ',' + line.y2 + ')');
+  placeGroup
+    .transition()
+    .duration(dur)
+    .delay(i * 30)
+    .attr('transform', 'translate(' + line.x1 + ',' + line.y1 + ')');
+
 }
 
 /**
@@ -141,8 +168,9 @@ function drawDot(el, projection, place) {
  * @param  {object} place Place object data from Meteor
  * @param  {object} placeImage TODO: add description
  * @param  {object} maxWidth Maximum width for the image
+ * @param  {int} picDur Miliseconds for the fade in animation
  */
-function drawPlace(projection, place, placeImage, maxWidth) {
+function drawPlace(projection, place, placeImage, maxWidth, picDur) {
   let translateX = projection([place.long, place.lat])[0] + place.offsetX;
   let translateY = projection([place.long, place.lat])[1] + place.offsetY;
 
@@ -176,6 +204,12 @@ function drawPlace(projection, place, placeImage, maxWidth) {
   $placeLabelBackground.append($placeLabelText);
   $newDiv.append($placeLabelBackground);
   $('.Chart').append($newDiv);
+
+  $newDiv.animate({
+    opacity: 1,
+  }, picDur, function() {
+    console.log('Animation complete');
+  });
 }
 
 /**
@@ -186,7 +220,17 @@ function drawPlace(projection, place, placeImage, maxWidth) {
  * @param  {object} el Top level react DOM parent for our SVG elements
  * @param  {object} projection D3 map projection object
  */
-function drawCounties(el, projection) {
+function drawCounties(el, props, projection) {
+
+  var svg = d3.select(el).append('svg')
+    .attr('class', 'd3-dev')
+    .attr('width', props.width)
+    .attr('height', props.height);
+
+  // Add a group for the map
+  svg.append('g')
+    .attr('class', 'd3-map');
+
   var path = d3.geo.path().projection(projection);
   var mapG = d3.select(el).selectAll('.d3-map');
   d3.json('/data/counties.json', function (error, counties) {
