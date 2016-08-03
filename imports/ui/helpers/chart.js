@@ -27,6 +27,24 @@ d3Chart.create = function (el, props, state) {
     .attr('class', 'd3-points');
 
   this._drawMap(el, props, state);
+
+  // Listen for clicks on the places
+  // It's important to use the .on() syntax which can handle
+  // looking for elements that are animating into the page over time (animation)
+  $(document).on('click', '.place-label', function(e) {
+    // Output the element that was clicked on
+    var elemId = $(this).attr('id');
+    console.log('elemId:', elemId);
+
+    /**
+     * TODO:
+     *  - Hide all of the elements that aren't the one that was clicked
+     *  - Zoom the map to the point that was clicked
+     *  - Animate in the right div that contains the content for the section
+     *    that was clicked
+     */
+  });
+
 };
 
 /**
@@ -56,11 +74,7 @@ d3Chart._drawMap = function (el, props, state) {
   // Draw all of the places on the map
   drawPlaces(el, projection, places, images, maxWidth, stagger, animDur);
 
-  $('.place-label').click(function (e) {
-    e.preventDefault();
-    var $clickedId = $(this).attr('id');
-    window.location.href = '/place/' + $clickedId;
-  });
+
 };
 
 export default d3Chart;
