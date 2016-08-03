@@ -7,7 +7,7 @@
  * @param  {object} props React component properties, contains chart details
  * @param  {object} projection D3 map projection object
  */
-export function drawCounties(el, props, projection) {
+function drawCounties(el, props, projection) {
 
   var svg = d3.select(el).append('svg')
     .attr('class', 'd3-dev')
@@ -27,5 +27,13 @@ export function drawCounties(el, props, projection) {
       .attr('d', path)
       .attr('class', 'states');
   });
+}
+
+export function drawDev(el, props, projection) {
+  // Draw county boundaries in dev mode
+  //noinspection JSUnresolvedVariable
+  if (Meteor.settings.public.dev == 'true') {
+    drawCounties(el, props, projection);
+  }
 }
 
