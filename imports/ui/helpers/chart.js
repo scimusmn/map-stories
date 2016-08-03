@@ -22,6 +22,14 @@ d3Chart.create = function (el, props, state) {
     .attr('width', props.width)
     .attr('height', props.height);
 
+  // Add SVG background image
+  svg.append('svg:image')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('width', 1920)
+    .attr('height', 1080)
+    .attr('xlink:href', '/images/mnrra_be09d4.png');
+
   // Add a group for the points
   svg.append('g')
     .attr('class', 'd3-points');
@@ -60,8 +68,6 @@ d3Chart.create = function (el, props, state) {
     let selectedPlace = _.find(state.places, function (o) {
       return o.slug == elemId;
     });
-    // console.log(selectedPlace);
-    // console.log('----^ ^ ^ ^ ^ selectedPlace ^ ^ ^ ^ ^----');
 
     var projection = mapProjection(state.settings);
     let line = {}
