@@ -1,5 +1,5 @@
 /**
- * Draw a line between the dot and the picture
+ * Draw a line between the circle and the picture
  *
  * The line helps people know which picture goes with which spot
  *
@@ -13,6 +13,7 @@
 function drawLine(el, projection, place, maxWidth, dur) {
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g')
+    .attr('id', 'line-' + place.slug)
     .classed('place-line', true);
 
   var line = linePoints(projection, place, maxWidth);
@@ -40,10 +41,10 @@ function linePoints(projection, place, maxWidth) {
 }
 
 /**
- * Draw individual location dot
+ * Draw individual location circle
  *
  * We draw this separately since we don't want any other transformations to
- * move the lat/long based map dot.
+ * move the lat/long based map circle.
  *
  * @param {object} el Top level react DOM parent for our SVG elements
  * @param {function} projection D3 map projection object
@@ -51,13 +52,14 @@ function linePoints(projection, place, maxWidth) {
  * @param {int} maxWidth Width of the image circle.
  *              Used here for calculating animation centers
  */
-function drawDot(el, projection, place, maxWidth) {
+function drawCircle(el, projection, place, maxWidth) {
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g')
-    .classed('place-dot', true);
+    .attr('id', 'circle-' + place.slug)
+    .classed('place-circle', true);
   placeGroup.append('circle')
     .attr('r', '5px')
-    .classed('map-dot', true);
+    .classed('map-circle', true);
   var line = linePoints(projection, place, maxWidth);
   placeGroup.attr('transform', 'translate(' + line.x1 + ',' + line.y1 + ')');
 }
@@ -65,7 +67,7 @@ function drawDot(el, projection, place, maxWidth) {
 /**
  * Draw individual location label group
  *
- * Draw the text label, picture, and click-able box near each location dot
+ * Draw the text label, picture, and click-able box near each location circle
  *
  * @param  {function} projection D3 map projection object
  * @param  {object} place Place object data from Meteor
@@ -132,13 +134,24 @@ function drawPlace(el, projection, place, placeImage, maxWidth, animDur) {
   // Draw the location labels and images
   drawImageLabel(projection, place, placeImage, maxWidth, animDur);
 
-  // Draw map dots, for each location
+  // Draw map circle, for each location
   drawLine(el, projection, place, maxWidth, animDur);
 
-  // Draw map dots, for each location
-  drawDot(el, projection, place, maxWidth);
+  // Draw map circle, for each location
+  drawCircle(el, projection, place, maxWidth);
 }
 
+/**
+ * Draw all the places when you enter the map
+ *
+ * @param el
+ * @param projection
+ * @param places
+ * @param images
+ * @param maxWidth
+ * @param stagger
+ * @param animDur
+ */
 export function drawPlaces(el, projection, places, images, maxWidth, stagger, animDur) {
   _.each(places, function (place, i) {
     // Find the images for this location
@@ -156,3 +169,59 @@ export function drawPlaces(el, projection, places, images, maxWidth, stagger, an
     }, stagger * (i + 1 - 0.9));
   });
 }
+
+/**
+ * Hide places that weren't clicked
+ *
+ * @param el
+ * @param projection
+ * @param places
+ * @param images
+ * @param maxWidth
+ * @param stagger
+ * @param animDur
+ */
+export function hidePlaces(elemId, el, projection, places, images, maxWidth, stagger, animDur) {
+  _.each(places, function (place, i) {
+    hidePlace(elemId, el, projection, place, maxWidth, animDur);
+  });
+
+}
+
+/**
+ * Hide a single place
+ *
+ * @param elemId
+ * @param el
+ * @param projection
+ * @param place
+ * @param maxWidth
+ * @param animDur
+ */
+function hidePlace(elemId, el, projection, place, maxWidth, animDur) {
+  // Fade out the divs, that weren't clicked
+  let $placeLabel = $('.place-label');
+  // let $filteredPlaces = $placeLabel.not('#' + elemId);
+  let $filteredPlaces = $placeLabel;
+  $filteredPlaces.animate({
+    opacity: 0,
+  }, 300, function () {
+    $filteredPlaces.hide();
+  });
+
+  // Fade out the SVG elements, that weren't clicked
+  let shapes = ['line', 'circle'];
+  _.each(shapes, function (shape){
+    let placeShape = d3.selectAll('#' + shape + '-' + place.slug);
+    // Leave the circle for the clicked element in place
+    if (placeShape.attr('id') != 'circle-' + elemId) {
+      placeShape
+        .select(shape)
+        .transition()
+        .duration(300)
+        .attr('opacity', 0);
+    }
+  });
+
+}
+

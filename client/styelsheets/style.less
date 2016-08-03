@@ -4,8 +4,6 @@
 @import "_fonts.import.less";
 
 body {
-  background: @drk-blue, 10%;
-  background-image: url("/images/mnrra_b82a74.png");
   color: #e5e5e5;
   margin: 0;
   padding: 0;
@@ -17,6 +15,15 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+#app {
+  background-image: url("/images/mnrra_be09d4.png");
+  background-size: 1920px 1080px;
+  background-position: 0px 0px;
+  //-moz-transition: all .5s;
+  //-webkit-transition: all .5s;
+  //transition: all .5s;
 }
 
 body.kiosk-mode {
@@ -261,7 +268,7 @@ h3.location-headline {
 }
 
 .map-line,
-.map-dot {
+.map-circle {
   fill: white;
   stroke: #062926;
   stroke-width: 4;

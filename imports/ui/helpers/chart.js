@@ -1,5 +1,5 @@
 import { drawDev } from '/imports/ui/helpers/dev';
-import { drawPlaces } from '/imports/ui/helpers/drawPlaces';
+import { drawPlaces, hidePlaces } from '/imports/ui/helpers/drawPlaces';
 import { mapProjection } from '/imports/ui/helpers/mapProjection';
 
 var d3Chart = {};
@@ -31,10 +31,9 @@ d3Chart.create = function (el, props, state) {
   // Listen for clicks on the places
   // It's important to use the .on() syntax which can handle
   // looking for elements that are animating into the page over time (animation)
-  $(document).on('click', '.place-label', function(e) {
+  $(document).on('click', '.place-label', function (e) {
     // Output the element that was clicked on
     var elemId = $(this).attr('id');
-    console.log('elemId:', elemId);
 
     /**
      * TODO:
@@ -43,6 +42,41 @@ d3Chart.create = function (el, props, state) {
      *  - Animate in the right div that contains the content for the section
      *    that was clicked
      */
+
+    /**
+     * Animate out the places that were not clicked
+     */
+    hidePlaces(
+      elemId,
+      el,
+      mapProjection(state.settings),
+      state.places,
+      state.images,
+      maxWidth,
+      stagger,
+      animDur
+    );
+
+    let selectedPlace = _.find(state.places, function (o) {
+      return o.slug == elemId;
+    });
+    // console.log(selectedPlace);
+    // console.log('----^ ^ ^ ^ ^ selectedPlace ^ ^ ^ ^ ^----');
+
+    var projection = mapProjection(state.settings);
+    let line = {}
+    line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
+    line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
+    console.log(line);
+    console.log('----^ ^ ^ ^ ^ line ^ ^ ^ ^ ^----');
+
+    // Set up place information
+    $('.map-info, .map-info-background')
+      .animate({
+        width: '800px',
+      }, 800);
+    $('.map-info h3')
+      .html(selectedPlace.name);
   });
 
 };
@@ -61,19 +95,20 @@ d3Chart.destroy = function (el) {
 };
 
 d3Chart._drawMap = function (el, props, state) {
-  // Meteor collections
-  var places = state.places;
-  var images = state.images;
-
-  // D3 Map projection for lat-long to pixel translation
-  var projection = mapProjection(state.settings);
 
   // Draw development tools if enabled
-  drawDev(el, props, projection);
+  drawDev(el, props, mapProjection(state.settings));
 
   // Draw all of the places on the map
-  drawPlaces(el, projection, places, images, maxWidth, stagger, animDur);
-
+  drawPlaces(
+    el,
+    mapProjection(state.settings),
+    state.places,
+    state.images,
+    maxWidth,
+    stagger,
+    animDur
+  );
 
 };
 
