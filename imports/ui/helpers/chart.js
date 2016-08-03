@@ -1,3 +1,5 @@
+import { drawCounties } from '/imports/ui/helpers/dev.js';
+
 var d3Chart = {};
 
 /**
@@ -5,13 +7,13 @@ var d3Chart = {};
  */
 d3Chart.create = function (el, props, state) {
   var svg = d3.select(el).append('svg')
-      .attr('class', 'd3')
-      .attr('width', props.width)
-      .attr('height', props.height);
+    .attr('class', 'd3')
+    .attr('width', props.width)
+    .attr('height', props.height);
 
   // Add a group for the points
   svg.append('g')
-      .attr('class', 'd3-points');
+    .attr('class', 'd3-points');
 
   this._drawMap(el, props, state);
 };
@@ -36,9 +38,9 @@ d3Chart._drawMap = function (el, props, state) {
 
   // Set up map projection
   var projection = d3.geo.mercator()
-      .scale(settings.mapScale)
-      .center([settings.mapX, settings.mapY])
-      .precision(0.1);
+    .scale(settings.mapScale)
+    .center([settings.mapX, settings.mapY])
+    .precision(0.1);
 
   // Draw county boundaries in dev mode
   //noinspection JSUnresolvedVariable
@@ -94,13 +96,14 @@ d3Chart._drawMap = function (el, props, state) {
  * @param {object} projection D3 map projection
  * @param {object} place Meteor data object for the place
  * @param {int} maxWidth Width of the image circle.
- *              Used here for calculating animation centers
+ *  Used here for calculating animation centers
  * @param dur {int} Line drawing animation duration
  */
 function drawLine(el, projection, place, maxWidth, dur) {
   var placeGroup = d3.select(el).selectAll('.d3-points')
     .append('g')
     .classed('place-line', true);
+
   var line = linePoints(projection, place, maxWidth);
   placeGroup.append('line')
     .attr('x1', line.x1)
@@ -109,11 +112,11 @@ function drawLine(el, projection, place, maxWidth, dur) {
     .attr('y2', line.y1)
     .attr('opacity', 0)
     .classed('map-line', true)
-      .transition()
-        .duration(dur)
-        .attr('x1', line.x2)
-        .attr('y1', line.y2)
-        .attr('opacity', 1);
+    .transition()
+    .duration(dur)
+    .attr('x1', line.x2)
+    .attr('y1', line.y2)
+    .attr('opacity', 1);
 }
 
 function linePoints(projection, place, maxWidth) {
@@ -171,10 +174,10 @@ function drawPlace(projection, place, placeImage, maxWidth, picDur) {
   var yStyle = ['top', center.y1 + 'px'];
 
   var $newDiv = $('<div/>')
-   .attr('id', place.slug)
-   .addClass('place-label')
-   .css(yStyle[0], yStyle[1])
-   .css(xStyle[0], xStyle[1]);
+    .attr('id', place.slug)
+    .addClass('place-label')
+    .css(yStyle[0], yStyle[1])
+    .css(xStyle[0], xStyle[1]);
 
   var backgroundImage = '/images/collection/' + placeImage.filename;
 
@@ -212,37 +215,6 @@ function drawPlace(projection, place, placeImage, maxWidth, picDur) {
     height: displayDimension + 'px',
   }, picDur);
 
-}
-
-/**
- * Draw county boundaries on map
- *
- * We use this in development to align the raster and vector layers.
- *
- * @param  {object} el Top level react DOM parent for our SVG elements
- * @param  {object} props React component properties, contains chart details
- * @param  {object} projection D3 map projection object
- */
-function drawCounties(el, props, projection) {
-
-  var svg = d3.select(el).append('svg')
-    .attr('class', 'd3-dev')
-    .attr('width', props.width)
-    .attr('height', props.height);
-
-  // Add a group for the map
-  svg.append('g')
-    .attr('class', 'd3-map');
-
-  var path = d3.geo.path().projection(projection);
-  var mapG = d3.select(el).selectAll('.d3-map');
-  d3.json('/data/counties.json', function (error, counties) {
-    //noinspection JSUnresolvedVariable
-    mapG.append('path')
-    .datum(topojson.feature(counties, counties.objects.counties))
-    .attr('d', path)
-    .attr('class', 'states');
-  });
 }
 
 export default d3Chart;
