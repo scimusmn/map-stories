@@ -55,7 +55,12 @@ export default class ListPlaces extends React.Component {
           domain={this.state.domain} />
         <div id="map-sidebar-background" className="map-sidebar-home"></div>
         <div id="map-sidebar" className="map-sidebar-home">
-          <h3 id="default-heading">Mississippi River</h3>
+          <h3 id="default-heading">
+            Select a spot<br/>
+            to explore<br/>
+            along the<br/>
+            Mississippi River
+          </h3>
           <h3 id="place-heading"></h3>
         </div>
         <div className="dev-map-details">
