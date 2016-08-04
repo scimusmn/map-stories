@@ -93,7 +93,10 @@ d3Chart.create = function (el, props, state) {
     // that can accommodate the overflow in the Y axis
     // .attr('y', ((line.y1 * -2) + (1080 / 2)));
 
-    // Set up place information
+    /**
+     * Draw sidebar
+     */
+    // Sidebar heading
     $('#map-sidebar, #map-sidebar-background')
       .attr('class', 'map-sidebar-detail');
     $('#map-sidebar h3#default-heading')
@@ -109,6 +112,22 @@ d3Chart.create = function (el, props, state) {
     $('#map-sidebar')
       .append($homeButton);
 
+    // Sidebar content
+    var placeImages = _.filter(state.images, function(o) {
+      return o.place == selectedPlace.name;
+    });
+    _.each(placeImages, function (image) {
+
+      var $thumbDiv = $('<img/>')
+        .empty()
+        .addClass('image-thumbnail')
+        .attr('width', 300)
+        .attr('src', 'images/collection/' + image.filename);
+
+      $('#image-thumbnails')
+        .append($thumbDiv);
+
+    });
   });
 
   $(document).on('click', '.home-button', function (e) {
@@ -133,6 +152,10 @@ d3Chart.create = function (el, props, state) {
       .show()
     $('#map-sidebar h3#place-heading')
       .hide();
+
+    // Reset sidebar content
+    $('#image-thumbnails')
+      .empty();
 
     drawPlaces(
       el,
