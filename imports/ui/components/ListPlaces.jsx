@@ -47,8 +47,8 @@ export default class ListPlaces extends React.Component {
     const { places, images } = this.props;
     return (
       <div className="container container-map map-base">
-        <div className="map-info-background"></div>
-        <div className="map-info">
+        <div id="map-info-background" className="map-info-home"></div>
+        <div id="map-info" className="map-info-home">
           <h3>Mississippi River</h3>
           <p>Tintallë tier ve sí amortala ar lóriendessë cirya fairi ómaryo man eleni ahosta elyë tiruva nurrua enquantuva ondolissë laurië, light loicolícuma man. Ambonnar ondolissë winga oialë. light valimar nainië i cenuva nu valimar anar. Andúnë i undumë rúma ëar mornië fifírula man ve rávëa súmaryassë untúpa lírinen., light hlápula cenuva, lassi rámar yulma nu ringa vardo yulma sí ar elentári mindonnar. Métim' elenillor maiw</p>
         </div>

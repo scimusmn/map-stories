@@ -59,6 +59,8 @@ function drawCircle(el, projection, place, maxWidth) {
     .classed('place-circle', true);
   placeGroup.append('circle')
     .attr('r', '5px')
+    .attr('stroke-width', 4)
+    .attr('stroke', '#062926')
     .classed('map-circle', true);
   var line = linePoints(projection, place, maxWidth);
   placeGroup.attr('transform', 'translate(' + line.x1 + ',' + line.y1 + ')');
@@ -220,6 +222,14 @@ function hidePlace(elemId, el, projection, place, maxWidth, animDur) {
         .transition()
         .duration(300)
         .attr('opacity', 0);
+    } else {
+      var circlePath = '#circle-' + elemId + ' circle';
+      console.log(circlePath);
+      console.log('----^ ^ ^ ^ ^ circlePath ^ ^ ^ ^ ^----');
+      d3.select(circlePath)
+        .attr('r', '20px')
+        .attr('stroke-width', 3)
+        .attr('fill-opacity', .2);
     }
   });
 
