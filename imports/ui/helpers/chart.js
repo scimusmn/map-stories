@@ -94,7 +94,8 @@ d3Chart.create = function (el, props, state) {
     $('#map-sidebar h3#default-heading')
       .hide()
     $('#map-sidebar h3#place-heading')
-      .html(selectedPlace.name);
+      .html(selectedPlace.name)
+      .show();
 
     // Add home button to the side panel
     var $homeButton = $('<div/>')

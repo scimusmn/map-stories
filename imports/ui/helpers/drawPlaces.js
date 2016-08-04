@@ -155,6 +155,10 @@ function drawPlace(el, projection, place, placeImage, maxWidth, animDur) {
  * @param animDur
  */
 export function drawPlaces(el, projection, places, images, maxWidth, stagger, animDur) {
+  // Remove any past circles
+  d3.selectAll('.place-circle')
+    .remove();
+
   _.each(places, function (place, i) {
     // Find the images for this location
     const placeImages = _.filter(images, function (o) {
