@@ -68,8 +68,8 @@ body.kiosk-mode {
  * Map info
  * ----------------------------------------------------------------------------
  */
-#map-info-background,
-#map-info {
+#map-sidebar-background,
+#map-sidebar {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -85,15 +85,15 @@ body.kiosk-mode {
   transition: all 0.5s ease;
 }
 
-.map-info-home {
+.map-sidebar-home {
   width: 440px;
 }
 
-.map-info-detail {
+.map-sidebar-detail {
   width: 840px;
 }
 
-#map-info-background {
+#map-sidebar-background {
   background-color: rgb(35, 61, 83);
   opacity: .8;
   border-left: 2px solid @tan;
@@ -104,14 +104,14 @@ body.kiosk-mode {
   //mix-blend-mode: screen;
 }
 
-#map-info h3 {
+#map-sidebar h3 {
 }
 
-#map-info h3 {
+#map-sidebar h3 {
   margin: 5px;
 }
 
-#map-info p {
+#map-sidebar p {
   font-family: national-bold;
   font-size: 20px;
 }
@@ -364,7 +364,7 @@ h3.location-headline {
  * Map details form
  * ----------------------------------------------------------------------------
  */
-.map-details {
+.dev-map-details {
   display: none;
   position: absolute;
   top: 200px;
@@ -377,8 +377,8 @@ h3.location-headline {
   text-align: center;
 }
 
-.map-details submit,
-.map-details input {
+.dev-map-details submit,
+.dev-map-details input {
   font-size: 30px;
   padding: 20px;
   margin: 20px;

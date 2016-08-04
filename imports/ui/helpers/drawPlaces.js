@@ -11,7 +11,7 @@
  * @param dur {int} Line drawing animation duration
  */
 function drawLine(el, projection, place, maxWidth, dur) {
-  var placeGroup = d3.select(el).selectAll('.d3-points')
+  var placeGroup = d3.select(el).selectAll('.map-points')
     .append('g')
     .attr('id', 'line-' + place.slug)
     .classed('place-line', true);
@@ -53,7 +53,7 @@ function linePoints(projection, place, maxWidth) {
  *              Used here for calculating animation centers
  */
 function drawCircle(el, projection, place, maxWidth) {
-  var placeGroup = d3.select(el).selectAll('.d3-points')
+  var placeGroup = d3.select(el).selectAll('.map-points')
     .append('g')
     .attr('id', 'circle-' + place.slug)
     .classed('place-circle', true);
@@ -208,7 +208,7 @@ function hidePlace(elemId, el, projection, place, maxWidth, animDur) {
   $filteredPlaces.animate({
     opacity: 0,
   }, 300, function () {
-    $filteredPlaces.hide();
+    $filteredPlaces.remove();
   });
 
   // Fade out the SVG elements, that weren't clicked
@@ -222,6 +222,8 @@ function hidePlace(elemId, el, projection, place, maxWidth, animDur) {
         .transition()
         .duration(300)
         .attr('opacity', 0);
+      placeShape
+        .remove();
     } else {
       var circlePath = '#circle-' + elemId + ' circle';
       console.log(circlePath);

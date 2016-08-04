@@ -47,32 +47,32 @@ export default class ListPlaces extends React.Component {
     const { places, images } = this.props;
     return (
       <div className="container container-map map-base">
-        <div id="map-info-background" className="map-info-home"></div>
-        <div id="map-info" className="map-info-home">
-          <h3 id="default-heading">Mississippi River</h3>
-          <h3 id="place-heading"></h3>
-          <p>Tintallë tier ve sí amortala ar lóriendessë cirya fairi ómaryo man eleni ahosta elyë tiruva nurrua enquantuva ondolissë laurië, light loicolícuma man. Ambonnar ondolissë winga oialë. light valimar nainië i cenuva nu valimar anar. Andúnë i undumë rúma ëar mornië fifírula man ve rávëa súmaryassë untúpa lírinen., light hlápula cenuva, lassi rámar yulma nu ringa vardo yulma sí ar elentári mindonnar. Métim' elenillor maiw</p>
-        </div>
-        <div className="map-details">
-          <form className="map-details-form">
-            <h4>Change map details</h4>
-            Zoom: <input type="text" data-tag="mapScale" ref="mapScale"
-              onChange={this.handleChange.bind(this)}
-              defaultValue={this.state.settings.mapScale}/><br/>
-            X: <input type="text" data-tag="mapX" ref="mapX"
-              onChange={this.handleChange.bind(this)}
-              defaultValue={this.state.settings.mapX}/><br/>
-            Y: <input type="text" data-tag="mapY" ref="mapY"
-              onChange={this.handleChange.bind(this)}
-              defaultValue={this.state.settings.mapY}/><br/>
-          </form>
-        </div>
         <Chart
           places={this.state.places}
           images={this.state.images}
           settings={this.state.settings}
           data={this.state.data}
           domain={this.state.domain} />
+        <div id="map-sidebar-background" className="map-sidebar-home"></div>
+        <div id="map-sidebar" className="map-sidebar-home">
+          <h3 id="default-heading">Mississippi River</h3>
+          <h3 id="place-heading"></h3>
+          <p>Tintallë tier ve sí amortala ar lóriendessë cirya fairi ómaryo man eleni ahosta elyë tiruva nurrua enquantuva ondolissë laurië, light loicolícuma man. Ambonnar ondolissë winga oialë. light valimar nainië i cenuva nu valimar anar. Andúnë i undumë rúma ëar mornië fifírula man ve rávëa súmaryassë untúpa lírinen., light hlápula cenuva, lassi rámar yulma nu ringa vardo yulma sí ar elentári mindonnar. Métim' elenillor maiw</p>
+        </div>
+        <div className="dev-map-details">
+          <form className="dev-map-details-form">
+            <h4>Change map details</h4>
+            Zoom: <input type="text" data-tag="mapScale" ref="mapScale"
+                         onChange={this.handleChange.bind(this)}
+                         defaultValue={this.state.settings.mapScale}/><br/>
+            X: <input type="text" data-tag="mapX" ref="mapX"
+                      onChange={this.handleChange.bind(this)}
+                      defaultValue={this.state.settings.mapX}/><br/>
+            Y: <input type="text" data-tag="mapY" ref="mapY"
+                      onChange={this.handleChange.bind(this)}
+                      defaultValue={this.state.settings.mapY}/><br/>
+          </form>
+        </div>
       </div>
     );
   }

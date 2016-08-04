@@ -37,7 +37,7 @@ d3Chart.create = function (el, props, state) {
 
   // Add a group for the points
   svg.append('g')
-    .attr('class', 'd3-points');
+    .attr('class', 'map-points');
 
   this._drawMap(el, props, state);
 
@@ -89,25 +89,26 @@ d3Chart.create = function (el, props, state) {
       .attr('y', (line.y1 * -1));
 
     // Set up place information
-    $('#map-info, #map-info-background')
-      .attr('class', 'map-info-detail');
-    $('#map-info h3#default-heading')
+    $('#map-sidebar, #map-sidebar-background')
+      .attr('class', 'map-sidebar-detail');
+    $('#map-sidebar h3#default-heading')
       .hide()
-    $('#map-info h3#place-heading')
+    $('#map-sidebar h3#place-heading')
       .html(selectedPlace.name);
 
+    // Add home button to the side panel
     var $homeButton = $('<div/>')
       .addClass('home-button')
       .html('Home');
-    $('#map-info')
+    $('#map-sidebar')
       .append($homeButton);
 
   });
 
   $(document).on('click', '.home-button', function (e) {
     // Resize the sidebar
-    $('#map-info, #map-info-background')
-      .attr('class', 'map-info-home');
+    $('#map-sidebar, #map-sidebar-background')
+      .attr('class', 'map-sidebar-home');
 
     // Reset the background map
     d3.select('#background-image')
@@ -122,10 +123,20 @@ d3Chart.create = function (el, props, state) {
     $('div.home-button').remove();
 
     // Reset heading
-    $('#map-info h3#default-heading')
+    $('#map-sidebar h3#default-heading')
       .show()
-    $('#map-info h3#place-heading')
+    $('#map-sidebar h3#place-heading')
       .hide();
+
+    drawPlaces(
+      el,
+      mapProjection(state.settings),
+      state.places,
+      state.images,
+      maxWidth,
+      stagger,
+      animDur
+    );
 
   });
 
