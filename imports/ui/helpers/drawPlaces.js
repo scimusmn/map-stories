@@ -229,11 +229,17 @@ function hidePlace(elemId, el, projection, place, maxWidth, animDur) {
       placeShape
         .remove();
     } else {
+
+      // Move the clicked highlight circle
+      var circleGroup = '#circle-' + elemId;
+      var line = linePoints(projection, place, maxWidth);
+      d3.select(circleGroup)
+        .attr('transform', 'translate(320,' + line.y1 + ')');
+
+      // Adjust the clicked circle style
       var circlePath = '#circle-' + elemId + ' circle';
-      console.log(circlePath);
-      console.log('----^ ^ ^ ^ ^ circlePath ^ ^ ^ ^ ^----');
       d3.select(circlePath)
-        .attr('r', '20px')
+        .attr('r', '30px')
         .attr('stroke-width', 3)
         .attr('fill-opacity', .2);
     }

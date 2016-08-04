@@ -80,13 +80,18 @@ d3Chart.create = function (el, props, state) {
     line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
     line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
 
+    // Zoom and position background image
     d3.select('#background-image')
       .transition()
       .duration(300)
       .attr('width', 3840)
       .attr('height', 2160)
-      .attr('x', (line.x1 * -1))
+      .attr('x', ((line.x1 * -2) + 320))
       .attr('y', (line.y1 * -1));
+
+    // Use in the future if you draw a bigger map
+    // that can accommodate the overflow in the Y axis
+    // .attr('y', ((line.y1 * -2) + (1080 / 2)));
 
     // Set up place information
     $('#map-sidebar, #map-sidebar-background')
