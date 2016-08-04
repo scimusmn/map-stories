@@ -106,6 +106,16 @@ d3Chart.create = function (el, props, state) {
     // Resize the sidebar
     $('#map-info, #map-info-background')
       .attr('class', 'map-info-home');
+
+    // Reset the background map
+    d3.select('#background-image')
+      .transition()
+      .duration(300)
+      .attr('width', 1920)
+      .attr('height', 1080)
+      .attr('x', 0)
+      .attr('y', 0);
+
   });
 
 };
