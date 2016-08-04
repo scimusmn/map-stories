@@ -91,7 +91,9 @@ d3Chart.create = function (el, props, state) {
     // Set up place information
     $('#map-info, #map-info-background')
       .attr('class', 'map-info-detail');
-    $('#map-info h3')
+    $('#map-info h3#default-heading')
+      .hide()
+    $('#map-info h3#place-heading')
       .html(selectedPlace.name);
 
     var $homeButton = $('<div/>')
@@ -115,6 +117,15 @@ d3Chart.create = function (el, props, state) {
       .attr('height', 1080)
       .attr('x', 0)
       .attr('y', 0);
+
+    // Remove home button
+    $('div.home-button').remove();
+
+    // Reset heading
+    $('#map-info h3#default-heading')
+      .show()
+    $('#map-info h3#place-heading')
+      .hide();
 
   });
 
