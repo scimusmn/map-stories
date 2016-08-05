@@ -27,11 +27,12 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .append($highlightImg);
 
       // Populate main text block
-      let $highlightText = $('<p/>')
-        .addClass('text-highlight')
-        .html('Lorem ipsum');
-      $('#text-content')
-        .append($highlightText);
+      let desc = _.each(selectedPlaceImage.desc, function (paragraph) {
+        let $paragraph = $('<p/>')
+          .html(paragraph);
+        $('#text-content')
+          .append($paragraph);
+      });
 
       // Fade in location content
       $('#location-content')
@@ -88,7 +89,7 @@ export function collapseSidebar() {
       $('#map-sidebar, #map-sidebar-background')
         .animate({
           width: sizes.infoWidthCollapsed,
-        }, (dur.default / 2), function() {
+        }, (dur.default / 2), function () {
           // Fade back in the default heading
           let $mapSidebar = $('#map-sidebar');
           $mapSidebar

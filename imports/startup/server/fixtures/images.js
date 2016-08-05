@@ -10,12 +10,18 @@ Meteor.startup(() => {
   if (Images.find().count() === 0) {
 
     const data = [
+
       // Coon rapids
       {
         place: 'Coon Rapids',
         name: 'Coon Rapids Dam',
         filename: 'CoonRdsDam1928.jpg',
         type: 'historic',
+        desc: [
+          'The Northern Mississippi Power Company began construction of a dam and hydroelectric power station at Coon Rapids in 1913. Although some local leaders argued that the dam should include locks, the Army Corps of Engineers determined that the river above the dam was not navigable, and the power company did not include a lock.',
+          'A crew of more than 1,000 worked day and night to build the dam. They lived in a nearby camp complete with streets, a store, clubhouse, hospital, office buildings, school, dormitories, dance hall, movie theater and billiard parlor.',
+          'In 1966 the hydroelectric station closed, and three years later the Hennepin County Park Board purchased the site.',
+        ],
       },
       {
         place: 'Coon Rapids',
@@ -45,7 +51,7 @@ Meteor.startup(() => {
         filename: 'Meeker.jpg',
       },
 
-      // SAFL
+      // SAF
       {
         place: 'Saint Anthony Falls',
         name: 'Old Bridge',
