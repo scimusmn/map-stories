@@ -181,15 +181,14 @@ export function drawPlaces(el, projection, places, images) {
 /**
  * Hide places that weren't clicked
  *
- * @param el
+ * @param elemId
  * @param projection
  * @param places
- * @param images
  * @param maxWidth
  */
-export function hidePlaces(elemId, el, projection, places, images, maxWidth) {
-  _.each(places, function (place, i) {
-    hidePlace(elemId, el, projection, place, maxWidth);
+export function hidePlaces(elemId, projection, places, maxWidth) {
+  _.each(places, function (place) {
+    hidePlace(elemId, projection, place, maxWidth);
   });
 
 }
@@ -204,11 +203,10 @@ export function hidePlaces(elemId, el, projection, places, images, maxWidth) {
  */
 function hidePlace(elemId, projection, place, maxWidth) {
   const dur = appDurations();
+  const sizes = appSizes();
 
   // Fade out the divs, that weren't clicked
-  let $placeLabel = $('.place-label');
-  // let $filteredPlaces = $placeLabel.not('#' + elemId);
-  let $filteredPlaces = $placeLabel;
+  let $filteredPlaces = $('.place-label');
   $filteredPlaces.animate({
     opacity: 0,
   }, 300, function () {
@@ -217,8 +215,9 @@ function hidePlace(elemId, projection, place, maxWidth) {
 
   // Fade out the SVG elements, that weren't clicked
   let shapes = ['line', 'circle'];
-  _.each(shapes, function (shape){
+  _.each(shapes, function (shape) {
     let placeShape = d3.selectAll('#' + shape + '-' + place.slug);
+
     // Leave the circle for the clicked element in place
     if (placeShape.attr('id') != 'circle-' + elemId) {
       placeShape
