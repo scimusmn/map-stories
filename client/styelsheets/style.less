@@ -57,6 +57,8 @@ h3 {
  * Sidebar
  * ----------------------------------------------------------------------------
  */
+@sidebar-padding: 35px;
+
 #map-sidebar-background,
 #map-sidebar {
   position: absolute;
@@ -76,13 +78,22 @@ h3 {
 
 #map-sidebar h3 {
   font-family: 'national-medium', sans-serif;
-  margin: 0 35px 35px;
+  margin: 0 @sidebar-padding @sidebar-padding;
   font-size: 65px;
 }
 
 #map-sidebar p {
   font-family: 'national-bold', sans-serif;
-  font-size: 20px;
+  font-size: 35px;
+}
+
+#text-content {
+  margin-left: @sidebar-padding;
+}
+
+#image-content {
+  float: right;
+  margin: 0 @sidebar-padding @sidebar-padding;
 }
 
 #image-thumbnails {

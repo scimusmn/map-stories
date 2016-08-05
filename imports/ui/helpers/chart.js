@@ -176,9 +176,15 @@ d3Chart.create = function (el, props, state) {
       .addClass('image-highlight')
       .attr('height', sizes.highlightHieght)
       .attr('src', 'images/collection/' + randImage.filename);
-
     $('#image-content')
       .append($highlightImg);
+
+    let $highlightText = $('<p/>')
+      .empty()
+      .addClass('text-highlight')
+      .html('Lorem ipsum');
+    $('#text-content')
+      .append($highlightText);
 
     // Thumbnails bar
     let placeImages = _.filter(state.images, function (o) {
