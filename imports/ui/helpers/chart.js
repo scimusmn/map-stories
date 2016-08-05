@@ -14,7 +14,10 @@ export function appDurations() {
   // Default animation duration
   dur.default = 300;
 
-  // Map zoom duration
+  // Slide the sidebar out quickly to make the app feel snappy.
+  dur.sidebarSlide = 800;
+
+  // Zoom the map slightly slower so that your eye catches the location translation.
   dur.bgZoom = 1200;
 
   // Bounce
@@ -80,6 +83,7 @@ d3Chart.create = function (el, props, state) {
 
   // Start with sidebar collapsed
   $('#map-sidebar, #map-sidebar-background')
+    .css('transition', 'all ' + (dur.sidebarSlide / 1000) + 's ease')
     .css('width', sizes.infoWidthCollapsed);
 
   // Listen for clicks on the places
