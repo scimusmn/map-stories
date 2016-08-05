@@ -196,15 +196,6 @@ function reDrawHomePage(el, state) {
   // Remove home button
   $('div.home-button').remove();
 
-  // Reset heading
-  let $mapSidebar = $('#map-sidebar');
-  $mapSidebar
-    .find('h3#default-heading')
-    .show();
-  $mapSidebar
-    .find('h3#place-heading')
-    .hide();
-
   drawPlaces(
     el,
     mapProjection(state.settings),

@@ -13,6 +13,7 @@ export function appDurations() {
 
   // Default animation, used in various short item show and hides
   dur.default = 300;
+  // dur.default = 900;
 
   // Slide the sidebar out quickly to make the app feel snappy.
   dur.sidebarSlide = 800;
