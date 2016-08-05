@@ -143,11 +143,12 @@ d3Chart.create = function (el, props, state) {
     // Sidebar heading
     $('#map-sidebar, #map-sidebar-background')
       .css('width', sizes.infoWidthExpanded);
-    $('#map-sidebar h3#default-heading')
-      .hide();
-    $('#map-sidebar h3#place-heading')
+    let $mapSidebar = $('#map-sidebar');
+    $mapSidebar.find('h3#place-heading')
       .html(selectedPlace.name)
       .show();
+    $mapSidebar.find('h3#default-heading')
+        .hide();
 
     // Add home button to the side panel
     let $homeButton = $('<div/>')
@@ -155,11 +156,12 @@ d3Chart.create = function (el, props, state) {
       .html('Home');
     $('.Chart')
       .append($homeButton);
+
     // Position home button in center
-    $('.home-button').css(
+    $homeButton.css(
       'left',
       ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) -
-      ($('.home-button').outerWidth() / 2)
+      ($homeButton.outerWidth() / 2)
     );
 
     // Sidebar content
@@ -218,9 +220,12 @@ d3Chart.create = function (el, props, state) {
     $('div.home-button').remove();
 
     // Reset heading
-    $('#map-sidebar h3#default-heading')
-      .show();
-    $('#map-sidebar h3#place-heading')
+    let $mapSidebar = $('#map-sidebar');
+    $mapSidebar
+      .find('h3#default-heading')
+        .show();
+    $mapSidebar
+      .find('h3#place-heading')
       .hide();
 
     // Reset sidebar content
