@@ -1,5 +1,4 @@
-import { appSizes } from '/imports/ui/helpers/chart';
-import { appDurations } from '/imports/ui/helpers/chart';
+import { appDurations, appSizes } from '/imports/ui/helpers/settings';
 
 /**
  * Draw a line between the circle and the picture
