@@ -8,10 +8,10 @@ import { mapProjection } from '/imports/ui/helpers/mapProjection';
 export function appDurations() {
   const dur = {};
 
-  // Stagger base, to make the animations happen in delayed sequence
+  // Stagger base duration, to make the animations happen in delayed sequence
   dur.stagger = 30;
 
-  // Default animation duration
+  // Default animation, used in various short item show and hides
   dur.default = 300;
 
   // Slide the sidebar out quickly to make the app feel snappy.
@@ -20,7 +20,7 @@ export function appDurations() {
   // Zoom the map slightly slower so that your eye catches the location translation.
   dur.bgZoom = 1200;
 
-  // Bounce
+  // Timing for circle bounce
   dur.bounce = 300;
 
   return dur;
