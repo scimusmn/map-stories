@@ -229,9 +229,7 @@ d3Chart.create = function (el, props, state) {
       .hide();
 
     // Reset sidebar content
-    $('#location-content')
-      .empty();
-    $('#image-thumbnails')
+    $('#image-content, #image-thumbnails, #text-content')
       .empty();
 
     drawPlaces(
