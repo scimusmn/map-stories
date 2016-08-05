@@ -22,8 +22,12 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .addClass('image-highlight')
         .attr('height', sizes.highlightMaxHeight)
         .attr('src', 'images/collection/' + selectedPlaceImage.filename);
-      $('#image-content')
+      $('#highlighted-image')
         .prepend($highlightImg);
+
+      // Populate image caption
+      $('#caption-content')
+        .html(selectedPlaceImage.caption);
 
       // Populate image credit
       $('#credit-content')
