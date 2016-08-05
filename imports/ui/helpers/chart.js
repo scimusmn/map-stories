@@ -61,25 +61,6 @@ const dur = appDurations();
  */
 let d3Chart = {};
 d3Chart.create = function (el, props, state) {
-  /* START */
-  /* Move from START to END into the _drawMap function */
-  let svg = d3.select(el).append('svg')
-    .attr('class', 'd3')
-    .attr('width', props.width)
-    .attr('height', props.height);
-
-  // Add SVG background image
-  svg.append('svg:image')
-    .attr('id', 'background-image')
-    .attr('x', 0)
-    .attr('y', 0)
-    .attr('width', sizes.screenWidth)
-    .attr('height', sizes.screenHeight)
-    .attr('xlink:href', '/images/mnrra_be09d4.png');
-
-  // Add a group for the points
-  svg.append('g')
-    .attr('class', 'map-points');
 
   /**
    * Set up the homepage map
@@ -111,21 +92,25 @@ d3Chart.create = function (el, props, state) {
 
 };
 
-/**
- * Update the D3 chart when the React props change
- */
-d3Chart.update = function (el, props, state) {
-  const mapPath = d3.select('path.states');
-  mapPath.remove();
-  this._drawMap(el, props, state);
-};
-
-d3Chart.destroy = function (el) {
-  // Clean up chart
-};
-
 d3Chart._drawMap = function (el, props, state) {
   const sizes = appSizes();
+  let svg = d3.select(el).append('svg')
+    .attr('class', 'd3')
+    .attr('width', props.width)
+    .attr('height', props.height);
+
+  // Add SVG background image
+  svg.append('svg:image')
+    .attr('id', 'background-image')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('width', sizes.screenWidth)
+    .attr('height', sizes.screenHeight)
+    .attr('xlink:href', '/images/mnrra_be09d4.png');
+
+  // Add a group for the points
+  svg.append('g')
+    .attr('class', 'map-points');
 
   // Draw development tools if enabled
   drawDev(el, props, mapProjection(state.settings));
@@ -318,5 +303,21 @@ function reDrawHomePage(el, state) {
     state.images,
   );
 }
+
+/**
+ * Update the D3 chart when the React props change
+ * @param el
+ * @param props
+ * @param state
+ */
+d3Chart.update = function (el, props, state) {
+  const mapPath = d3.select('path.states');
+  mapPath.remove();
+  this._drawMap(el, props, state);
+};
+
+d3Chart.destroy = function (el) {
+  // Clean up chart
+};
 
 export default d3Chart;
