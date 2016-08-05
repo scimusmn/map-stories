@@ -2,20 +2,51 @@ import { drawDev } from '/imports/ui/helpers/dev';
 import { drawPlaces, hidePlaces } from '/imports/ui/helpers/drawPlaces';
 import { mapProjection } from '/imports/ui/helpers/mapProjection';
 
-var d3Chart = {};
+/**
+ * Animation durations
+ */
+export function appDurations() {
+  const dur = {};
 
-// Image width
-const maxWidth = 200;
+  // Stagger base, to make the animations happen in delayed sequence
+  dur.stagger = 30;
 
-// Animation duration
-const animDur = 200;
+  // Default animation duration
+  dur.default = 300;
 
-// Stagger base, to make the animations happen in delayed sequence
-const stagger = 200;
+  // Map zoom duration
+  dur.bgZoom = 1200;
 
-// Map X translate
-// Fudge factor for the distance to move all the map points
-const zoomTranslate = 400;
+  // Bounce
+  dur.bounce = 300;
+
+  return dur;
+}
+
+/**
+ * Element sizes
+ *
+ * Returns and object with global sizes and pixel dimensions for animation
+ * and positioning.
+ */
+export function appSizes() {
+  const sizes = {};
+
+  // Screen dimensions
+  sizes.screenWidth = 1920;
+  sizes.screenHeight = 1080;
+  sizes.infoWidthCollapsed = 560;
+  sizes.infoWidthExpanded = sizes.screenWidth * (2 / 3);
+
+  // Map X translate
+  // Fudge factor for the distance to move all the map points
+  sizes.zoomTranslate = 400;
+
+  // Image width
+  sizes.maxWidth = 200;
+
+  return sizes;
+}
 
 /**
  * Create the D3 chart object
