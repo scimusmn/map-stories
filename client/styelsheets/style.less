@@ -1,4 +1,8 @@
-/* Project styles */
+/**
+ * ----------------------------------------------------------------------------
+ * Application styles
+ * ----------------------------------------------------------------------------
+ */
 @import "_colors.import.less";
 @import "_sizes.import.less";
 @import "_fonts.import.less";
@@ -17,10 +21,7 @@ body {
   user-select: none;
 }
 
-#app {
-  background-color: black;
-}
-
+// Don't show the cursor on kiosks
 body.kiosk-mode {
   cursor: none;
 }
@@ -51,6 +52,11 @@ body.kiosk-mode {
   display: none;
 }
 
+/**
+ * ----------------------------------------------------------------------------
+ * Detail view UI
+ * ----------------------------------------------------------------------------
+ */
 .home-button {
   position: absolute;
   bottom: 30px;
@@ -66,7 +72,7 @@ body.kiosk-mode {
 
 /**
  * ----------------------------------------------------------------------------
- * Map info
+ * Sidebar
  * ----------------------------------------------------------------------------
  */
 #map-sidebar-background,
@@ -389,3 +395,23 @@ h3.location-headline {
   margin: 20px;
   background: #DDD;
 }
+
+/**
+ * ----------------------------------------------------------------------------
+ * Screensaver
+ * ----------------------------------------------------------------------------
+ */
+#screensaver {
+  width: @screen-width;
+  max-width: @screen-width;
+  height: @screen-height;
+  padding: 0;
+  background: white;
+  z-index: 9999;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none;
+}
+
+
