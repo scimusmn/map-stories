@@ -42,6 +42,13 @@ d3Chart.create = function (el, props, state) {
 
 };
 
+/**
+ * Draw the homepage map when the app is loaded
+ * @param el
+ * @param props
+ * @param state
+ * @private
+ */
 d3Chart._drawMap = function (el, props, state) {
   const sizes = appSizes();
   let svg = d3.select(el).append('svg')
@@ -88,6 +95,11 @@ function drawSidebar() {
     .css('height', (sizes.thumbHieght + 100));
 }
 
+/**
+ * Draw the details page, when a user selects a location
+ * @param clicked The clicked DOM element
+ * @param {object} state Meteor data via React state
+ */
 function drawDetailPage(clicked, state) {
 
   // Selected place ID
@@ -153,20 +165,6 @@ function drawDetailPage(clicked, state) {
   $('#map-sidebar, #map-sidebar-background')
     .css('width', sizes.infoWidthExpanded);
 
-  // Add home button
-  let $homeButton = $('<div/>')
-    .addClass('home-button')
-    .html('Home');
-  $('.Chart')
-    .append($homeButton);
-
-  // Position home button in center of map panel
-  $homeButton.css(
-    'left',
-    ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) -
-    ($homeButton.outerWidth() / 2)
-  );
-
   // Main image
   let selectedPlaceImage = _.find(state.images, function (image) {
     return image.slug == selectedPlaceImageId;
@@ -204,6 +202,24 @@ function drawDetailPage(clicked, state) {
       .append($thumbDiv);
 
   });
+
+  drawHomeButton();
+}
+
+function drawHomeButton() {
+  // Add home button
+  let $homeButton = $('<div/>')
+    .addClass('home-button')
+    .html('Home');
+  $('.Chart')
+    .append($homeButton);
+
+  // Position home button in center of map panel
+  $homeButton.css(
+    'left',
+    ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) -
+    ($homeButton.outerWidth() / 2)
+  );
 }
 
 /**
