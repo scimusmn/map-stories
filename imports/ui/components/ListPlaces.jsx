@@ -62,6 +62,7 @@ export default class ListPlaces extends React.Component {
             Mississippi River
           </h3>
           <h3 id="place-heading"></h3>
+          <div id="location-content"></div>
           <div id="image-thumbnails"></div>
         </div>
         <div className="dev-map-details">

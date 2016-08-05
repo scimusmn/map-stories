@@ -88,6 +88,7 @@ d3Chart.create = function (el, props, state) {
     // Output the element that was clicked on
     var elemId = $(this).attr('id');
 
+    // Pass this along to the image-thumbanails
     var childImage = $(this).children('.place-label-background').attr('id');
 
     /**
@@ -150,10 +151,24 @@ d3Chart.create = function (el, props, state) {
     );
 
     // Sidebar content
+
+    // Main image
+    var randImage = _.find(state.images, function (image) {
+      return image.slug == childImage;
+    })
+    var $highlightImg = $('<img/>')
+      .empty()
+      .addClass('image-highlight')
+      .attr('height', 580)
+      .attr('src', 'images/collection/' + randImage.filename);
+
+    $('#location-content')
+      .append($highlightImg);
+
+    // Thumbnails bar
     var placeImages = _.filter(state.images, function (o) {
       return o.place == selectedPlace.name;
     });
-
     _.each(placeImages, function (image) {
 
       var $thumbDiv = $('<img/>')
@@ -195,6 +210,8 @@ d3Chart.create = function (el, props, state) {
       .hide();
 
     // Reset sidebar content
+    $('#location-content')
+      .empty();
     $('#image-thumbnails')
       .empty();
 
