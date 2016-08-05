@@ -1,3 +1,6 @@
+import { appSizes } from '/imports/ui/helpers/chart';
+import { appDurations } from '/imports/ui/helpers/chart';
+
 /**
  * Draw a line between the circle and the picture
  *
@@ -6,17 +9,15 @@
  * @param {object} el Parent SVG element
  * @param {object} projection D3 map projection
  * @param {object} place Meteor data object for the place
- * @param {int} maxWidth Width of the image circle.
- *  Used here for calculating animation centers
- * @param dur {int} Line drawing animation duration
  */
-function drawLine(el, projection, place, maxWidth, dur) {
+function drawLine(el, projection, place) {
+  const dur = appDurations();
   var placeGroup = d3.select(el).selectAll('.map-points')
     .append('g')
     .attr('id', 'line-' + place.slug)
     .classed('place-line', true);
 
-  var line = linePoints(projection, place, maxWidth);
+  var line = linePoints(projection, place);
   placeGroup.append('line')
     .attr('x1', line.x1)
     .attr('y1', line.y1)
@@ -25,18 +26,19 @@ function drawLine(el, projection, place, maxWidth, dur) {
     .attr('opacity', 0)
     .classed('map-line', true)
     .transition()
-    .duration(dur)
+    .duration(dur.default)
     .attr('x1', line.x2)
     .attr('y1', line.y2)
     .attr('opacity', 1);
 }
 
-function linePoints(projection, place, maxWidth) {
+function linePoints(projection, place) {
+  const sizes = appSizes();
   var line = {};
   line.x1 = projection([place.long, place.lat])[0];
   line.y1 = projection([place.long, place.lat])[1];
-  line.x2 = line.x1 + place.offsetX + (maxWidth / 2);
-  line.y2 = line.y1 + place.offsetY + (maxWidth / 2);
+  line.x2 = line.x1 + place.offsetX + (sizes.maxWidth / 2);
+  line.y2 = line.y1 + place.offsetY + (sizes.maxWidth / 2);
   return line;
 }
 
@@ -49,20 +51,20 @@ function linePoints(projection, place, maxWidth) {
  * @param {object} el Top level react DOM parent for our SVG elements
  * @param {function} projection D3 map projection object
  * @param {object} place Place object data from Meteor
- * @param {int} maxWidth Width of the image circle.
- *              Used here for calculating animation centers
  */
-function drawCircle(el, projection, place, maxWidth) {
+function drawCircle(el, projection, place) {
+  const sizes = appSizes();
   var placeGroup = d3.select(el).selectAll('.map-points')
     .append('g')
     .attr('id', 'circle-' + place.slug)
     .classed('place-circle', true);
   placeGroup.append('circle')
     .attr('r', '5px')
+    .attr('id', 'circle-' + place.slug + '-base')
     .attr('stroke-width', 4)
     .attr('stroke', '#062926')
     .classed('map-circle', true);
-  var line = linePoints(projection, place, maxWidth);
+  var line = linePoints(projection, place, sizes.maxWidth);
   placeGroup.attr('transform', 'translate(' + line.x1 + ',' + line.y1 + ')');
 }
 
@@ -74,10 +76,11 @@ function drawCircle(el, projection, place, maxWidth) {
  * @param  {function} projection D3 map projection object
  * @param  {object} place Place object data from Meteor
  * @param  {object} placeImage TODO: add description
- * @param  {object} maxWidth Maximum width for the image
- * @param  {int} picDur Milliseconds for the fade in animation
  */
-function drawImageLabel(projection, place, placeImage, maxWidth, picDur) {
+function drawImageLabel(projection, place, placeImage) {
+  const sizes = appSizes();
+  const dur = appDurations();
+
   var center = {};
   center.x1 = projection([place.long, place.lat])[0];
   center.y1 = projection([place.long, place.lat])[1];
@@ -97,11 +100,12 @@ function drawImageLabel(projection, place, placeImage, maxWidth, picDur) {
   var backgroundImage = '/images/collection/' + placeImage.filename;
 
   let displayDimension = placeImage.width;
-  if (placeImage.width >= maxWidth) {
-    displayDimension = maxWidth;
+  if (placeImage.width >= sizes.maxWidth) {
+    displayDimension = sizes.maxWidth;
   }
 
   var $placeLabelBackground = $('<div/>')
+    .attr('id', placeImage.slug)
     .addClass('place-label-background')
     .css('background-image', 'url(' + backgroundImage + ')')
     .css('width', '0px')
@@ -114,7 +118,7 @@ function drawImageLabel(projection, place, placeImage, maxWidth, picDur) {
     opacity: 1,
     left: center.x2,
     top: center.y2,
-  }, picDur, function () {
+  }, dur.default, function () {
     var $placeLabelText = $('<div/>')
       .addClass('place-label-text')
       .html(place.name);
@@ -128,19 +132,19 @@ function drawImageLabel(projection, place, placeImage, maxWidth, picDur) {
   $placeLabelBackground.animate({
     width: displayDimension + 'px',
     height: displayDimension + 'px',
-  }, picDur);
+  }, dur.default);
 
 }
 
-function drawPlace(el, projection, place, placeImage, maxWidth, animDur) {
+function drawPlace(el, projection, place, placeImage) {
   // Draw the location labels and images
-  drawImageLabel(projection, place, placeImage, maxWidth, animDur);
+  drawImageLabel(projection, place, placeImage);
 
   // Draw map circle, for each location
-  drawLine(el, projection, place, maxWidth, animDur);
+  drawLine(el, projection, place);
 
   // Draw map circle, for each location
-  drawCircle(el, projection, place, maxWidth);
+  drawCircle(el, projection, place);
 }
 
 /**
@@ -150,11 +154,10 @@ function drawPlace(el, projection, place, placeImage, maxWidth, animDur) {
  * @param projection
  * @param places
  * @param images
- * @param maxWidth
- * @param stagger
- * @param animDur
  */
-export function drawPlaces(el, projection, places, images, maxWidth, stagger, animDur) {
+export function drawPlaces(el, projection, places, images) {
+  const dur = appDurations();
+
   // Remove any past circles
   d3.selectAll('.place-circle')
     .remove();
@@ -169,10 +172,9 @@ export function drawPlaces(el, projection, places, images, maxWidth, stagger, an
 
     // Select a random image
     const placeImage = _.sample(placeImages);
-
     setTimeout(function () {
-      drawPlace(el, projection, place, placeImage, maxWidth, animDur);
-    }, stagger * (i + 1 - 0.9));
+      drawPlace(el, projection, place, placeImage);
+    }, dur.stagger * (i + 1 - 0.9));
   });
 }
 
@@ -184,12 +186,10 @@ export function drawPlaces(el, projection, places, images, maxWidth, stagger, an
  * @param places
  * @param images
  * @param maxWidth
- * @param stagger
- * @param animDur
  */
-export function hidePlaces(elemId, el, projection, places, images, maxWidth, stagger, animDur) {
+export function hidePlaces(elemId, el, projection, places, images, maxWidth) {
   _.each(places, function (place, i) {
-    hidePlace(elemId, el, projection, place, maxWidth, animDur);
+    hidePlace(elemId, el, projection, place, maxWidth);
   });
 
 }
@@ -202,9 +202,10 @@ export function hidePlaces(elemId, el, projection, places, images, maxWidth, sta
  * @param projection
  * @param place
  * @param maxWidth
- * @param animDur
  */
-function hidePlace(elemId, el, projection, place, maxWidth, animDur) {
+function hidePlace(elemId, el, projection, place, maxWidth) {
+  const dur = appDurations();
+
   // Fade out the divs, that weren't clicked
   let $placeLabel = $('.place-label');
   // let $filteredPlaces = $placeLabel.not('#' + elemId);
@@ -234,14 +235,50 @@ function hidePlace(elemId, el, projection, place, maxWidth, animDur) {
       var circleGroup = '#circle-' + elemId;
       var line = linePoints(projection, place, maxWidth);
       d3.select(circleGroup)
+        .transition()
+        .duration(dur.bgZoom)
         .attr('transform', 'translate(320,' + line.y1 + ')');
 
-      // Adjust the clicked circle style
-      var circlePath = '#circle-' + elemId + ' circle';
-      d3.select(circlePath)
-        .attr('r', '30px')
-        .attr('stroke-width', 3)
-        .attr('fill-opacity', .2);
+      /**
+       * Resize selected map point circle
+       */
+      // Add a second stroke to back up the orange
+
+      d3.select('#circle-' + elemId)
+        .append('circle')
+        .attr('id', 'circle-' + elemId + '-stroke')
+        .attr('r', '5px')
+        .attr('stroke-width', 4)
+        .attr('stroke', '#33444C');
+
+      var circlePathBase = '#circle-' + elemId + '-base';
+      var circlePathStroke = '#circle-' + elemId + '-stroke';
+
+      setTimeout(
+        function () {
+          d3.select(circlePathBase)
+            .transition()
+            .duration(dur.bounce)
+            .attr('r', '45px')
+            .attr('stroke-width', 9)
+            .attr('stroke', '#0083c0')
+            .attr('fill-opacity', .1)
+            .transition()
+            .duration(dur.bounce)
+            .attr('r', '30px');
+
+          d3.select(circlePathStroke)
+            .transition()
+            .duration(dur.bounce)
+            .attr('r', '45px')
+            .attr('stroke-width', 6)
+            .attr('fill-opacity', .1)
+            .transition()
+            .duration(dur.bounce)
+            .attr('r', '30px');
+        },
+
+      dur.bgZoom - 500);
     }
   });
 

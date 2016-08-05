@@ -51,7 +51,11 @@ export function appSizes() {
 /**
  * Create the D3 chart object
  */
+var d3Chart = {};
 d3Chart.create = function (el, props, state) {
+  const sizes = appSizes();
+  const dur = appDurations();
+
   var svg = d3.select(el).append('svg')
     .attr('class', 'd3')
     .attr('width', props.width)
@@ -62,8 +66,8 @@ d3Chart.create = function (el, props, state) {
     .attr('id', 'background-image')
     .attr('x', 0)
     .attr('y', 0)
-    .attr('width', 1920)
-    .attr('height', 1080)
+    .attr('width', sizes.screenWidth)
+    .attr('height', sizes.screenHeight)
     .attr('xlink:href', '/images/mnrra_be09d4.png');
 
   // Add a group for the points
@@ -72,20 +76,19 @@ d3Chart.create = function (el, props, state) {
 
   this._drawMap(el, props, state);
 
+  // Start with sidebar collapsed
+  $('#map-sidebar, #map-sidebar-background')
+    .css('width', sizes.infoWidthCollapsed);
+
   // Listen for clicks on the places
   // It's important to use the .on() syntax which can handle
   // looking for elements that are animating into the page over time (animation)
   $(document).on('click', '.place-label', function (e) {
+
     // Output the element that was clicked on
     var elemId = $(this).attr('id');
 
-    /**
-     * TODO:
-     *  - Hide all of the elements that aren't the one that was clicked
-     *  - Zoom the map to the point that was clicked
-     *  - Animate in the right div that contains the content for the section
-     *    that was clicked
-     */
+    var childImage = $(this).children('.place-label-background').attr('id');
 
     /**
      * Animate out the places that were not clicked
@@ -96,9 +99,6 @@ d3Chart.create = function (el, props, state) {
       mapProjection(state.settings),
       state.places,
       state.images,
-      maxWidth,
-      stagger,
-      animDur
     );
 
     let selectedPlace = _.find(state.places, function (o) {
@@ -114,24 +114,24 @@ d3Chart.create = function (el, props, state) {
     // Zoom and position background image
     d3.select('#background-image')
       .transition()
-      .duration(300)
-      .attr('width', 3840)
-      .attr('height', 2160)
-      .attr('x', ((line.x1 * -2) + 320))
+      .duration(dur.bgZoom)
+      .attr('width', sizes.screenWidth * 2)
+      .attr('height', sizes.screenHeight * 2)
+      .attr('x', ((line.x1 * -2) + (620 / 2)))
       .attr('y', (line.y1 * -1));
 
     // Use in the future if you draw a bigger map
     // that can accommodate the overflow in the Y axis
-    // .attr('y', ((line.y1 * -2) + (1080 / 2)));
+    // .attr('y', ((line.y1 * -2) + (screenHeight / 2)));
 
     /**
      * Draw sidebar
      */
     // Sidebar heading
     $('#map-sidebar, #map-sidebar-background')
-      .attr('class', 'map-sidebar-detail');
+      .css('width', sizes.infoWidthExpanded);
     $('#map-sidebar h3#default-heading')
-      .hide()
+      .hide();
     $('#map-sidebar h3#place-heading')
       .html(selectedPlace.name)
       .show();
@@ -140,19 +140,26 @@ d3Chart.create = function (el, props, state) {
     var $homeButton = $('<div/>')
       .addClass('home-button')
       .html('Home');
-    $('#map-sidebar')
+    $('.Chart')
       .append($homeButton);
+    // Position home button in center
+    $('.home-button').css(
+      'left',
+      ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) -
+      ($('.home-button').outerWidth() / 2)
+    );
 
     // Sidebar content
-    var placeImages = _.filter(state.images, function(o) {
+    var placeImages = _.filter(state.images, function (o) {
       return o.place == selectedPlace.name;
     });
+
     _.each(placeImages, function (image) {
 
       var $thumbDiv = $('<img/>')
         .empty()
         .addClass('image-thumbnail')
-        .attr('width', 300)
+        .attr('height', 200)
         .attr('src', 'images/collection/' + image.filename);
 
       $('#image-thumbnails')
@@ -161,17 +168,20 @@ d3Chart.create = function (el, props, state) {
     });
   });
 
+  /**
+   * Handle click on the home button
+   */
   $(document).on('click', '.home-button', function (e) {
     // Resize the sidebar
     $('#map-sidebar, #map-sidebar-background')
-      .attr('class', 'map-sidebar-home');
+      .css('width', sizes.infoWidthCollapsed);
 
     // Reset the background map
     d3.select('#background-image')
       .transition()
       .duration(300)
-      .attr('width', 1920)
-      .attr('height', 1080)
+      .attr('width', sizes.screenWidth)
+      .attr('height', sizes.screenHeight)
       .attr('x', 0)
       .attr('y', 0);
 
@@ -180,7 +190,7 @@ d3Chart.create = function (el, props, state) {
 
     // Reset heading
     $('#map-sidebar h3#default-heading')
-      .show()
+      .show();
     $('#map-sidebar h3#place-heading')
       .hide();
 
@@ -193,9 +203,6 @@ d3Chart.create = function (el, props, state) {
       mapProjection(state.settings),
       state.places,
       state.images,
-      maxWidth,
-      stagger,
-      animDur
     );
 
   });
@@ -226,9 +233,6 @@ d3Chart._drawMap = function (el, props, state) {
     mapProjection(state.settings),
     state.places,
     state.images,
-    maxWidth,
-    stagger,
-    animDur
   );
 
 };
