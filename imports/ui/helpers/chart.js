@@ -111,43 +111,20 @@ function drawDetailPage(clicked, state) {
     .children('.place-label-background')
     .attr('id');
 
-  /**
-   * Animate out the places that were not clicked
-   */
+  // Get Meteor data object for the selected place
+  let selectedPlace = _.find(state.places, function (o) {
+    return o.slug == selectedPlaceId;
+  });
+
+  // Animate out the places that were not clicked
   hidePlaces(
     selectedPlaceId,
     mapProjection(state.settings),
     state.places,
   );
 
-  let selectedPlace = _.find(state.places, function (o) {
-    return o.slug == selectedPlaceId;
-  });
-
-  // Map projection details for map zoom
-  let projection = mapProjection(state.settings);
-  let line = {};
-  line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
-  line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
-
-  // Zoom and position background image
-  d3.select('#background-image')
-    .transition()
-    .duration(dur.bgZoom)
-    .attr('width', sizes.screenWidth * 2)
-    .attr('height', sizes.screenHeight * 2)
-    .attr(
-      'x',
-      (
-        (line.x1 * -2) +
-        ((sizes.screenWidth - sizes.infoWidthExpanded) / 2)
-      )
-    )
-    .attr('y', (line.y1 * -1));
-
-  // Use in the future if you draw a bigger map
-  // that can accommodate the overflow in the Y axis
-  // .attr('y', ((line.y1 * -2) + (screenHeight / 2)));
+  // Center the map on the selected location
+  zoomMap(state, selectedPlace);
 
   /**
    * Draw sidebar
@@ -206,6 +183,42 @@ function drawDetailPage(clicked, state) {
   drawHomeButton();
 }
 
+/**
+ * Zoom and pan the background map to a selected location
+ * @param state
+ * @param selectedPlace
+ */
+function zoomMap(state, selectedPlace) {
+
+  let projection = mapProjection(state.settings);
+  let line = {};
+  line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
+  line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
+
+  // Zoom and position background image
+  d3.select('#background-image')
+    .transition()
+    .duration(dur.bgZoom)
+    .attr('width', sizes.screenWidth * 2)
+    .attr('height', sizes.screenHeight * 2)
+    .attr(
+      'x',
+      (
+        (line.x1 * -2) +
+        ((sizes.screenWidth - sizes.infoWidthExpanded) / 2)
+      )
+    )
+    .attr('y', (line.y1 * -1));
+
+  // Use in the future if you draw a bigger map
+  // that can accommodate the overflow in the Y axis
+  // .attr('y', ((line.y1 * -2) + (screenHeight / 2)));
+
+}
+
+/**
+ * Draw home button
+ */
 function drawHomeButton() {
   // Add home button
   let $homeButton = $('<div/>')
