@@ -38,8 +38,7 @@ var Chart = React.createClass({
   },
 
   componentWillUnmount: function () {
-    var el = ReactDOM.findDOMNode(this);
-    d3Chart.destroy(el);
+    // Disabled, since we're not using it.
   },
 
   render: function () {

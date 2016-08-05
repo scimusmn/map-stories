@@ -266,8 +266,4 @@ d3Chart.update = function (el, props, state) {
   this._drawMap(el, props, state);
 };
 
-d3Chart.destroy = function (el) {
-  // Clean up chart
-};
-
 export default d3Chart;
