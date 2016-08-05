@@ -81,7 +81,8 @@ d3Chart.create = function (el, props, state) {
 
   this._drawMap(el, props, state);
 
-  // Start with sidebar collapsed
+  // Set the sidebar animation durations
+  // Start with sidebar collapsed and set animation durations
   $('#map-sidebar, #map-sidebar-background')
     .css('transition', 'all ' + (dur.sidebarSlide / 1000) + 's ease')
     .css('width', sizes.infoWidthCollapsed);
