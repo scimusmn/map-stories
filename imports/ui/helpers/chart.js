@@ -53,14 +53,16 @@ export function appSizes() {
   return sizes;
 }
 
+const sizes = appSizes();
+const dur = appDurations();
+
 /**
  * Create the D3 chart object
  */
 let d3Chart = {};
 d3Chart.create = function (el, props, state) {
-  const sizes = appSizes();
-  const dur = appDurations();
-
+  /* START */
+  /* Move from START to END into the _drawMap function */
   let svg = d3.select(el).append('svg')
     .attr('class', 'd3')
     .attr('width', props.width)
@@ -79,172 +81,32 @@ d3Chart.create = function (el, props, state) {
   svg.append('g')
     .attr('class', 'map-points');
 
+  /**
+   * Set up the homepage map
+   */
   this._drawMap(el, props, state);
 
-  // Set the sidebar animation durations
-  // Start with sidebar collapsed and set animation durations
-  $('#map-sidebar, #map-sidebar-background')
-    .css('transition', 'all ' + (dur.sidebarSlide / 1000) + 's ease')
-    .css('width', sizes.infoWidthCollapsed);
+  /**
+   * Set up the homepage sidebar
+   */
+  drawSidebar();
 
-  // Listen for clicks on the places
-  // It's important to use the .on() syntax which can handle
-  // looking for elements that are animating into the page over time (animation)
+  /**
+   * Handle clicks on homepage places
+   *
+   * It's important to use the .on() syntax which can handle
+   * looking for elements that are animating into the page
+   * over time (animation).
+   */
   $(document).on('click', '.place-label', function () {
-
-    // Output the element that was clicked on
-    let elemId = $(this).attr('id');
-
-    // Pass this along to the image-thumbnails
-    let childImage = $(this).children('.place-label-background').attr('id');
-
-    /**
-     * Animate out the places that were not clicked
-     */
-    hidePlaces(
-      elemId,
-      mapProjection(state.settings),
-      state.places,
-    );
-
-    let selectedPlace = _.find(state.places, function (o) {
-      return o.slug == elemId;
-    });
-
-    // Map projection details for map zoom
-    let projection = mapProjection(state.settings);
-    let line = {};
-    line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
-    line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
-
-    // Zoom and position background image
-    d3.select('#background-image')
-      .transition()
-      .duration(dur.bgZoom)
-      .attr('width', sizes.screenWidth * 2)
-      .attr('height', sizes.screenHeight * 2)
-      .attr(
-        'x',
-        (
-          (line.x1 * -2) +
-          ((sizes.screenWidth - sizes.infoWidthExpanded) / 2)
-        )
-      )
-      .attr('y', (line.y1 * -1));
-
-    // Use in the future if you draw a bigger map
-    // that can accommodate the overflow in the Y axis
-    // .attr('y', ((line.y1 * -2) + (screenHeight / 2)));
-
-    /**
-     * Draw sidebar
-     */
-
-    // Sidebar heading
-    $('#map-sidebar, #map-sidebar-background')
-      .css('width', sizes.infoWidthExpanded);
-    let $mapSidebar = $('#map-sidebar');
-    $mapSidebar.find('h3#place-heading')
-      .html(selectedPlace.name)
-      .show();
-    $mapSidebar.find('h3#default-heading')
-        .hide();
-
-    // Add home button to the side panel
-    let $homeButton = $('<div/>')
-      .addClass('home-button')
-      .html('Home');
-    $('.Chart')
-      .append($homeButton);
-
-    // Position home button in center
-    $homeButton.css(
-      'left',
-      ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) -
-      ($homeButton.outerWidth() / 2)
-    );
-
-    // Sidebar content
-
-    // Main image
-    let randImage = _.find(state.images, function (image) {
-      return image.slug == childImage;
-    });
-
-    let $highlightImg = $('<img/>')
-      .empty()
-      .addClass('image-highlight')
-      .attr('height', sizes.highlightHieght)
-      .attr('src', 'images/collection/' + randImage.filename);
-    $('#image-content')
-      .append($highlightImg);
-
-    let $highlightText = $('<p/>')
-      .empty()
-      .addClass('text-highlight')
-      .html('Lorem ipsum');
-    $('#text-content')
-      .append($highlightText);
-
-    // Thumbnails bar
-    let placeImages = _.filter(state.images, function (o) {
-      return o.place == selectedPlace.name;
-    });
-
-    _.each(placeImages, function (image) {
-
-      let $thumbDiv = $('<img/>')
-        .empty()
-        .addClass('image-thumbnail')
-        .attr('height', sizes.thumbHieght)
-        .attr('src', 'images/collection/' + image.filename);
-
-      $('#image-thumbnails')
-        .append($thumbDiv);
-
-    });
+    drawDetailPage(this, state);
   });
 
   /**
-   * Handle click on the home button
+   * Handle click on the detail page home button
    */
   $(document).on('click', '.home-button', function () {
-    // Resize the sidebar
-    $('#map-sidebar, #map-sidebar-background')
-      .css('width', sizes.infoWidthCollapsed);
-
-    // Reset the background map
-    d3.select('#background-image')
-      .transition()
-      .duration(300)
-      .attr('width', sizes.screenWidth)
-      .attr('height', sizes.screenHeight)
-      .attr('x', 0)
-      .attr('y', 0);
-
-    // Remove home button
-    $('div.home-button').remove();
-
-    // Reset heading
-    let $mapSidebar = $('#map-sidebar');
-    $mapSidebar
-      .find('h3#default-heading')
-        .show();
-    $mapSidebar
-      .find('h3#place-heading')
-      .hide();
-
-    // Reset sidebar content
-    $('#image-content, #image-thumbnails, #text-content')
-      .empty();
-
-    drawPlaces(
-      el,
-      mapProjection(state.settings),
-      state.places,
-      state.images,
-    );
-
+    reDrawHomePage(el, state);
   });
 
 };
@@ -276,9 +138,183 @@ d3Chart._drawMap = function (el, props, state) {
     state.images,
   );
 
+};
+
+function drawSidebar() {
+  // Set the sidebar animation durations
+  // Start with sidebar collapsed and set animation durations
+  $('#map-sidebar, #map-sidebar-background')
+    .css('transition', 'all ' + (dur.sidebarSlide / 1000) + 's ease')
+    .css('width', sizes.infoWidthCollapsed);
+
   $('#image-thumbnails')
     .css('height', (sizes.thumbHieght + 100));
+}
 
-};
+function drawDetailPage(clicked, state) {
+
+  // Selected place ID
+  let selectedPlaceId = $(clicked).attr('id');
+
+  // ID of the image in the selected place
+  // This will be highlighted in the sidebar
+  let selectedPlaceImageId = $(clicked)
+    .children('.place-label-background')
+    .attr('id');
+
+  /**
+   * Animate out the places that were not clicked
+   */
+  hidePlaces(
+    selectedPlaceId,
+    mapProjection(state.settings),
+    state.places,
+  );
+
+  let selectedPlace = _.find(state.places, function (o) {
+    return o.slug == selectedPlaceId;
+  });
+
+  // Map projection details for map zoom
+  let projection = mapProjection(state.settings);
+  let line = {};
+  line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
+  line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
+
+  // Zoom and position background image
+  d3.select('#background-image')
+    .transition()
+    .duration(dur.bgZoom)
+    .attr('width', sizes.screenWidth * 2)
+    .attr('height', sizes.screenHeight * 2)
+    .attr(
+      'x',
+      (
+        (line.x1 * -2) +
+        ((sizes.screenWidth - sizes.infoWidthExpanded) / 2)
+      )
+    )
+    .attr('y', (line.y1 * -1));
+
+  // Use in the future if you draw a bigger map
+  // that can accommodate the overflow in the Y axis
+  // .attr('y', ((line.y1 * -2) + (screenHeight / 2)));
+
+  /**
+   * Draw sidebar
+   */
+
+  // Sidebar heading
+  let $mapSidebar = $('#map-sidebar');
+  $mapSidebar.find('h3#place-heading')
+    .html(selectedPlace.name)
+    .show();
+  $mapSidebar.find('h3#default-heading')
+    .hide();
+
+  // Expand the sidebar width
+  $('#map-sidebar, #map-sidebar-background')
+    .css('width', sizes.infoWidthExpanded);
+
+  // Add home button
+  let $homeButton = $('<div/>')
+    .addClass('home-button')
+    .html('Home');
+  $('.Chart')
+    .append($homeButton);
+
+  // Position home button in center of map panel
+  $homeButton.css(
+    'left',
+    ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) -
+    ($homeButton.outerWidth() / 2)
+  );
+
+  // Main image
+  let selectedPlaceImage = _.find(state.images, function (image) {
+    return image.slug == selectedPlaceImageId;
+  });
+
+  let $highlightImg = $('<img/>')
+    .empty()
+    .addClass('image-highlight')
+    .attr('height', sizes.highlightHieght)
+    .attr('src', 'images/collection/' + selectedPlaceImage.filename);
+  $('#image-content')
+    .append($highlightImg);
+
+  let $highlightText = $('<p/>')
+    .empty()
+    .addClass('text-highlight')
+    .html('Lorem ipsum');
+  $('#text-content')
+    .append($highlightText);
+
+  // Thumbnails bar
+  let placeImages = _.filter(state.images, function (o) {
+    return o.place == selectedPlace.name;
+  });
+
+  _.each(placeImages, function (image) {
+
+    let $thumbDiv = $('<img/>')
+      .empty()
+      .addClass('image-thumbnail')
+      .attr('height', sizes.thumbHieght)
+      .attr('src', 'images/collection/' + image.filename);
+
+    $('#image-thumbnails')
+      .append($thumbDiv);
+
+  });
+}
+
+/**
+ * Draw homepage on return from the detail view
+ * @param el
+ * @param state
+ */
+function reDrawHomePage(el, state) {
+  // Fade out sidebar content
+  $('#location-content')
+    .animate({
+      opacity: 0,
+    }, 200, function () {
+      $('#image-content, #image-thumbnails, #text-content')
+        .empty();
+    });
+
+  // Resize the sidebar
+  $('#map-sidebar, #map-sidebar-background')
+    .css('width', sizes.infoWidthCollapsed);
+
+  // Reset the background map
+  d3.select('#background-image')
+    .transition()
+    .duration(300)
+    .attr('width', sizes.screenWidth)
+    .attr('height', sizes.screenHeight)
+    .attr('x', 0)
+    .attr('y', 0);
+
+  // Remove home button
+  $('div.home-button').remove();
+
+  // Reset heading
+  let $mapSidebar = $('#map-sidebar');
+  $mapSidebar
+    .find('h3#default-heading')
+    .show();
+  $mapSidebar
+    .find('h3#place-heading')
+    .hide();
+
+  drawPlaces(
+    el,
+    mapProjection(state.settings),
+    state.places,
+    state.images,
+  );
+}
 
 export default d3Chart;
