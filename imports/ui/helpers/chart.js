@@ -56,12 +56,12 @@ export function appSizes() {
 /**
  * Create the D3 chart object
  */
-var d3Chart = {};
+let d3Chart = {};
 d3Chart.create = function (el, props, state) {
   const sizes = appSizes();
   const dur = appDurations();
 
-  var svg = d3.select(el).append('svg')
+  let svg = d3.select(el).append('svg')
     .attr('class', 'd3')
     .attr('width', props.width)
     .attr('height', props.height);
@@ -92,10 +92,10 @@ d3Chart.create = function (el, props, state) {
   $(document).on('click', '.place-label', function (e) {
 
     // Output the element that was clicked on
-    var elemId = $(this).attr('id');
+    let elemId = $(this).attr('id');
 
-    // Pass this along to the image-thumbanails
-    var childImage = $(this).children('.place-label-background').attr('id');
+    // Pass this along to the image-thumbnails
+    let childImage = $(this).children('.place-label-background').attr('id');
 
     /**
      * Animate out the places that were not clicked
@@ -113,7 +113,7 @@ d3Chart.create = function (el, props, state) {
     });
 
     // Map projection details for map zoom
-    var projection = mapProjection(state.settings);
+    let projection = mapProjection(state.settings);
     let line = {};
     line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
     line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
@@ -150,7 +150,7 @@ d3Chart.create = function (el, props, state) {
       .show();
 
     // Add home button to the side panel
-    var $homeButton = $('<div/>')
+    let $homeButton = $('<div/>')
       .addClass('home-button')
       .html('Home');
     $('.Chart')
@@ -165,10 +165,11 @@ d3Chart.create = function (el, props, state) {
     // Sidebar content
 
     // Main image
-    var randImage = _.find(state.images, function (image) {
+    let randImage = _.find(state.images, function (image) {
       return image.slug == childImage;
-    })
-    var $highlightImg = $('<img/>')
+    });
+
+    let $highlightImg = $('<img/>')
       .empty()
       .addClass('image-highlight')
       .attr('height', sizes.highlightHieght)
@@ -178,12 +179,12 @@ d3Chart.create = function (el, props, state) {
       .append($highlightImg);
 
     // Thumbnails bar
-    var placeImages = _.filter(state.images, function (o) {
+    let placeImages = _.filter(state.images, function (o) {
       return o.place == selectedPlace.name;
     });
     _.each(placeImages, function (image) {
 
-      var $thumbDiv = $('<img/>')
+      let $thumbDiv = $('<img/>')
         .empty()
         .addClass('image-thumbnail')
         .attr('height', sizes.thumbHieght)
