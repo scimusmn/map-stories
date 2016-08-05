@@ -67,7 +67,7 @@ d3Chart.create = function (el, props, state) {
     .attr('height', props.height);
 
   // Add SVG background image
-  var backgroundImage = svg.append('svg:image')
+  svg.append('svg:image')
     .attr('id', 'background-image')
     .attr('x', 0)
     .attr('y', 0)
