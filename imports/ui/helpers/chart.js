@@ -140,13 +140,15 @@ d3Chart._drawMap = function (el, props, state) {
 
 };
 
+/**
+ * Set up the sidebar on the initial render
+ *
+ * Start with sidebar collapsed. Set sizes and animation durations
+ */
 function drawSidebar() {
-  // Set the sidebar animation durations
-  // Start with sidebar collapsed and set animation durations
   $('#map-sidebar, #map-sidebar-background')
     .css('transition', 'all ' + (dur.sidebarSlide / 1000) + 's ease')
     .css('width', sizes.infoWidthCollapsed);
-
   $('#image-thumbnails')
     .css('height', (sizes.thumbHieght + 100));
 }
