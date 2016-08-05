@@ -177,7 +177,7 @@ d3Chart.create = function (el, props, state) {
       .attr('height', sizes.highlightHieght)
       .attr('src', 'images/collection/' + randImage.filename);
 
-    $('#location-content')
+    $('#image-content')
       .append($highlightImg);
 
     // Thumbnails bar
