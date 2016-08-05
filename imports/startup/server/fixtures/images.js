@@ -27,7 +27,7 @@ Meteor.startup(() => {
       // Bohemian Flats
       {
         place: 'Bohemian Flats',
-        name: 'I 35 Bridge Collapse',
+        name: 'I-35 Bridge Collapse',
         filename: 'I35_Bridge_Collapse_4crop.jpg',
         type: 'historic',
       },
@@ -41,7 +41,7 @@ Meteor.startup(() => {
       // Lock and Dam #1
       {
         place: 'Lock and Dam #1',
-        name: 'Meeker',
+        name: 'Meeker island',
         filename: 'Meeker.jpg',
       },
 
@@ -65,12 +65,12 @@ Meteor.startup(() => {
       // Fort Snelling
       {
         place: 'Fort Snelling',
-        name: 'Fot Snelling',
+        name: 'Fort Snelling painting',
         filename: 'AV1988-45-18.jpg',
       },
       {
         place: 'Fort Snelling',
-        name: 'Fort Snelling Settlers',
+        name: 'Fort Snelling sketch',
         filename: 'FortSnellingHeadofNavigation.jpg',
       },
       {
@@ -95,19 +95,19 @@ Meteor.startup(() => {
       // Mendota
       {
         place: 'Mendota',
-        name: 'Something',
+        name: 'Native people above Mendota',
         filename: 'AV2004-88.jpg',
       },
       {
         place: 'Mendota',
-        name: 'Something',
+        name: 'Sibley house painting',
         filename: 'SibleyHse1888.jpg',
       },
 
       // Mounds
       {
         place: 'Mounds Park',
-        name: 'Something',
+        name: 'Mounds Park painting',
         filename: 'AV1991-85-33.jpg',
       },
     ];
