@@ -42,7 +42,10 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .animate({
           width: sizes.infoWidthExpanded,
         }, dur.default, function () {
-          console.log('done');
+          $('#image-thumbnails')
+            .animate({
+              bottom: 0,
+            }, dur.default);
         });
 
     });
@@ -76,6 +79,11 @@ export function collapseSidebar() {
       $('#place-heading, #image-content, #text-content, #image-thumbnails')
         .empty();
 
+      $('#image-thumbnails')
+        .animate({
+          bottom: ((sizes.thumbHieght + 100) * -1),
+        });
+
       // Slide the sidebar back to homepage default
       $('#map-sidebar, #map-sidebar-background')
         .animate({
@@ -107,5 +115,6 @@ export function drawSidebar() {
     .hide();
 
   $('#image-thumbnails')
+    .css('bottom', (sizes.thumbHieght + 100) * -1)
     .css('height', (sizes.thumbHieght + 100));
 }
