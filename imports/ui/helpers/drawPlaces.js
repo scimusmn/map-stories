@@ -237,7 +237,9 @@ function hidePlace(elemId, el, projection, place, maxWidth) {
       d3.select(circleGroup)
         .transition()
         .duration(dur.bgZoom)
-        .attr('transform', 'translate(320,' + line.y1 + ')');
+        .attr('transform', 'translate(' +
+          ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) +
+          ',' + line.y1 + ')');
 
       /**
        * Resize selected map point circle

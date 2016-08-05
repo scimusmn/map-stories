@@ -36,7 +36,7 @@ export function appSizes() {
   sizes.screenWidth = 1920;
   sizes.screenHeight = 1080;
   sizes.infoWidthCollapsed = 560;
-  sizes.infoWidthExpanded = sizes.screenWidth * (2 / 3);
+  sizes.infoWidthExpanded = sizes.screenWidth * (19 / 24);
 
   // Map X translate
   // Fudge factor for the distance to move all the map points
@@ -120,7 +120,13 @@ d3Chart.create = function (el, props, state) {
       .duration(dur.bgZoom)
       .attr('width', sizes.screenWidth * 2)
       .attr('height', sizes.screenHeight * 2)
-      .attr('x', ((line.x1 * -2) + (620 / 2)))
+      .attr(
+        'x',
+        (
+          (line.x1 * -2) +
+          ((sizes.screenWidth - sizes.infoWidthExpanded) / 2)
+        )
+      )
       .attr('y', (line.y1 * -1));
 
     // Use in the future if you draw a bigger map
