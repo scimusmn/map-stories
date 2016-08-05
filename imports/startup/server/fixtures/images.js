@@ -22,12 +22,23 @@ Meteor.startup(() => {
           'A crew of more than 1,000 worked day and night to build the dam. They lived in a nearby camp complete with streets, a store, clubhouse, hospital, office buildings, school, dormitories, dance hall, movie theater and billiard parlor.',
           'In 1966 the hydroelectric station closed, and three years later the Hennepin County Park Board purchased the site.',
         ],
+        caption: 'The Coon Rapid Dam and hydroelectric power station in 1928.',
+        credit: 'Paul W. Hamilton / Minnesota Historical Society / Public domain',
+        date: 1928,
       },
+
       {
         place: 'Coon Rapids',
         name: 'Men Lounging',
         filename: 'HE21r30.jpg',
         type: 'historic',
+        desc: [
+          'During the mid-1800s, a series of “Red River ox cart trails” connected the Selkirk settlement, near present day Winnipeg, Canada, to the Mississippi River’s head of navigation at Saint Paul. Wooden carts pulled by oxen transported loads of furs south and carried food supplies, ammunition and manufactured goods on the return north.',
+          'The trails accelerated the development of Minnesota and North Dakota. Communities grew along the trails, and in some places modern highways follow the routes once taken by the ox carts.',
+        ],
+        caption: 'Red River ox cart drivers taking a rest along the trail in 1860. ',
+        credit: 'Minnesota Historical Society / Public domain',
+        date: 1860,
       },
 
       // Bohemian Flats

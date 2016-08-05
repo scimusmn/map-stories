@@ -18,13 +18,16 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
       let selectedPlaceImage = _.find(state.images, function (image) {
         return image.slug == selectedPlaceImageId;
       });
-
       let $highlightImg = $('<img/>')
         .addClass('image-highlight')
-        .attr('height', sizes.highlightHieght)
+        .attr('height', sizes.highlightMaxHeight)
         .attr('src', 'images/collection/' + selectedPlaceImage.filename);
       $('#image-content')
-        .append($highlightImg);
+        .prepend($highlightImg);
+
+      // Populate image credit
+      $('#credit-content')
+        .html(selectedPlaceImage.credit);
 
       // Populate main text block
       let desc = _.each(selectedPlaceImage.desc, function (paragraph) {
@@ -41,7 +44,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
       // Expand the sidebar width
       $('#map-sidebar, #map-sidebar-background')
         .animate({
-          width: sizes.infoWidthExpanded,
+          left: (sizes.screenWidth - sizes.infoWidthExpanded),
         }, dur.default, function () {
           $('#image-thumbnails')
             .animate({
@@ -50,7 +53,6 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         });
 
     });
-
 
   // Thumbnails bar
   let placeImages = _.filter(state.images, function (o) {
@@ -77,8 +79,10 @@ export function collapseSidebar() {
     .fadeOut((dur.default / 2), function () {
 
       // After fade out empty all the divs
-      $('#place-heading, #image-content, #text-content, #image-thumbnails')
+      $('#place-heading, #credit-content, #text-content, #image-thumbnails')
         .empty();
+      $('#image-content img')
+        .remove();
 
       $('#image-thumbnails')
         .animate({
@@ -88,7 +92,7 @@ export function collapseSidebar() {
       // Slide the sidebar back to homepage default
       $('#map-sidebar, #map-sidebar-background')
         .animate({
-          width: sizes.infoWidthCollapsed,
+          left: (sizes.screenWidth - sizes.infoWidthCollapsed),
         }, (dur.default / 2), function () {
           // Fade back in the default heading
           let $mapSidebar = $('#map-sidebar');
@@ -108,7 +112,8 @@ export function collapseSidebar() {
 export function drawSidebar() {
   // Set sidebar to default homepage width
   $('#map-sidebar, #map-sidebar-background')
-    .css('width', sizes.infoWidthCollapsed);
+    .css('width', sizes.infoWidthExpanded)
+    .css('left', sizes.screenWidth - sizes.infoWidthCollapsed);
 
   // Hide the div that we will place our detail content into
   // This make it easier to fade in on transition

@@ -64,7 +64,9 @@ export default class ListPlaces extends React.Component {
           <div id="sidebar-content">
             <div id="location-content">
               <h3 id="place-heading"></h3>
-              <div id="image-content"></div>
+              <div id="image-content">
+                <div id="credit-content" className="image-credit"></div>
+              </div>
               <div id="text-content"></div>
             </div>
           </div>
