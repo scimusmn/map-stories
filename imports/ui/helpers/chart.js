@@ -42,8 +42,10 @@ export function appSizes() {
   // Fudge factor for the distance to move all the map points
   sizes.zoomTranslate = 400;
 
-  // Image width
+  // Image sizes
   sizes.maxWidth = 200;
+  sizes.thumbHieght = 100;
+  sizes.highlightHieght = 650;
 
   return sizes;
 }
@@ -159,7 +161,7 @@ d3Chart.create = function (el, props, state) {
     var $highlightImg = $('<img/>')
       .empty()
       .addClass('image-highlight')
-      .attr('height', 580)
+      .attr('height', sizes.highlightHieght)
       .attr('src', 'images/collection/' + randImage.filename);
 
     $('#location-content')
@@ -174,7 +176,7 @@ d3Chart.create = function (el, props, state) {
       var $thumbDiv = $('<img/>')
         .empty()
         .addClass('image-thumbnail')
-        .attr('height', 200)
+        .attr('height', sizes.thumbHieght)
         .attr('src', 'images/collection/' + image.filename);
 
       $('#image-thumbnails')
@@ -240,6 +242,7 @@ d3Chart.destroy = function (el) {
 };
 
 d3Chart._drawMap = function (el, props, state) {
+  sizes = appSizes();
 
   // Draw development tools if enabled
   drawDev(el, props, mapProjection(state.settings));
@@ -251,6 +254,9 @@ d3Chart._drawMap = function (el, props, state) {
     state.places,
     state.images,
   );
+
+  $('#image-thumbnails')
+    .css('height', (sizes.thumbHieght + 100));
 
 };
 
