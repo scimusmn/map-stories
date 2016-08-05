@@ -2,6 +2,9 @@ import { drawDev } from '/imports/ui/helpers/dev';
 import { drawPlaces, hidePlaces } from '/imports/ui/helpers/drawPlaces';
 import { mapProjection } from '/imports/ui/helpers/mapProjection';
 import { appDurations, appSizes } from '/imports/ui/helpers/settings';
+import {
+  collapseSidebar, drawSidebar, expandSidebar
+} from '/imports/ui/helpers/sidebar';
 
 const sizes = appSizes();
 const dur = appDurations();
@@ -82,18 +85,6 @@ d3Chart._drawMap = function (el, props, state) {
 
 };
 
-/**
- * Set up the sidebar on the initial render
- *
- * Start with sidebar collapsed. Set sizes and animation durations
- */
-function drawSidebar() {
-  $('#map-sidebar, #map-sidebar-background')
-    .css('transition', 'all ' + (dur.sidebarSlide / 1000) + 's ease')
-    .css('width', sizes.infoWidthCollapsed);
-  $('#image-thumbnails')
-    .css('height', (sizes.thumbHieght + 100));
-}
 
 /**
  * Draw the details page, when a user selects a location
@@ -126,60 +117,10 @@ function drawDetailPage(clicked, state) {
   // Center the map on the selected location
   zoomMap(state, selectedPlace);
 
-  /**
-   * Draw sidebar
-   */
+  // Expand the sidebar and add clicked content
+  expandSidebar(state, selectedPlace, selectedPlaceImageId);
 
-  // Sidebar heading
-  let $mapSidebar = $('#map-sidebar');
-  $mapSidebar.find('h3#place-heading')
-    .html(selectedPlace.name)
-    .show();
-  $mapSidebar.find('h3#default-heading')
-    .hide();
-
-  // Expand the sidebar width
-  $('#map-sidebar, #map-sidebar-background')
-    .css('width', sizes.infoWidthExpanded);
-
-  // Main image
-  let selectedPlaceImage = _.find(state.images, function (image) {
-    return image.slug == selectedPlaceImageId;
-  });
-
-  let $highlightImg = $('<img/>')
-    .empty()
-    .addClass('image-highlight')
-    .attr('height', sizes.highlightHieght)
-    .attr('src', 'images/collection/' + selectedPlaceImage.filename);
-  $('#image-content')
-    .append($highlightImg);
-
-  let $highlightText = $('<p/>')
-    .empty()
-    .addClass('text-highlight')
-    .html('Lorem ipsum');
-  $('#text-content')
-    .append($highlightText);
-
-  // Thumbnails bar
-  let placeImages = _.filter(state.images, function (o) {
-    return o.place == selectedPlace.name;
-  });
-
-  _.each(placeImages, function (image) {
-
-    let $thumbDiv = $('<img/>')
-      .empty()
-      .addClass('image-thumbnail')
-      .attr('height', sizes.thumbHieght)
-      .attr('src', 'images/collection/' + image.filename);
-
-    $('#image-thumbnails')
-      .append($thumbDiv);
-
-  });
-
+  // Draw the home button
   drawHomeButton();
 }
 
@@ -241,18 +182,7 @@ function drawHomeButton() {
  * @param state
  */
 function reDrawHomePage(el, state) {
-  // Fade out sidebar content
-  $('#location-content')
-    .animate({
-      opacity: 0,
-    }, 200, function () {
-      $('#image-content, #image-thumbnails, #text-content')
-        .empty();
-    });
-
-  // Resize the sidebar
-  $('#map-sidebar, #map-sidebar-background')
-    .css('width', sizes.infoWidthCollapsed);
+  collapseSidebar();
 
   // Reset the background map
   d3.select('#background-image')
