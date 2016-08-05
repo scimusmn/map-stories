@@ -240,17 +240,16 @@ function hidePlace(elemId, projection, place, maxWidth) {
           ',' + line.y1 + ')');
 
       /**
-       * Resize selected map point circle
+       * Animate selected map point circle
        */
-      // Add a second stroke to back up the orange
 
+      // Add a second stroke
       d3.select('#circle-' + elemId)
         .append('circle')
         .attr('id', 'circle-' + elemId + '-stroke')
         .attr('r', '5px')
         .attr('stroke-width', 4)
         .attr('stroke', '#33444C');
-
       var circlePathBase = '#circle-' + elemId + '-base';
       var circlePathStroke = '#circle-' + elemId + '-stroke';
 
