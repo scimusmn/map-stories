@@ -198,12 +198,11 @@ export function hidePlaces(elemId, el, projection, places, images, maxWidth) {
  * Hide a single place
  *
  * @param elemId
- * @param el
  * @param projection
  * @param place
  * @param maxWidth
  */
-function hidePlace(elemId, el, projection, place, maxWidth) {
+function hidePlace(elemId, projection, place, maxWidth) {
   const dur = appDurations();
 
   // Fade out the divs, that weren't clicked

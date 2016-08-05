@@ -90,7 +90,7 @@ d3Chart.create = function (el, props, state) {
   // Listen for clicks on the places
   // It's important to use the .on() syntax which can handle
   // looking for elements that are animating into the page over time (animation)
-  $(document).on('click', '.place-label', function (e) {
+  $(document).on('click', '.place-label', function () {
 
     // Output the element that was clicked on
     let elemId = $(this).attr('id');
@@ -103,10 +103,8 @@ d3Chart.create = function (el, props, state) {
      */
     hidePlaces(
       elemId,
-      el,
       mapProjection(state.settings),
       state.places,
-      state.images,
     );
 
     let selectedPlace = _.find(state.places, function (o) {
@@ -141,6 +139,7 @@ d3Chart.create = function (el, props, state) {
     /**
      * Draw sidebar
      */
+
     // Sidebar heading
     $('#map-sidebar, #map-sidebar-background')
       .css('width', sizes.infoWidthExpanded);
@@ -183,6 +182,7 @@ d3Chart.create = function (el, props, state) {
     let placeImages = _.filter(state.images, function (o) {
       return o.place == selectedPlace.name;
     });
+
     _.each(placeImages, function (image) {
 
       let $thumbDiv = $('<img/>')
@@ -200,7 +200,7 @@ d3Chart.create = function (el, props, state) {
   /**
    * Handle click on the home button
    */
-  $(document).on('click', '.home-button', function (e) {
+  $(document).on('click', '.home-button', function () {
     // Resize the sidebar
     $('#map-sidebar, #map-sidebar-background')
       .css('width', sizes.infoWidthCollapsed);
@@ -254,7 +254,7 @@ d3Chart.destroy = function (el) {
 };
 
 d3Chart._drawMap = function (el, props, state) {
-  sizes = appSizes();
+  const sizes = appSizes();
 
   // Draw development tools if enabled
   drawDev(el, props, mapProjection(state.settings));
