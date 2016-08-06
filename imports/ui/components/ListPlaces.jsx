@@ -73,7 +73,7 @@ export default class ListPlaces extends React.Component {
               <div id="text-content"></div>
             </div>
           </div>
-          <div id="image-thumbnails"></div>
+          <div id="dock"></div>
         </div>
         <div className="dev-map-details">
           <form className="dev-map-details-form">

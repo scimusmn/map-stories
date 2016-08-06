@@ -6,6 +6,10 @@ const dur = appDurations();
 export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
   let $mapSidebar = $('#map-sidebar');
 
+  let selectedPlaceImage = _.find(state.images, function (image) {
+    return image.slug == selectedPlaceImageId;
+  });
+
   // Fade out default heading
   $mapSidebar.find('h3#default-heading')
     .fadeOut(dur.default, function () {
@@ -15,9 +19,6 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .html(selectedPlace.name);
 
       // Populate main image
-      let selectedPlaceImage = _.find(state.images, function (image) {
-        return image.slug == selectedPlaceImageId;
-      });
       let $highlightImg = $('<img/>')
         .addClass('image-highlight')
         .attr('height', sizes.highlightMaxHeight)
@@ -50,7 +51,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .animate({
           left: (sizes.screenWidth - sizes.infoWidthExpanded),
         }, dur.default, function () {
-          $('#image-thumbnails')
+          $('#dock')
             .animate({
               bottom: 0,
             }, dur.default);
@@ -58,20 +59,38 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
 
     });
 
-  // Thumbnails bar
+  // Thumbnails bar - Dock
   let placeImages = _.filter(state.images, function (o) {
     return o.place == selectedPlace.name;
   });
 
   _.each(placeImages, function (image) {
 
-    let $thumbDiv = $('<img/>')
+
+    // Random rotation for dock images
+    let randomRotation = _.random(0, 2, true) -1;
+
+    let $thumbDiv = $('<div/>')
       .empty()
+      .css('transform', 'rotate(' + randomRotation + 'deg)');
+
+    let $thumbImg = $('<img/>')
+      .empty()
+      .attr('id', 'dock-' + image.slug)
       .addClass('image-thumbnail')
       .attr('height', sizes.thumbHieght)
       .attr('src', 'images/collection/' + image.filename);
 
-    $('#image-thumbnails')
+    // Identify the active image in the dock
+    if (image.slug == selectedPlaceImage.slug) {
+      $thumbDiv
+        .addClass('active');
+    }
+
+    $thumbDiv
+      .append($thumbImg);
+
+    $('#dock')
       .append($thumbDiv);
 
   });
@@ -83,14 +102,14 @@ export function collapseSidebar() {
     .fadeOut((dur.default / 2), function () {
 
       // After fade out empty all the divs
-      $('#place-heading, #credit-content, #text-content, #image-thumbnails')
+      $('#place-heading, #credit-content, #text-content, #dock')
         .empty();
       $('#image-content img')
         .remove();
 
-      $('#image-thumbnails')
+      $('#dock')
         .animate({
-          bottom: ((sizes.thumbHieght + 100) * -1),
+          bottom: ((sizes.dockHeight) * -1),
         });
 
       // Slide the sidebar back to homepage default
@@ -124,7 +143,9 @@ export function drawSidebar() {
   $('#location-content')
     .hide();
 
-  $('#image-thumbnails')
-    .css('bottom', (sizes.thumbHieght + 100) * -1)
-    .css('height', (sizes.thumbHieght + 100));
+  $('#dock')
+    .css('bottom', (sizes.dockHeight) * -1)
+    .css('height', (sizes.dockHeight))
+    .addClass('other');
+
 }

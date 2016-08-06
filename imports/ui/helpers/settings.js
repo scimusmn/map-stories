@@ -48,7 +48,8 @@ export function appSizes() {
 
   // Image sizes
   sizes.maxWidth = 200;
-  sizes.thumbHieght = 100;
+  sizes.dockHeight = 200;
+  sizes.thumbHieght = 220;
   sizes.highlightMaxHeight = 550;
 
   return sizes;
