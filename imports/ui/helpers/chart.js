@@ -3,7 +3,7 @@ import { drawPlaces, hidePlaces } from '/imports/ui/helpers/drawPlaces';
 import { mapProjection } from '/imports/ui/helpers/mapProjection';
 import { appDurations, appSizes } from '/imports/ui/helpers/settings';
 import {
-  collapseSidebar, drawSidebar, expandSidebar
+  collapseSidebar, drawSidebar, expandSidebar, highlightImage
 } from '/imports/ui/helpers/sidebar';
 
 const sizes = appSizes();
@@ -41,6 +41,13 @@ d3Chart.create = function (el, props, state) {
    */
   $(document).on('click', '.home-button', function () {
     reDrawHomePage(el, state);
+  });
+
+  /**
+   * Handle click on the dock images
+   */
+  $(document).on('click', '.image-thumbnail:not(.active)', function () {
+    highlightImage(this, el, state);
   });
 
 };

@@ -35,7 +35,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .html(selectedPlaceImage.credit);
 
       // Populate main text block
-      let desc = _.each(selectedPlaceImage.desc, function (paragraph) {
+      _.each(selectedPlaceImage.desc, function (paragraph) {
         let $paragraph = $('<p/>')
           .html(paragraph);
         $('#text-content')
@@ -66,9 +66,8 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
 
   _.each(placeImages, function (image) {
 
-
     // Random rotation for dock images
-    let randomRotation = _.random(0, 2, true) -1;
+    let randomRotation = _.random(0, 2, true) - 1;
 
     let $thumbDiv = $('<div/>')
       .empty()
@@ -83,8 +82,11 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
 
     // Identify the active image in the dock
     if (image.slug == selectedPlaceImage.slug) {
-      $thumbDiv
-        .addClass('active');
+      $thumbImg
+        .addClass('active')
+        .css('opacity', .5)
+        .css('-webkit-filter', 'grayscale(100%)')
+        .css('box-shadow', 'none');
     }
 
     $thumbDiv
@@ -104,7 +106,7 @@ export function collapseSidebar() {
       // After fade out empty all the divs
       $('#place-heading, #credit-content, #text-content, #dock')
         .empty();
-      $('#image-content img')
+      $('#image-content').find('img')
         .remove();
 
       $('#dock')
@@ -147,5 +149,51 @@ export function drawSidebar() {
     .css('bottom', (sizes.dockHeight) * -1)
     .css('height', (sizes.dockHeight))
     .addClass('other');
+
+}
+
+export function highlightImage(clicked, el, state) {
+  let selectedDockImage = _.find(state.images, function (image) {
+    return image.slug == clicked.id.replace('dock-', '');
+  });
+
+  console.log(selectedDockImage);
+  console.log('----^ ^ ^ ^ ^ selectedDockImage ^ ^ ^ ^ ^----');
+
+  $('#image-content, #text-content')
+    .fadeOut((dur.default / 2), function () {
+
+      // Replace image and text content
+      $('#text-content')
+        .empty();
+      _.each(selectedDockImage.desc, function (paragraph) {
+        let $paragraph = $('<p/>')
+          .html(paragraph);
+        $('#text-content')
+          .append($paragraph);
+      });
+
+      $('#credit-content')
+        .html(selectedDockImage.credit);
+      $('#caption-content')
+        .html(selectedDockImage.caption);
+      $('.image-highlight')
+        .attr('src', 'images/collection/' + selectedDockImage.filename);
+
+      // Remove the active class from any dock images
+      $('#dock').find('div img.active')
+        .removeClass('active')
+        .css('-webkit-filter', 'none')
+        .css('box-shadow', '6px 6px 20px #222222')
+        .css('opacity', '1');
+      $('#dock-' + selectedDockImage.slug)
+        .addClass('active')
+        .css('-webkit-filter', 'grayscale(100%)')
+        .css('box-shadow', 'none')
+        .css('opacity', '.5');
+    })
+
+    // Fade everything back in after content is switched
+    .fadeIn(dur.default / 2);
 
 }
