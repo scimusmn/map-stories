@@ -47,7 +47,7 @@ d3Chart.create = function (el, props, state) {
    * Handle click on the dock images
    */
   $(document).on('click', '.image-thumbnail:not(.active)', function () {
-    highlightImage(this, el, state);
+    highlightImage(this, state);
   });
 
 };
