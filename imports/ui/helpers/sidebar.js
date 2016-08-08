@@ -19,9 +19,14 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .html(selectedPlace.name);
 
       // Populate main image
+      var imageHeight = sizes.highlightMaxHeight;
+      if (selectedPlaceImage.customHeight) {
+        imageHeight = selectedPlaceImage.customHeight;
+      }
+
       let $highlightImg = $('<img/>')
         .addClass('image-highlight')
-        .attr('height', sizes.highlightMaxHeight)
+        .attr('height', imageHeight)
         .attr('src', 'images/collection/' + selectedPlaceImage.filename);
       $('#highlighted-image')
         .prepend($highlightImg);
@@ -76,11 +81,12 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
     var adjustedWidth = sizes.thumbHieght * ratio;
     return (parseInt(sum) + parseInt(adjustedWidth));
   }, 0);
+
   sumWidths = sumWidths + ((sizes.dockMargin * 2) * _.size(placeImages));
 
   // If the expected dock size is too big add a multiplier to shrink the
   // images and the margins between them.
-  dimensionMultiplier = sizes.dockWidth / sumWidths;
+  var dimensionMultiplier = sizes.dockWidth / sumWidths;
   var thumbHeight = sizes.thumbHieght;
   if (sumWidths > sizes.dockWidth) {
     thumbHeight = Math.floor(sizes.thumbHieght * dimensionMultiplier);
@@ -213,7 +219,13 @@ export function highlightImage(clicked, state) {
           .hide();
       }
 
+      var imageHeight = sizes.highlightMaxHeight;
+      if (selectedDockImage.customHeight) {
+        imageHeight = selectedDockImage.customHeight;
+      }
+
       $('.image-highlight')
+        .attr('height', imageHeight)
         .attr('src', 'images/collection/' + selectedDockImage.filename);
     })
 
