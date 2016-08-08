@@ -27,8 +27,14 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .prepend($highlightImg);
 
       // Populate image caption
-      $('#caption-content')
-        .html(selectedPlaceImage.caption);
+      if (selectedPlaceImage.caption != '') {
+        $('#caption-content')
+          .show()
+          .html(selectedPlaceImage.caption);
+      } else {
+        $('#caption-content')
+          .hide();
+      }
 
       // Populate image credit
       $('#credit-content')
@@ -188,19 +194,25 @@ export function highlightImage(clicked, state) {
       // Replace image and text content
       $('#text-content')
         .empty();
-      _.each(selectedDockImage.desc, function(paragraph) {
+      _.each(selectedDockImage.desc, function (paragraph) {
         let $paragraph = $('<p/>')
           .html(paragraph);
         $('#text-content')
           .append($paragraph);
-      })
-
-
+      });
 
       $('#credit-content')
         .html(selectedDockImage.credit);
-      $('#caption-content')
-        .html(selectedDockImage.caption);
+
+      if (selectedDockImage.caption != '') {
+        $('#caption-content')
+          .show()
+          .html(selectedDockImage.caption);
+      } else {
+        $('#caption-content')
+          .hide();
+      }
+
       $('.image-highlight')
         .attr('src', 'images/collection/' + selectedDockImage.filename);
     })
