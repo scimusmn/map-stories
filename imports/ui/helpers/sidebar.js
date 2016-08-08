@@ -85,8 +85,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
       $thumbImg
         .addClass('active')
         .css('opacity', .5)
-        .css('-webkit-filter', 'grayscale(100%)')
-        .css('box-shadow', 'none');
+        .css('-webkit-filter', 'grayscale(100%)');
     }
 
     $thumbDiv
@@ -152,13 +151,11 @@ export function drawSidebar() {
 
 }
 
-export function highlightImage(clicked, el, state) {
+export function highlightImage(clicked, state) {
+  console.log('highlight image');
   let selectedDockImage = _.find(state.images, function (image) {
     return image.slug == clicked.id.replace('dock-', '');
   });
-
-  console.log(selectedDockImage);
-  console.log('----^ ^ ^ ^ ^ selectedDockImage ^ ^ ^ ^ ^----');
 
   $('#image-content, #text-content')
     .fadeOut((dur.default / 2), function () {
@@ -166,12 +163,14 @@ export function highlightImage(clicked, el, state) {
       // Replace image and text content
       $('#text-content')
         .empty();
-      _.each(selectedDockImage.desc, function (paragraph) {
+      _.each(selectedDockImage.desc, function(paragraph) {
         let $paragraph = $('<p/>')
           .html(paragraph);
         $('#text-content')
           .append($paragraph);
-      });
+      })
+
+
 
       $('#credit-content')
         .html(selectedDockImage.credit);
@@ -179,21 +178,36 @@ export function highlightImage(clicked, el, state) {
         .html(selectedDockImage.caption);
       $('.image-highlight')
         .attr('src', 'images/collection/' + selectedDockImage.filename);
-
-      // Remove the active class from any dock images
-      $('#dock').find('div img.active')
-        .removeClass('active')
-        .css('-webkit-filter', 'none')
-        .css('box-shadow', '6px 6px 20px #222222')
-        .css('opacity', '1');
-      $('#dock-' + selectedDockImage.slug)
-        .addClass('active')
-        .css('-webkit-filter', 'grayscale(100%)')
-        .css('box-shadow', 'none')
-        .css('opacity', '.5');
     })
 
-    // Fade everything back in after content is switched
+    // Fade detail content back in after content is switched
     .fadeIn(dur.default / 2);
+
+  // Remove the active class from any dock images
+  $('#dock').find('div img.active')
+    .removeClass('active')
+    .animate({
+      opacity: '1',
+    }, dur.default, function () {
+      $(this)
+        .css('-webkit-filter', 'none')
+        .css('opacity', '1');
+    });
+
+  $('#dock-' + selectedDockImage.slug)
+    .addClass('active')
+    .css('opacity', 1)
+    .animate({
+      opacity: '.5',
+    }, dur.default, function() {
+      $(this)
+        .css('-webkit-filter', 'grayscale(100%)');
+    });
+
+  // TODO: Figure out a way to animate box-shadow
+  // Changing the box shadow without an animated transition is distracting
+  // None of the jquery plugins seem to work properly.
+  // .css('box-shadow', '6px 6px 20px #222222')
+  // .css('box-shadow', 'none');
 
 }
