@@ -73,7 +73,7 @@ d3Chart._drawMap = function (el, props, state) {
     .attr('y', 0)
     .attr('width', sizes.screenWidth)
     .attr('height', sizes.screenHeight)
-    .attr('xlink:href', '/images/mnrra_be09d4.png');
+    .attr('xlink:href', '/images/mnrra_754709.jpg');
 
   // Add a group for the points
   svg.append('g')
