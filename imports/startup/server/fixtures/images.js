@@ -47,6 +47,14 @@ Meteor.startup(() => {
         name: 'I-35 Bridge Collapse',
         filename: 'I35_Bridge_Collapse_4crop.jpg',
         type: 'historic',
+        desc: [
+          'On the evening of August 1, 2007, the Interstate 35W bridge over the Mississippi River collapsed. Thirteen people died and 145 suffered injuries.',
+          'During routine inspections prior to it’s collapse, the Department of Transportation had rated the bridge “structurally deficient.” In 2007, approximately 75,000 other bridges in the United States had received this same rating.',
+          'The bridge collapse shone a spotlight on the nation’s crumbling infrastructure. In the days following the collapse, bridge inspections were increased around the country.',
+        ],
+        caption: '',
+        credit: 'Courtesy Mike Wills / CC-BY-SA-2.0',
+        date: 1928,
       },
       {
         place: 'Bohemian Flats',
@@ -63,6 +71,19 @@ Meteor.startup(() => {
       },
 
       // SAF
+      {
+        place: 'Saint Anthony Falls',
+        name: 'SAF 1786',
+        filename: 'saf-1786.jpg',
+        type: 'historic',
+        desc: [
+          'Long before the first European explorers "discovered" the falls, Native Americans who lived in the area knew them well.',
+          'Archaeological evidence shows that people lived in the area as long as 12,000 years ago. When the first Europeans arrived in 1680, the Dakota tribe controlled the area.',
+        ],
+        caption: '',
+        credit: 'Jean Alexis Fournier / Minnesota Historical Society / Public domain',
+        date: 1680,
+      },
       {
         place: 'Saint Anthony Falls',
         name: 'Hennepin at SAF',
@@ -99,6 +120,57 @@ Meteor.startup(() => {
         caption: '',
         credit: 'Minnesota Historical Society / Public domain',
         date: '',
+      },
+      {
+        place: 'Saint Anthony Falls',
+        name: 'lumber-mills',
+        filename: 'MH5-9-MP4-31-p36.jpg',
+        type: 'historic',
+        desc: [
+          'By 1869, 18 lumber mills operated at Saint Anthony Falls. As the millers dammed the falls, the natural free-flowing waterfall described by the early explorers all but disappeared.',
+        ],
+        caption: 'Platform mills on the west side of the falls in about 1868.',
+        credit: 'Minnesota Historical Society / Public domain',
+        date: '',
+      },
+      {
+        place: 'Saint Anthony Falls',
+        name: 'milling',
+        filename: 'HE5-44-r1.jpg',
+        type: 'historic',
+        desc: [
+          'In the mid-1800s, water power at Saint Anthony Falls powered a booming lumber industry. Milling didn’t just change the falls. Lumberjacks clear-cut the northern forests of Minnesota and Wisconsin and floated the logs downstream to the mills.',
+          'Much of the resulting lumber flowed downriver to Saint Louis. But the cities of Saint Anthony, located on the east side of the falls, Minneapolis and Saint Paul began to command more and more of the mills’ output to support the needs of their rapidly growing populations.',
+        ],
+        caption: 'Log drivers working above Saint Anthony Falls in 1881.',
+        credit: 'Michael Nowack / Minnesota Historical Society / Public domain',
+        date: '',
+      },
+      {
+        place: 'Saint Anthony Falls',
+        name: 'eastman-tunnel',
+        filename: 'MH5-9-MP4-32-p16.jpg',
+        type: 'historic',
+        desc: [
+          'In 1869, a tunnel being dug to bring waterpower to a mill on Nicollet Island collapsed. Water rushed through the collapsed tunnel threatening the stability of Saint Anthony Falls.',
+          'Lumbermen, shopkeepers, lawyers, bakers and barbers all rushed to the scene and tried to plug the leak with logs and rocks. When their efforts failed, they called on the Army Corps of Engineers to save the falls. In 1870, Congress gave the Corps $50,000 to repair the falls. After three years of working to plug leaks, they realized it required more drastic measures.',
+          'The Corps of Engineers built a massive wall beneath the falls with a wooden apron protecting the edge from further erosion. Eventually, the Corps of Engineers replaced the wooden apron with the concrete apron that characterizes the falls today.',
+        ],
+        caption: 'Water rushed through the collapsed Eastman Tunnel on Hennepin Island in 1869.',
+        credit: 'William Henry Illingworth / Minnesota Historical Society / Public domain',
+        date: '1869',
+      },
+      {
+        place: 'Saint Anthony Falls',
+        name: 'flour-mill',
+        filename: 'Ferrell_333.jpg',
+        type: 'historic',
+        desc: [
+          'The first commercial flour mill joined the lumber mills at Saint Anthony Falls in 1851. Over the decades that followed, industrialists built more and more flour mills at the falls. The lumber mills that once dominated the falls gradually relocated to north Minneapolis fueled by steam rather than water power. Flour milling became the new king at Saint Anthony Falls.',
+        ],
+        caption: '',
+        credit: 'Minnesota Historical Society / Public domain',
+        date: '1851',
       },
 
       // Fort Snelling
