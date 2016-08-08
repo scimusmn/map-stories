@@ -65,18 +65,40 @@ Meteor.startup(() => {
       // SAF
       {
         place: 'Saint Anthony Falls',
-        name: 'Old Bridge',
-        filename: 'SprtIslnd-669-B.jpg',
+        name: 'Hennepin at SAF',
+        filename: 'Henn@SAF.jpg',
+        type: 'historic',
+        desc: [
+          'Motivated by a search for easy passage to the Pacific Ocean, the quest to control the area’s rich fur resources, and a desire to spread Christianity, small groups of French explorers traveled along parts of the Upper Mississippi River in the 1670s.',
+          'Two of those explorers, Father Louis Hennepin and Antoine Auguelle, became the first Europeans to see the falls in 1680. Father Hennepin named them for his patron saint, Anthony of Padua.',
+        ],
+        caption: 'A depiction of Father Louis Hennepin and Antoine Auguelle at Saint Anthony Falls in 1680.',
+        credit: 'J. N. Marchand / Minnesota Historical Society / Public domain',
+        date: 1680,
       },
       {
         place: 'Saint Anthony Falls',
-        name: 'Washburn poster',
-        filename: 'Washbrn-Postr.jpg',
+        name: 'saf-eastman',
+        filename: 'saf-eastman.jpg',
+        type: 'historic',
+        desc: [
+          'In the early 1820s soldiers from Fort Snelling built two small mills on the west side of Saint Anthony Falls. For the first time people harnessed the power of the falls to mill lumber and grain. Before long Saint Anthony Falls became a major milling center leading to the birth of the city of Minneapolis.',
+        ],
+        caption: 'The Fort Snelling mills are visible on the left side of this illustration.',
+        credit: 'Artist: Seth Eastman, Engraver: J.C. McRae / Minnesota Historical Society / Public domain',
+        date: '182u',
       },
       {
         place: 'Saint Anthony Falls',
-        name: 'Washburn A Mill',
-        filename: 'Washburnamill.jpg',
+        name: 'franklin-steele',
+        filename: 'por-15571-p1.jpg',
+        type: 'historic',
+        desc: [
+          'Franklin Steele, a storekeeper at Fort Snelling and part owner of the Saint Croix Falls Lumber Company, built the first dam and commercial sawmill at Saint Anthony Falls in 1848. Other mills quickly followed and for the next 100 years the falls were a major center of commercial milling.',
+        ],
+        caption: '',
+        credit: 'Minnesota Historical Society / Public domain',
+        date: '',
       },
 
       // Fort Snelling
