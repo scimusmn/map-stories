@@ -64,20 +64,45 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
     return o.place == selectedPlace.name;
   });
 
+  // Total width of the dock thumbnails
+  var sumWidths = _.reduce(placeImages, function (sum, image) {
+    var ratio = image.width / image.height;
+    var adjustedWidth = sizes.thumbHieght * ratio;
+    return (parseInt(sum) + parseInt(adjustedWidth));
+  }, 0);
+  sumWidths = sumWidths + ((sizes.dockMargin * 2) * _.size(placeImages));
+
+  // If the expected dock size is too big add a multiplier to shrink the
+  // images and the margins between them.
+  dimensionMultiplier = sizes.dockWidth / sumWidths;
+  var thumbHeight = sizes.thumbHieght;
+  if (sumWidths > sizes.dockWidth) {
+    thumbHeight = Math.floor(sizes.thumbHieght * dimensionMultiplier);
+  }
+
   _.each(placeImages, function (image) {
 
-    // Random rotation for dock images
-    let randomRotation = _.random(0, 2, true) - 1;
+    // If we're going to shrink images, push them down so that they still
+    // hit the bottom of the dock
+    var marginTop = 0;
+    if (dimensionMultiplier < 1) {
+      marginTop = Math.floor(40 * (1 / dimensionMultiplier));
+    }
 
+    // Dock Image container
     let $thumbDiv = $('<div/>')
-      .empty()
-      .css('transform', 'rotate(' + randomRotation + 'deg)');
+      .css('margin-left', Math.floor(sizes.dockMargin * dimensionMultiplier))
+      .css('margin-right', Math.floor(sizes.dockMargin * dimensionMultiplier))
+      .css('margin-top', marginTop)
+      .css('margin-bottom', 0)
+      .empty();
 
+    // Thumbnail image
     let $thumbImg = $('<img/>')
       .empty()
       .attr('id', 'dock-' + image.slug)
       .addClass('image-thumbnail')
-      .attr('height', sizes.thumbHieght)
+      .attr('height', thumbHeight)
       .attr('src', 'images/collection/' + image.filename);
 
     // Identify the active image in the dock
@@ -147,12 +172,12 @@ export function drawSidebar() {
   $('#dock')
     .css('bottom', (sizes.dockHeight) * -1)
     .css('height', (sizes.dockHeight))
+    .css('padding-left', (sizes.dockLeftPadding))
     .addClass('other');
 
 }
 
 export function highlightImage(clicked, state) {
-  console.log('highlight image');
   let selectedDockImage = _.find(state.images, function (image) {
     return image.slug == clicked.id.replace('dock-', '');
   });
@@ -199,7 +224,7 @@ export function highlightImage(clicked, state) {
     .css('opacity', 1)
     .animate({
       opacity: '.5',
-    }, dur.default, function() {
+    }, dur.default, function () {
       $(this)
         .css('-webkit-filter', 'grayscale(100%)');
     });

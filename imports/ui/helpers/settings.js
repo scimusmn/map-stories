@@ -47,8 +47,11 @@ export function appSizes() {
   sizes.zoomTranslate = 400;
 
   // Image sizes
+  sizes.dockLeftPadding = 50;
+  sizes.dockWidth = sizes.infoWidthExpanded - sizes.dockLeftPadding;
   sizes.maxWidth = 200;
   sizes.dockHeight = 200;
+  sizes.dockMargin = 20;
   sizes.thumbHieght = 220;
   sizes.highlightMaxHeight = 550;
 
