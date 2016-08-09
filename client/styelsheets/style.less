@@ -36,6 +36,60 @@ h3 {
 
 /**
  * ----------------------------------------------------------------------------
+ * Places
+ * ----------------------------------------------------------------------------
+ */
+
+.place-label {
+  position: absolute;
+  // Starting point for animation
+  opacity: 0;
+}
+
+.place-label-background {
+  position: relative;
+  border: 6px solid #062926;
+  font-size: 30px;
+  color: #FFF;
+  font-family: national-bold, sans-serif;
+  text-align: center;
+  box-shadow: 0 4px 10px 3px rgba(0,0,0,0.45);
+  border-radius: 50%;
+  animation: animatedBackground 40s linear infinite;
+  background: #FFF repeat-x center;
+  background-size: 600px;
+}
+
+.place-label-text {
+  position: absolute;
+  text-align: center;
+  bottom: 15px;
+  margin-left: 0;
+  margin-right: 0;
+  left: 0;
+  right: 0;
+  // Starting point for animation
+  opacity: 0;
+  color: #062926;
+  background: url('images/ricepaper.png');
+  padding: 6px;
+  box-shadow: 0 4px 10px 3px rgba(0,0,0,0.45);
+}
+
+// Custom text styles to get the copy to stay on one line
+#lock-and-dam-1 .place-label-text,
+#bohemian-flats .place-label-text {
+  width: 110%;
+  margin-left: -5%;
+}
+
+#saint-anthony-falls .place-label-text{
+  width: 130%;
+  margin-left: -15%;
+}
+
+/**
+ * ----------------------------------------------------------------------------
  * Detail view UI
  * ----------------------------------------------------------------------------
  */
@@ -214,89 +268,9 @@ h3 {
 
 /**
  * ----------------------------------------------------------------------------
- * Image detail on location page
- * ----------------------------------------------------------------------------
- */
-.image-detail {
-  position: absolute;
-  top: 30px;
-  left: 65px;
-  padding: 15px;
-  color: darken(@drk-blue, 5%);
-  font-size: 15px;
-  overflow: hidden;
-  width: 710px;
-  height: 610px;
-  box-shadow: 4px 4px 20px #222222;
-}
-
-.image-detail-contents {
-  border: 2px solid darken(@drk-blue, 5%);
-  padding: 20px;
-  height: 580px;
-  background: rgba(255, 255, 255, .4);
-}
-
-.image-description,
-.image-description-es {
-  font-size: 26px;
-}
-
-.image-location {
-  font-size: 35px;
-  font-family: 'FuturaTS-Medium', sans-serif;
-}
-
-.image-date {
-  font-size: 32px;
-  font-family: 'FuturaTS-Medium', sans-serif;
-}
-
-.image-credit-line {
-  position: absolute;
-  top: auto;
-  bottom: 30px;
-  right: 55px;
-  left: auto;
-  font-size: 18px;
-  text-align: right;
-  width: 700px;
-}
-
-.info-heading {
-  text-align: center;
-}
-
-.image-description-es,
-.image-description {
-  float: left;
-  width: 100%;
-  padding-right: 50px;
-  margin-bottom: 20px;
-  clear: both;
-}
-
-.image-description-es {
-  color: black;
-}
-
-/**
- * ----------------------------------------------------------------------------
  * Map styles
  * ----------------------------------------------------------------------------
  */
-.states {
-  fill: none;
-  stroke: purple;
-  stroke-width: 5;
-}
-
-.counties {
-  fill: none;
-  stroke: purple;
-  stroke-width: .5;
-}
-
 .map-line,
 .map-circle {
   fill: white;
@@ -315,62 +289,21 @@ h3 {
 
 /**
  * ----------------------------------------------------------------------------
- * Places
+ * Map styles - Dev. Used when placing the map projection
  * ----------------------------------------------------------------------------
  */
-
-.place-label {
-  position: absolute;
-  // Starting point for animation
-  opacity: 0;
+.states {
+  fill: none;
+  stroke: purple;
+  stroke-width: 5;
 }
 
-.place-label-background {
-  position: relative;
-  border: 6px solid #062926;
-  font-size: 30px;
-  color: #FFF;
-  font-family: national-bold, sans-serif;
-  text-align: center;
-  box-shadow: 0 4px 10px 3px rgba(0,0,0,0.45);
-  border-radius: 50%;
-  animation: animatedBackground 40s linear infinite;
-  background: #FFF repeat-x center;
-  background-size: 600px;
+.counties {
+  fill: none;
+  stroke: purple;
+  stroke-width: .5;
 }
 
-.place-label-text {
-  position: absolute;
-  text-align: center;
-  bottom: 15px;
-  margin-left: 0;
-  margin-right: 0;
-  left: 0;
-  right: 0;
-  // Starting point for animation
-  opacity: 0;
-  color: #062926;
-  background: url('images/ricepaper.png');
-  padding: 6px;
-  box-shadow: 0 4px 10px 3px rgba(0,0,0,0.45);
-}
-
-#lock-and-dam-1 .place-label-text,
-#bohemian-flats .place-label-text {
-  width: 110%;
-  margin-left: -5%;
-}
-
-#saint-anthony-falls .place-label-text{
-  width: 130%;
-  margin-left: -15%;
-}
-
-/**
- * ----------------------------------------------------------------------------
- * Map details form
- * ----------------------------------------------------------------------------
- */
 .dev-map-details {
   display: none;
   position: absolute;
@@ -408,5 +341,3 @@ h3 {
   left: 0;
   display: none;
 }
-
-
