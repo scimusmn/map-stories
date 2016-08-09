@@ -56,6 +56,10 @@ export function appSizes() {
   sizes.highlightMaxHeight = 550;
   sizes.zoomTopMargin = 40;
 
+  sizes.highlightedDockImageMargin = -60;
+  sizes.defaultDockMargin = -80;
+  sizes.smallerDockMargin = -140;
+
   return sizes;
 }
 

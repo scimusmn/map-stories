@@ -98,32 +98,53 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
   // images and the margins between them.
   var dimensionMultiplier = sizes.dockWidth / sumWidths;
   var thumbHeight = sizes.thumbHieght;
+  var marginLeft = sizes.defaultDockMargin;
   if (sumWidths > sizes.dockWidth) {
-    thumbHeight = Math.floor(sizes.thumbHieght * dimensionMultiplier);
+    marginLeft = sizes.smallerDockMargin;
   }
 
-  _.each(placeImages, function (image) {
+  const dockImages = _.size(placeImages);
 
-    // If we're going to shrink images, push them down so that they still
-    // hit the bottom of the dock
-    var marginTop = 0;
-    if (dimensionMultiplier < 1) {
-      marginTop = Math.floor(40 * (1 / dimensionMultiplier));
+  _.each(placeImages, function (image, i) {
+
+    var _marginLeft = marginLeft;
+    if (i == 0) {
+      _marginLeft = 0;
     }
 
     // Dock Image container
+    var marginTop = 0;
     let $thumbDiv = $('<div/>')
-      .css('margin-left', Math.floor(sizes.dockMargin * dimensionMultiplier))
+      // .css('margin-left', Math.floor(sizes.dockMargin * dimensionMultiplier))
+      .css('margin-left', _marginLeft)
       .css('margin-right', Math.floor(sizes.dockMargin * dimensionMultiplier))
       .css('margin-top', marginTop)
       .css('margin-bottom', 0)
       .empty();
+
+    // Rotate images to display in a fan
+    const rotationRange = 10;
+    const rotationStart = -5;
+    var imageRotation = 0;
+
+    if (dockImages == 2 &&  i == 0) {
+      imageRotation = rotationStart;
+    }
+
+    if (dockImages == 2 &&  i == 1) {
+      imageRotation = rotationStart + rotationRange;
+    }
+
+    if (dockImages > 2) {
+      imageRotation = rotationStart + ((rotationRange / (dockImages - 1)) * i);
+    }
 
     // Thumbnail image
     let $thumbImg = $('<img/>')
       .empty()
       .attr('id', 'dock-' + image.slug)
       .addClass('image-thumbnail')
+      .css('transform', 'rotate(' + imageRotation + 'deg)')
       .attr('height', thumbHeight)
       .attr('src', 'images/collection/' + image.filename);
 
@@ -131,7 +152,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
     if (image.slug == selectedPlaceImage.slug) {
       $thumbImg
         .addClass('active')
-        .css('opacity', .5);
+        .css('margin-top', sizes.highlightedDockImageMargin);
     }
 
     $thumbDiv
@@ -246,18 +267,18 @@ export function highlightImage(clicked, state) {
   $('#dock').find('div img.active')
     .removeClass('active')
     .animate({
-      opacity: '1',
-    }, dur.default, function () {
-      $(this)
-        .css('opacity', '1');
-    });
+      marginTop: 0,
+    }, (dur.default / 4));
 
   $('#dock-' + selectedDockImage.slug)
     .addClass('active')
-    .css('opacity', 1)
     .animate({
-      opacity: '.5',
-    }, dur.default);
+      marginTop: sizes.highlightedDockImageMargin * 1.4,
+    }, (dur.default / 6), function () {
+      $(this).animate({
+        marginTop: sizes.highlightedDockImageMargin,
+      }, dur.default / 4);
+    });
 
   // TODO: Figure out a way to animate box-shadow
   // Changing the box shadow without an animated transition is distracting
