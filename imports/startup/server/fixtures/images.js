@@ -15,7 +15,7 @@ Meteor.startup(() => {
       {
         place: 'Coon Rapids',
         name: 'Coon Rapids Dam',
-        filename: 'CoonRdsDam1928.jpg',
+        filename: 'MA6-9-CR-p1.jpg',
         type: 'historic',
         desc: [
           'The Northern Mississippi Power Company began construction of a dam and hydroelectric power station at Coon Rapids in 1913. Although some local leaders argued that the dam should include locks, the Army Corps of Engineers determined that the river above the dam was not navigable, and the power company did not include a lock.',
@@ -30,7 +30,7 @@ Meteor.startup(() => {
       {
         place: 'Coon Rapids',
         name: 'Men Lounging',
-        filename: 'HE21r30.jpg',
+        filename: 'HE2-1-r30.jpg',
         type: 'historic',
         desc: [
           'During the mid-1800s, a series of “Red River ox cart trails” connected the Selkirk settlement, near present day Winnipeg, Canada, to the Mississippi River’s head of navigation at Saint Paul. Wooden carts pulled by oxen transported loads of furs south and carried food supplies, ammunition and manufactured goods on the return north.',
