@@ -116,19 +116,7 @@ h3 {
 
 #highlighted-image img {
   box-shadow: 1px 2px 10px #000;
-}
-
-.image-zoom {
-  color: #333;
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  font-size: 50px;
-}
-
-.image-zoom i {
-  opacity: .9;
-  mix-blend-mode: overlay;
+  border: 9px solid #FFF;
 }
 
 .image-caption {
@@ -153,15 +141,22 @@ h3 {
   margin-top: 80px;
 }
 
-.overlay-shade {
-  width: 1920px;
-  height: 1080px;
+/**
+ * ----------------------------------------------------------------------------
+ * Zoomed image
+ * ----------------------------------------------------------------------------
+ */
+.image-zoom {
+  color: #333;
   position: absolute;
-  top: 0;
-  left: 0;
-  background: #FFF;
-  z-index: 999;
-  opacity: 0;
+  top: 30px;
+  left: 30px;
+  font-size: 50px;
+}
+
+.image-zoom i {
+  opacity: .9;
+  mix-blend-mode: overlay;
 }
 
 .zoom-image-container {
@@ -173,10 +168,19 @@ h3 {
   height: 1080px;
   text-align: center;
   background: rgba(0, 0, 0, .8);
-  vertical-align: middle;
 }
 
-.zoom-image {
+.zoom-image-close-container {
+  position: relative;
+}
+
+.zoom-image-container i {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 60px;
+  background: rgba(0, 0, 0, .6);
+  padding: 20px;
 }
 
 /**
