@@ -58,6 +58,7 @@ export default class ListPlaces extends React.Component {
           <h3 id="default-heading">
             Select a spot<br/>
             to explore<br/>
+            the history<br/>
             along the<br/>
             Mississippi River
           </h3>
