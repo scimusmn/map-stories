@@ -30,30 +30,48 @@ export function zoomImage(clicked, state) {
   });
 
   // Fit the image on the screen by max height
+  var imageWidth = selectedHighlightImage.width;
   var imageHeight = selectedHighlightImage.height;
   var imageTopMargin = sizes.zoomTopMargin;
   var maxZoomHeight = (sizes.screenHeight - (sizes.zoomTopMargin * 2));
   console.log(maxZoomHeight);
   console.log('----^ ^ ^ ^ ^ maxZoomHeight ^ ^ ^ ^ ^----');
   if (selectedHighlightImage.height >= maxZoomHeight) {
+    imageWidth = (imageWidth * maxZoomHeight) / imageHeight;
     imageHeight = maxZoomHeight;
   } else {
     imageTopMargin = ((sizes.screenHeight - imageHeight) / 2);
   }
 
+  var imageLeftMargin = ((sizes.screenWidth - imageWidth) / 2);
+
   // Define image
   var $zoomImage = $('<img/>')
     .attr('height', imageHeight)
-    .css('margin-top', imageTopMargin)
     .addClass('zoom-image')
     .attr('src', 'images/collection/' + selectedHighlightImage.filename);
+
+  // Define close button
+  let $zoomClose = $('<i/>')
+    .addClass('fa fa-times ')
+    .attr('aria-hidden', 'true');
+
+  let $zoomImageCloseContainer = $('<div/>')
+    .addClass('zoom-image-close-container')
+    .css('margin-left', imageLeftMargin)
+    .css('margin-top', imageTopMargin)
+    .css('width', imageWidth)
+    .css('height', imageHeight);
 
   // Add image to page
   var $zoomImageContainer = $('<div/>')
     .addClass('zoom-image-container')
     .hide();
+  $($zoomImageCloseContainer)
+    .append($zoomImage)
+    .append($zoomClose);
   $($zoomImageContainer)
-    .append($zoomImage);
+    .append($zoomImageCloseContainer);
   $('body')
     .append($zoomImageContainer);
   $($zoomImageContainer)

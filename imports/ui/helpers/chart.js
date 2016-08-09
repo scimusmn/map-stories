@@ -62,10 +62,11 @@ d3Chart.create = function (el, props, state) {
    * Handle close click for image highlights
    */
   $(document).on('click', '.zoom-image-container', function (e) {
-    if (e.target != this) {
-      return false;
-    } else {
+    var $test = $(e.target);
+    if (!($test).is('.zoom-image')) {
       hideZoomImage(this, state);
+    } else {
+      return false;
     }
   });
 
