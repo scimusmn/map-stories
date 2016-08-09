@@ -143,6 +143,23 @@ h3 {
 
 /**
  * ----------------------------------------------------------------------------
+ * Sidebar dock
+ * ----------------------------------------------------------------------------
+ */
+#dock {
+  position: absolute;
+}
+
+#dock div {
+  float: left;
+}
+
+#dock div img {
+  box-shadow: 6px 6px 20px #222222;
+}
+
+/**
+ * ----------------------------------------------------------------------------
  * Zoomed image
  * ----------------------------------------------------------------------------
  */
@@ -185,23 +202,6 @@ h3 {
 
 /**
  * ----------------------------------------------------------------------------
- * Sidebar dock
- * ----------------------------------------------------------------------------
- */
-#dock {
-  position: absolute;
-}
-
-#dock div {
-  float: left;
-}
-
-#dock div img {
-  box-shadow: 6px 6px 20px #222222;
-}
-
-/**
- * ----------------------------------------------------------------------------
  * Map container
  * ----------------------------------------------------------------------------
  */
@@ -210,63 +210,6 @@ h3 {
   height: @screen-height;
   margin: 0;
   padding: 0;
-}
-
-/**
- * ----------------------------------------------------------------------------
- * Single location page
- * ----------------------------------------------------------------------------
- */
-.location {
-  opacity: 0;
-  width: 1870px;
-  height: 980px;
-  position: absolute;
-  top: 100px;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-.location > * {
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-h3.location-headline {
-  position: absolute;
-  top: -40px;
-  left: -5px;
-  opacity: 1;
-  padding: 45px 45px 25px 40px;
-  font-family: 'FuturaTS-Demibold', sans-serif;
-  font-size: 35px;
-  box-shadow: 6px 6px 20px #222222;
-}
-
-.location-footer {
-  position: absolute;
-  top: 950px;
-  left: 28px;
-  height: 110px;
-  width: 110px;
-  background: #e2d9c2;
-  margin: 20px auto 0 auto;
-  text-align: center;
-  box-shadow: 4px 4px 20px #222222;
-  padding-top: 20px;
-  font-size: 50px;
-}
-
-.location-footer,
-.location-footer a {
-  color: darken(@drk-blue, 5%);
-}
-
-.location-footer a {
-  display: block;
-  width: 100%;
-  padding-top: 9px;
 }
 
 /**
