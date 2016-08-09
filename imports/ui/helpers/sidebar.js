@@ -78,7 +78,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         }, dur.default, function () {
           $('#dock')
             .animate({
-              bottom: 0,
+              bottom: -20,
             }, dur.default);
         });
 
