@@ -10,6 +10,10 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
     return image.slug == selectedPlaceImageId;
   });
 
+  $('#sidebar-content')
+    .removeClass()
+    .addClass(selectedPlaceImage.slug);
+
   // Fade out default heading
   $mapSidebar.find('h3#default-heading')
     .fadeOut(dur.default, function () {
@@ -223,6 +227,10 @@ export function highlightImage(clicked, state) {
   let selectedDockImage = _.find(state.images, function (image) {
     return image.slug == clicked.id.replace('dock-', '');
   });
+
+  $('#sidebar-content')
+    .removeClass()
+    .addClass(selectedDockImage.slug);
 
   $('#image-content, #text-content')
     .fadeOut((dur.default / 2), function () {
