@@ -24,12 +24,22 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         imageHeight = selectedPlaceImage.customHeight;
       }
 
+      let $highlightZoomIcon = $('<i/>')
+        .addClass('fa fa-search-plus')
+        .attr('aria-hidden', 'true');
+
+      let $highlightZoom = $('<div/>')
+        .addClass('image-zoom')
+        .append($highlightZoomIcon);
+
       let $highlightImg = $('<img/>')
         .addClass('image-highlight')
+        .attr('id', 'highlighted-' + selectedPlaceImage.slug)
         .attr('height', imageHeight)
         .attr('src', 'images/collection/' + selectedPlaceImage.filename);
       $('#highlighted-image')
-        .prepend($highlightImg);
+        .prepend($highlightImg)
+        .prepend($highlightZoom);
 
       // Populate image caption
       if (selectedPlaceImage.caption != '') {
@@ -121,8 +131,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
     if (image.slug == selectedPlaceImage.slug) {
       $thumbImg
         .addClass('active')
-        .css('opacity', .5)
-        .css('-webkit-filter', 'grayscale(100%)');
+        .css('opacity', .5);
     }
 
     $thumbDiv
@@ -225,6 +234,7 @@ export function highlightImage(clicked, state) {
       }
 
       $('.image-highlight')
+        .attr('id', 'highlighted-' + selectedDockImage.slug)
         .attr('height', imageHeight)
         .attr('src', 'images/collection/' + selectedDockImage.filename);
     })
@@ -239,7 +249,6 @@ export function highlightImage(clicked, state) {
       opacity: '1',
     }, dur.default, function () {
       $(this)
-        .css('-webkit-filter', 'none')
         .css('opacity', '1');
     });
 
@@ -248,10 +257,7 @@ export function highlightImage(clicked, state) {
     .css('opacity', 1)
     .animate({
       opacity: '.5',
-    }, dur.default, function () {
-      $(this)
-        .css('-webkit-filter', 'grayscale(100%)');
-    });
+    }, dur.default);
 
   // TODO: Figure out a way to animate box-shadow
   // Changing the box shadow without an animated transition is distracting

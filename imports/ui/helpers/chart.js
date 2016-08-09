@@ -5,6 +5,7 @@ import { appDurations, appSizes } from '/imports/ui/helpers/settings';
 import {
   collapseSidebar, drawSidebar, expandSidebar, highlightImage
 } from '/imports/ui/helpers/sidebar';
+import { zoomImage, hideZoomImage } from '/imports/ui/helpers/zoom';
 
 const sizes = appSizes();
 const dur = appDurations();
@@ -48,6 +49,20 @@ d3Chart.create = function (el, props, state) {
    */
   $(document).on('click', '.image-thumbnail:not(.active)', function () {
     highlightImage(this, state);
+  });
+
+  /**
+   * Handle click on the highlight images
+   */
+  $(document).on('click', '.image-highlight', function () {
+    zoomImage(this, state);
+  });
+
+  /**
+   * Handle close click for image highlights
+   */
+  $(document).on('click', '.zoom-image-container', function () {
+    hideZoomImage(this, state);
   });
 
 };

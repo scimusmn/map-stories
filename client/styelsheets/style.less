@@ -100,9 +100,25 @@ h3 {
   position: relative;
 }
 
-#highlighted-image img {
+#highlighted-image {
   transform: rotate(2deg);
+}
+
+#highlighted-image img {
   box-shadow: 1px 2px 10px #000;
+}
+
+.image-zoom {
+  color: #333;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 50px;
+}
+
+.image-zoom i {
+  opacity: .9;
+  mix-blend-mode: overlay;
 }
 
 .image-caption {
@@ -125,6 +141,32 @@ h3 {
   text-align: right;
   opacity: .2;
   margin-top: 80px;
+}
+
+.overlay-shade {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #FFF;
+  z-index: 999;
+  opacity: 0;
+}
+
+.zoom-image-container {
+  z-index: 9999;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1920px;
+  height: 1080px;
+  text-align: center;
+  background: rgba(255, 255, 255, .2);
+  vertical-align: middle;
+}
+
+.zoom-image {
 }
 
 /**
@@ -403,7 +445,7 @@ h3.location-headline {
   height: @screen-height;
   padding: 0;
   background: white;
-  z-index: 9999;
+  z-index: 999;
   position: absolute;
   top: 0;
   left: 0;

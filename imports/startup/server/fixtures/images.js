@@ -44,6 +44,30 @@ Meteor.startup(() => {
       // Bohemian Flats
       {
         place: 'Bohemian Flats',
+        name: 'poorest-residents',
+        filename: 'MH5-9-MP1E-p3-original.jpg',
+        type: 'historic',
+        desc: [
+          'The city’s poorest residents often lived in the least desirable areas like low lying areas along the river prone to frequent flooding. Bohemian Flats was one such poor neighborhood in Minneapolis. Although called Bohemian Flats, people of many nationalities lived there until the early 1930s.',
+        ],
+        caption: 'Bohemian Flats in 1880.',
+        credit: 'Emil Hilgarde / Minnesota Historical Society / Public domain',
+        date: 1880,
+      },
+      {
+        place: 'Bohemian Flats',
+        name: 'collecting-wood',
+        filename: 'GT2-52-p17.jpg',
+        type: 'historic',
+        desc: [
+          'Bohemian Flats lay just downstream from Saint Anthony Falls. Residents took advantage of this location, supplementing their income by gathering lumber and logs washed downstream from the lumber mills at the falls.',
+        ],
+        caption: 'An illustration of residents collecting wood at Bohemian Flats in 1887.',
+        credit: 'Will S. Horton / Minnesota Historical Society / Public domain',
+        date: 1887,
+      },
+      {
+        place: 'Bohemian Flats',
         name: 'I-35 Bridge Collapse',
         filename: 'I35_Bridge_Collapse_4crop.jpg',
         type: 'historic',
@@ -55,12 +79,7 @@ Meteor.startup(() => {
         caption: '',
         credit: 'Courtesy Mike Wills / CC-BY-SA-2.0',
         date: 1928,
-      },
-      {
-        place: 'Bohemian Flats',
-        name: 'Collecting wood',
-        filename: 'GT2-52-p17.jpg',
-        type: 'historic',
+        customHeight: 440,
       },
 
       // Lock and Dam #1
