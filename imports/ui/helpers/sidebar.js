@@ -89,6 +89,10 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
     return o.place == selectedPlace.name;
   });
 
+  placeImages = _.sortBy(placeImages, function (o) {
+    return o.order;
+  });
+
   // Total width of the dock thumbnails
   var sumWidths = _.reduce(placeImages, function (sum, image) {
     var ratio = image.width / image.height;
@@ -127,8 +131,8 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
       .empty();
 
     // Rotate images to display in a fan
-    const rotationRange = 10;
-    const rotationStart = -5;
+    const rotationRange = 16;
+    const rotationStart = -8;
     var imageRotation = 0;
 
     if (dockImages == 2 &&  i == 0) {
@@ -181,7 +185,7 @@ export function collapseSidebar() {
 
       $('#dock')
         .animate({
-          bottom: ((sizes.dockHeight) * -1),
+          bottom: ((sizes.dockHeight) * -1 - 100),
         });
 
       // Slide the sidebar back to homepage default
@@ -216,7 +220,7 @@ export function drawSidebar() {
     .hide();
 
   $('#dock')
-    .css('bottom', (sizes.dockHeight) * -1)
+    .css('bottom', (sizes.dockHeight) * -1 - 100)
     .css('height', (sizes.dockHeight))
     .css('padding-left', (sizes.dockLeftPadding))
     .addClass('other');
