@@ -14,32 +14,28 @@ export function zoomImage(clicked, state) {
     return image.slug == clicked.id.replace('highlighted-', '');
   });
 
-  console.log(selectedHighlightImage);
-  console.log('----^ ^ ^ ^ ^ selectedHighlightImage ^ ^ ^ ^ ^----');
+  // Fit the image on the screen by max height
+  var imageHeight = selectedHighlightImage.height;
+  var maxZoomHeight = (sizes.screenHeight - (sizes.zoomTopMargin * 2));
+  console.log(maxZoomHeight);
+  console.log('----^ ^ ^ ^ ^ maxZoomHeight ^ ^ ^ ^ ^----');
+  if (selectedHighlightImage.height > maxZoomHeight) {
+    imageHeight = maxZoomHeight;
+  }
 
-  console.log(state);
-  console.log('----^ ^ ^ ^ ^ state ^ ^ ^ ^ ^----');
-
-  var $zoomImageContainer = $('<div/>')
-    .addClass('zoom-image-container');
-
+  // Define image
   var $zoomImage = $('<img/>')
+    .attr('height', imageHeight)
+    .css('margin-top', sizes.zoomTopMargin)
     .addClass('zoom-image')
     .attr('src', 'images/collection/' + selectedHighlightImage.filename);
 
+  // Add image to page
+  var $zoomImageContainer = $('<div/>')
+    .addClass('zoom-image-container');
   $($zoomImageContainer)
     .append($zoomImage);
   $('body')
     .append($zoomImageContainer);
-
-  //
-  // $('.container')
-  //   .append($overlayShade)
-  //   .animate({
-  //     opacity: .5,
-  //   }, dur.default);
-  //
-  // $($overlayShade)
-  //   .append($zoomImage);
 
 }
