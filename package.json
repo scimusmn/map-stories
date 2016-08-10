@@ -5,22 +5,27 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "image-size": "^0.5.0",
+    "jquery": "^3.1.0",
+    "jquery-validation": "^1.15.1",
     "jsdom": "^9.3.0",
     "lodash": "^4.13.1",
     "meteor-node-stubs": "~0.2.0",
-    "react": "^15.1.0",
+    "react": "^15.3.0",
     "react-addons-create-fragment": "^15.1.0",
     "react-addons-css-transition-group": "^15.1.0",
     "react-addons-linked-state-mixin": "^15.1.0",
     "react-addons-perf": "^15.1.0",
-    "react-addons-pure-render-mixin": "^15.1.0",
+    "react-addons-pure-render-mixin": "^15.3.0",
     "react-addons-test-utils": "^15.1.0",
     "react-addons-transition-group": "^15.1.0",
     "react-addons-update": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "react-komposer": "^1.11.0",
-    "react-router": "^2.4.1",
+    "react-bootstrap": "^0.30.2",
+    "react-dom": "^15.3.0",
+    "react-komposer": "^1.13.1",
+    "react-router": "^2.6.1",
+    "react-router-bootstrap": "^0.23.1",
     "throttle-debounce": "^1.0.1"
   }
 }
