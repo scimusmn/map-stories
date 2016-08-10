@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import { Loading } from '../components/loading.js';
 import { Images } from '../../api/images/images.js';
+import { ImageFiles } from '../../api/imageFiles/imageFiles';
 import { Places } from '../../api/places/places.js';
 import AdminList from '../components/AdminList';
 
@@ -17,7 +18,8 @@ const composer = (props, onData) => {
   if (subscription.ready()) {
     const places = Places.find({}).fetch();
     const images = Images.find({}).fetch();
-    onData(null, { places, images });
+    const imageFiles = ImageFiles.find({}).fetch();
+    onData(null, { places, images, imageFiles });
   }
 };
 

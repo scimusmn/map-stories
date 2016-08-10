@@ -9,6 +9,7 @@ export default class AdminList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      imageFiles: props.imageFiles,
       images: props.images,
       places: props.places,
     };
@@ -16,6 +17,9 @@ export default class AdminList extends React.Component {
 
   render() {
     var images = this.props.images;
+    var imageFiles = this.props.imageFiles;
+    console.log(imageFiles);
+    console.log('----^ ^ ^ ^ ^ imageFiles ^ ^ ^ ^ ^----');
     return (
       <Table striped bordered condensed hover>
         <thead>
@@ -45,6 +49,7 @@ export default class AdminList extends React.Component {
 AdminList.propTypes = {
   places: React.PropTypes.array,
   images: React.PropTypes.array,
+  imageFiles: React.PropTypes.array,
 };
 
 AdminList.contextTypes = {
