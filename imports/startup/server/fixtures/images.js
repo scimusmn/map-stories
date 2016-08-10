@@ -321,7 +321,7 @@ Meteor.startup(() => {
         caption: 'Soldiers at Fort Snelling training for World War I.',
         credit: 'Minnesota Historical Society / Public domain',
         date: '1857',
-        order: 8,
+        order: 9,
       },
 
       {
@@ -339,8 +339,70 @@ Meteor.startup(() => {
       // Hastings
       {
         place: 'Hastings',
-        name: 'Something',
-        filename: 'Hastings1850-60.jpg',
+        name: 'hastings-treaty',
+        filename: 'MD2-9-HS1-r2.jpg',
+        type: 'historic',
+        desc: [
+          'Until 1852 only Native Americans and licensed fur traders were allowed to live west of the Mississippi River. Despite that, the junction of the Vermillion and Mississippi Rivers made for an attractive location and some settlers moved in early.',
+          'Once the 1851 treaty officially opened the area for settlement, the village grew quickly. By 1856, Hastings, as it was then called, had 1,918 residents and in 1900 the city’s population was 3,811.',
+        ],
+        caption: 'The business district of Hastings in about 1900.',
+        credit: 'Minnesota Historical Society / Public domain',
+        date: '1852',
+        order: 1,
+      },
+      {
+        place: 'Hastings',
+        name: 'hastings-wing-dam',
+        filename: 'HE5-3-p15.jpg',
+        type: 'historic',
+        desc: [
+          'In the late 1800s, the Army Corps of Engineers built hundreds of wings dams south of Saint Paul in an attempt to establish a 4 1/2 foot deep channel for navigation.',
+          'The wing dams, constructed of alternating layers of brush and rock, narrowed the river, concentrating the flow into the main channel.'
+        ],
+        caption: 'Workers constructing a wing dam.',
+        credit: 'Minnesota Historical Society / Public domain',
+        date: '1895',
+        order: 6,
+      },
+      {
+        place: 'Hastings',
+        name: 'hastings-ferry',
+        filename: 'HE5-15-r8.jpg',
+        type: 'historic',
+        desc: [
+          'Before bridges, ferries carried people back and forth across the river. One of the first ferries in the area, the Point Douglas Ferry near Hastings ran until a bridge was built in 1895.',
+        ],
+        caption: 'The point Douglas Ferry, four miles south of Hastings.',
+        credit: 'Minnesota Historical Society / Public domain',
+        date: '1895',
+        order: 7,
+      },
+      {
+        place: 'Hastings',
+        name: 'hastings-spiral-bridge',
+        filename: 'MD2_9-HS4S-p12.jpg',
+        type: 'historic',
+        desc: [
+          'An iconic landmark in Hastings, the spiral bridge rose above the river in 1895. Demolished in 1951, a new bridge better suited to handle modern vehicles replaced it.',
+        ],
+        caption: '',
+        credit: 'Minnesota Historical Society / Public domain',
+        date: '1895',
+        order: 8,
+      },
+      {
+        place: 'Hastings',
+        name: 'hastings-lock-dam-2',
+        filename: '5084-A.jpg',
+        type: 'historic',
+        desc: [
+          'Despite dredging and the construction of wing dams, the river between Hastings and Saint Paul remained difficult to navigate in the 1920s. In 1927, Congress authorized the construction of a lock and dam at Hastings to raise the water level and improve the river for navigation.',
+        ],
+        caption: 'Lock and Dam 2 at Hastings.',
+        credit: 'Minnesota Historical Society / Public domain',
+        date: '1927',
+        order: 9,
       },
 
       // Mendota
