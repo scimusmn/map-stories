@@ -3,6 +3,7 @@ import { Images } from '../../../api/images/images.js';
 import _ from 'lodash';
 import sizeOf from 'image-size';
 
+
 // If the database is empty on server start, create some sample data.
 
 Meteor.startup(() => {
