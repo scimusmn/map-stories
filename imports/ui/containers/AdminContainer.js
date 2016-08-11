@@ -7,7 +7,7 @@ import { Loading } from '../components/loading.js';
 import { Images } from '../../api/images/images.js';
 import { ImageFiles } from '../../api/imageFiles/imageFiles';
 import { Places } from '../../api/places/places.js';
-import AdminList from '../components/AdminList';
+import AdminListWrapper from '../components/AdminListWrapper';
 
 /**
  * Provide data for the list of places and images
@@ -23,4 +23,4 @@ const composer = (props, onData) => {
   }
 };
 
-export default composeWithTracker(composer, Loading)(AdminList);
+export default composeWithTracker(composer, Loading)(AdminListWrapper);

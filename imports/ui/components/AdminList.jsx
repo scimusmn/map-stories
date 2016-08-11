@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Table, Column, Cell } from 'fixed-data-table';
 import '/node_modules/fixed-data-table/dist/fixed-data-table-base.min.css';
+import Dimensions from 'react-dimensions';
+import ReactDataGrid from 'react-data-grid';
 
-export default class AdminList extends React.Component {
+class AdminList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -26,6 +28,9 @@ export default class AdminList extends React.Component {
 
     var images = this.props.images;
     var imageFiles = this.props.imageFiles;
+
+    console.log(imageFiles);
+    console.log('----^ ^ ^ ^ ^ imageFiles ^ ^ ^ ^ ^----');
 
     /**
      * Merge image file data with content in database
@@ -51,18 +56,34 @@ export default class AdminList extends React.Component {
     // Add mutated object back to state
     this.state.imageFiles = imageFiles;
 
+    //A rowGetter function is required by the grid to retrieve a row for a given index
+    var rowGetter = function(i){
+      return imageFiles[i];
+    };
+
+    var columns = [
+      {
+        key: 'title',
+        name: 'Title'
+      },
+      {
+        key: 'count',
+        name: 'Count'
+      }
+    ]
+
     /**
      * Display data table using Fixed Data Table component
      */
     return (
       <Table
-        rowsCount={this.state.myTableData.length}
+        rowsCount={this.state.imageFiles.length}
         rowHeight={50}
         headerHeight={50}
-        width={1000}
-        height={500}>
+        width={this.props.containe}
+        height={this.props.containerHeight}>
         <Column
-          header={<Cell>Name</Cell>}
+          header={<Cell>Filename</Cell>}
           cell={props => (
             <Cell {...props}>
               {this.state.imageFiles[props.rowIndex].filename}
@@ -70,8 +91,36 @@ export default class AdminList extends React.Component {
           )}
           width={200}
         />
+        <Column
+          header={<Cell>Place</Cell>}
+          cell={props => (
+            <Cell {...props}>
+              {this.state.imageFiles[props.rowIndex].place}
+            </Cell>
+          )}
+          width={200}
+        />
+        <Column
+          header={<Cell>Width</Cell>}
+          cell={props => (
+            <Cell {...props}>
+              {this.state.imageFiles[props.rowIndex].width}
+            </Cell>
+          )}
+          width={200}
+        />
+        <Column
+          header={<Cell>Height</Cell>}
+          cell={props => (
+            <Cell {...props}>
+              {this.state.imageFiles[props.rowIndex].height}
+            </Cell>
+          )}
+          width={200}
+        />
       </Table>
     );
+
   }
 }
 
@@ -81,7 +130,4 @@ AdminList.propTypes = {
   imageFiles: React.PropTypes.array,
 };
 
-AdminList.contextTypes = {
-  router: React.PropTypes.object,
-};
-
+export default Dimensions()(AdminList);

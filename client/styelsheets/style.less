@@ -7,6 +7,18 @@
 @import "_sizes.import.less";
 @import "_fonts.import.less";
 
+*, *:before, *:after
+{
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   color: #e5e5e5;
   margin: 0;
@@ -359,10 +371,19 @@ h3 {
  * Admin table
  * ----------------------------------------------------------------------------
  */
+
 .admin-table {
+  display:flex;
+  flex-direction: column;
   color: #333;
-  table-layout: fixed;
-  word-wrap: break-word;
-  width: 90%;
-  margin: 50px auto;
+  background: #EEE;
+}
+
+.admin-table > div {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  background: red;
+  display: flex;
+  flex-direction: row;
 }
