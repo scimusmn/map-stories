@@ -52,7 +52,12 @@ export default class AdminList extends React.Component {
     var Table = Reactable.Table;
     var sortable = ['filename'];
     return (
-      <Table className="admin-table table" data={imageFiles} sortable={sortable} />
+      <Table
+        data={imageFiles}
+        sortable={sortable}
+        filterable={['place', 'name', 'type', 'desc', 'caption', 'date']}
+        className="admin-table table"
+      />
     );
 
   }
