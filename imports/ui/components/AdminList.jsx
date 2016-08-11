@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Table, Column, Cell } from 'fixed-data-table';
 import '/node_modules/fixed-data-table/dist/fixed-data-table-base.min.css';
 import Dimensions from 'react-dimensions';
-import ReactDataGrid from 'react-data-grid';
 
 class AdminList extends React.Component {
 
