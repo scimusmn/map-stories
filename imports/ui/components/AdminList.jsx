@@ -1,10 +1,7 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import Reactable from 'reactable';
 
 export default class AdminList extends React.Component {
-  handleChange(event) {
-    //  Handle events
-  }
 
   constructor(props) {
     super(props);
@@ -16,33 +13,48 @@ export default class AdminList extends React.Component {
   }
 
   render() {
+
+    /**
+     * Hack to allow the content to scroll off screen.
+     * TODO: make this part of the routing system
+     * When we're on admin (non-kiosk) pages we should change the style
+     */
+    $('body')
+      .css('overflow', 'auto');
+
     var images = this.props.images;
     var imageFiles = this.props.imageFiles;
-    console.log(imageFiles);
-    console.log('----^ ^ ^ ^ ^ imageFiles ^ ^ ^ ^ ^----');
+
+    /**
+     * Merge image file data with content in database
+     *
+     * If the filename exists in the database, copy over the
+     * relevant data and display in in the table.
+     */
+    _.each(imageFiles, function (file) {
+      let matchedImage = _.filter(images, function (image) {
+        if (image.filename == file.filename) {
+          return true;
+        }
+      });
+
+      if (!_.isEmpty(matchedImage)) {
+        delete matchedImage[0].filename;
+        delete matchedImage[0]._id;
+        file = _.assign(file, matchedImage[0]);
+      }
+
+    });
+
+    /**
+     * Display data table using Reactable component
+     */
+    var Table = Reactable.Table;
+    var sortable = ['filename'];
     return (
-      <Table striped bordered condensed hover>
-        <thead>
-          <tr>
-            <th>Image file</th>
-            <th>Image name</th>
-            <th>Image SRC</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            images.map(function(image) {
-              return (
-                <tr key={image._id}>
-                  <td>{image.name}</td>
-                  <td>{image.filename}</td>
-                </tr>
-                );
-            })
-          }
-        </tbody>
-      </Table>
+      <Table className="admin-table table" data={imageFiles} sortable={sortable} />
     );
+
   }
 }
 
@@ -56,15 +68,3 @@ AdminList.contextTypes = {
   router: React.PropTypes.object,
 };
 
-Image = React.createClass({
-  render() {
-    return (
-      <tr>
-        <td className="text-center">
-          <img style={{width: '50px'}} className="img-circle" src={this.props.image.src} />
-        </td>
-        <td>{this.props.image.name}</td>
-      </tr>
-    );
-  }
-});
