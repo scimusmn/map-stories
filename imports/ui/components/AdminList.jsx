@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Table, Column, Cell } from 'fixed-data-table';
-import '/node_modules/fixed-data-table/dist/fixed-data-table.min.css';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import Dimensions from 'react-dimensions';
 import _ from 'lodash';
+import '/node_modules/react-bootstrap-table/css/react-bootstrap-table.min.css';
 
 class AdminList extends React.Component {
 
@@ -76,50 +75,11 @@ class AdminList extends React.Component {
      * Display data table using Fixed Data Table component
      */
     return (
-      <Table
-        className="table table-bordered table-hover table-striped"
-        rowsCount={this.state.imageFiles.length}
-        rowHeight={50}
-        headerHeight={50}
-        width={this.props.containerWidth}
-        height={this.props.containerHeight}>
-        <Column
-          header={<Cell>Filename</Cell>}
-          cell={props => (
-            <Cell {...props}>
-              {this.state.imageFiles[props.rowIndex].filename}
-            </Cell>
-          )}
-          width={200}
-        />
-        <Column
-          header={<Cell>Place</Cell>}
-          cell={props => (
-            <Cell {...props}>
-              {this.state.imageFiles[props.rowIndex].place}
-            </Cell>
-          )}
-          width={200}
-        />
-        <Column
-          header={<Cell>Width</Cell>}
-          cell={props => (
-            <Cell {...props}>
-              {this.state.imageFiles[props.rowIndex].width}
-            </Cell>
-          )}
-          width={200}
-        />
-        <Column
-          header={<Cell>Height</Cell>}
-          cell={props => (
-            <Cell {...props}>
-              {this.state.imageFiles[props.rowIndex].height}
-            </Cell>
-          )}
-          width={200}
-        />
-      </Table>
+      <BootstrapTable data={imageFiles} striped={true} hover={true}>
+        <TableHeaderColumn isKey={true} dataSort={true} dataField="filename">Filename</TableHeaderColumn>
+        <TableHeaderColumn dataField="width">Width</TableHeaderColumn>
+        <TableHeaderColumn dataField="height">Height</TableHeaderColumn>
+      </BootstrapTable>
     );
 
   }
