@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "fixed-data-table": "^0.6.3",
     "image-size": "^0.5.0",
     "jquery": "^3.1.0",
@@ -26,6 +27,7 @@
     "react-dom": "^15.3.0",
     "react-komposer": "^1.13.1",
     "react-router": "^2.6.1",
+    "startbootstrap-sb-admin-2": "^1.0.7",
     "throttle-debounce": "^1.0.1"
   }
 }

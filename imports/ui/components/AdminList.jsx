@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Table, Column, Cell } from 'fixed-data-table';
-import '/node_modules/fixed-data-table/dist/fixed-data-table-base.min.css';
+import '/node_modules/fixed-data-table/dist/fixed-data-table.min.css';
 import Dimensions from 'react-dimensions';
 import _ from 'lodash';
 
@@ -77,6 +77,7 @@ class AdminList extends React.Component {
      */
     return (
       <Table
+        className="table table-bordered table-hover table-striped"
         rowsCount={this.state.imageFiles.length}
         rowHeight={50}
         headerHeight={50}
