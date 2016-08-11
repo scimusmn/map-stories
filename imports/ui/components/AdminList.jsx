@@ -1,5 +1,7 @@
 import React from 'react';
-import Reactable from 'reactable';
+import ReactDOM from 'react-dom';
+import { Table, Column, Cell } from 'fixed-data-table';
+import '/node_modules/fixed-data-table/dist/fixed-data-table-base.min.css';
 
 export default class AdminList extends React.Component {
 
@@ -46,20 +48,30 @@ export default class AdminList extends React.Component {
 
     });
 
+    // Add mutated object back to state
+    this.state.imageFiles = imageFiles;
+
     /**
-     * Display data table using Reactable component
+     * Display data table using Fixed Data Table component
      */
-    var Table = Reactable.Table;
-    var sortable = ['filename'];
     return (
       <Table
-        data={imageFiles}
-        sortable={sortable}
-        filterable={['place', 'name', 'type', 'desc', 'caption', 'date']}
-        className="admin-table table"
-      />
+        rowsCount={this.state.myTableData.length}
+        rowHeight={50}
+        headerHeight={50}
+        width={1000}
+        height={500}>
+        <Column
+          header={<Cell>Name</Cell>}
+          cell={props => (
+            <Cell {...props}>
+              {this.state.imageFiles[props.rowIndex].filename}
+            </Cell>
+          )}
+          width={200}
+        />
+      </Table>
     );
-
   }
 }
 

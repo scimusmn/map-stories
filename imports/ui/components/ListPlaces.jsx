@@ -46,7 +46,7 @@ export default class ListPlaces extends React.Component {
   render() {
     const { places, images } = this.props;
     return (
-      <div className="container container-map map-base">
+      <div className="container-map map-base">
         <Chart
           places={this.state.places}
           images={this.state.images}
