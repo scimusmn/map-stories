@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Table, Column, Cell } from 'fixed-data-table';
 import '/node_modules/fixed-data-table/dist/fixed-data-table-base.min.css';
 import Dimensions from 'react-dimensions';
+import _ from 'lodash';
 
 class AdminList extends React.Component {
 
@@ -27,9 +28,6 @@ class AdminList extends React.Component {
 
     var images = this.props.images;
     var imageFiles = this.props.imageFiles;
-
-    console.log(imageFiles);
-    console.log('----^ ^ ^ ^ ^ imageFiles ^ ^ ^ ^ ^----');
 
     /**
      * Merge image file data with content in database
@@ -71,6 +69,9 @@ class AdminList extends React.Component {
       }
     ]
 
+    console.log(this.props);
+    console.log('----^ ^ ^ ^ ^ this.props ^ ^ ^ ^ ^----');
+
     /**
      * Display data table using Fixed Data Table component
      */
@@ -79,7 +80,7 @@ class AdminList extends React.Component {
         rowsCount={this.state.imageFiles.length}
         rowHeight={50}
         headerHeight={50}
-        width={this.props.containe}
+        width={this.props.containerWidth}
         height={this.props.containerHeight}>
         <Column
           header={<Cell>Filename</Cell>}
@@ -129,4 +130,9 @@ AdminList.propTypes = {
   imageFiles: React.PropTypes.array,
 };
 
-export default Dimensions()(AdminList);
+export default Dimensions({
+    containerStyle: {
+      flex: 1,
+      minHeight: 90 + 'vh',
+    },
+  })(AdminList);

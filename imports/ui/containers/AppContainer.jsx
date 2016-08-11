@@ -2,8 +2,6 @@ import { Images } from '../../api/images/images.js';
 import { Places } from '../../api/places/places.js';
 import { createContainer } from 'meteor/react-meteor-data';
 import App from '../layouts/App.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
 
 /**
  * Create a container for the App

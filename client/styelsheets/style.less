@@ -20,6 +20,10 @@ html, body {
 }
 
 body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
   color: #e5e5e5;
   margin: 0;
   padding: 0;
@@ -372,6 +376,10 @@ h3 {
  * ----------------------------------------------------------------------------
  */
 
+.admin-page {
+  width: 80%;
+}
+
 .admin-table {
   display:flex;
   flex-direction: column;
@@ -380,10 +388,17 @@ h3 {
 }
 
 .admin-table > div {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-  background: red;
+  background: #FFF;
   display: flex;
   flex-direction: row;
+  color: #000;
+}
+
+.admin-table > div.admin-table-content {
+  //min-width: 95vh;
+  //min-height: 95vh;
+}
+
+.admin-table > div.admin-table-header {
+  background: pink;
 }

@@ -12,18 +12,17 @@ export default class AdminListWrapper extends React.Component {
   }
 
   render() {
-    console.log(this.props.imageFiles);
-    console.log('----^ ^ ^ ^ ^ this.props.imageFiles ^ ^ ^ ^ ^----');
     return (
-      <div className="admin-table">
-        <div className="admin-table-header">Header content for the table</div>
-        <div className="admin-table-content">
-          <p>Some other content</p>
-          <AdminList
-            imageFiles={this.props.imageFiles}
-            images={this.props.images}
-            places={this.props.places}
-          />
+      <div className="admin-page">
+        <div className="admin-table">
+          <div className="admin-table-header">Header content for the table</div>
+          <div className="admin-table-content">
+            <AdminList
+              imageFiles={this.props.imageFiles}
+              images={this.props.images}
+              places={this.props.places}
+            />
+          </div>
         </div>
       </div>
     );
