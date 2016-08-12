@@ -1,6 +1,5 @@
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import Dimensions from 'react-dimensions';
 import _ from 'lodash';
 import '/node_modules/react-bootstrap-table/css/react-bootstrap-table.min.css';
 
@@ -87,9 +86,4 @@ AdminList.propTypes = {
   imageFiles: React.PropTypes.array,
 };
 
-export default Dimensions({
-    containerStyle: {
-      flex: 1,
-      minHeight: 90 + 'vh',
-    },
-  })(AdminList);
+export default AdminList;
