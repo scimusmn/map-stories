@@ -1,8 +1,7 @@
 import React from 'react';
 import AdminList from '/imports/ui/components/AdminList';
-import '/node_modules/bootstrap/dist/css/bootstrap.min.css'
-import '/node_modules/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css'
-
+import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '/node_modules/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css';
 
 export default class AdminListWrapper extends React.Component {
   constructor(props) {
@@ -17,7 +16,7 @@ export default class AdminListWrapper extends React.Component {
   render() {
     return (
       <div id="wrapper">
-        <nav className="navbar navbar-default navbar-static-top" role="navigation" style={{marginBottom: 0}}>
+        <nav className="navbar navbar-default navbar-static-top" role="navigation" style={{ marginBottom: 0 }}>
           <div className="navbar-header">
             <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span className="sr-only">Toggle navigation</span>

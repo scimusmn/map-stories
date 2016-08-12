@@ -53,20 +53,20 @@ class AdminList extends React.Component {
     this.state.imageFiles = imageFiles;
 
     //A rowGetter function is required by the grid to retrieve a row for a given index
-    var rowGetter = function(i){
+    var rowGetter = function (i) {
       return imageFiles[i];
     };
 
     var columns = [
       {
         key: 'title',
-        name: 'Title'
+        name: 'Title',
       },
       {
         key: 'count',
-        name: 'Count'
-      }
-    ]
+        name: 'Count',
+      },
+    ];
 
     console.log(this.props);
     console.log('----^ ^ ^ ^ ^ this.props ^ ^ ^ ^ ^----');
