@@ -16,7 +16,6 @@ class AdminList extends React.Component {
   }
 
   render() {
-
     /**
      * Hack to allow the content to scroll off screen.
      * TODO: make this part of the routing system
@@ -25,8 +24,8 @@ class AdminList extends React.Component {
     $('body')
       .css('overflow', 'auto');
 
-    var images = this.props.images;
-    var imageFiles = this.props.imageFiles;
+    const images = this.props.images;
+    let imageFiles = this.props.imageFiles;
 
     /**
      * Merge image file data with content in database
@@ -34,11 +33,9 @@ class AdminList extends React.Component {
      * If the filename exists in the database, copy over the
      * relevant data and display in in the table.
      */
-    _.each(imageFiles, function (file) {
-      let matchedImage = _.filter(images, function (image) {
-        if (image.filename == file.filename) {
-          return true;
-        }
+    _.each(imageFiles, file => {
+      const matchedImage = _.filter(images, image => {
+        return image.filename === file.filename;
       });
 
       if (!_.isEmpty(matchedImage)) {
@@ -46,7 +43,6 @@ class AdminList extends React.Component {
         delete matchedImage[0]._id;
         file = _.assign(file, matchedImage[0]);
       }
-
     });
 
     // Add mutated object back to state
@@ -82,7 +78,6 @@ class AdminList extends React.Component {
         <TableHeaderColumn dataSort={true} dataField="height">Height</TableHeaderColumn>
       </BootstrapTable>
     );
-
   }
 }
 
