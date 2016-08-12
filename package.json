@@ -30,5 +30,14 @@
     "react-router": "^2.6.1",
     "startbootstrap-sb-admin-2": "^1.0.7",
     "throttle-debounce": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb": "^10.0.0",
+    "eslint-import-resolver-meteor": "^0.3.1",
+    "eslint-plugin-import": "^1.13.0",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "eslint-plugin-meteor": "^4.0.0",
+    "eslint-plugin-react": "^6.0.0"
   }
 }
