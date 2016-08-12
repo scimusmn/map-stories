@@ -47,34 +47,52 @@ class AdminList extends React.Component {
     // Add mutated object back to state
     this.state.imageFiles = imageFiles;
 
-    //A rowGetter function is required by the grid to retrieve a row for a given index
-    var rowGetter = function (i) {
-      return imageFiles[i];
-    };
+    function warnEmpty(cell) {
+      if (cell == null) {
+        return '<div class="cell-warning">-</div>';
+      }
+      return cell;
+    }
 
-    var columns = [
-      {
-        key: 'title',
-        name: 'Title',
-      },
-      {
-        key: 'count',
-        name: 'Count',
-      },
-    ];
+    function dimensionFormatter(cell) {
+      if (cell <= 300) {
+        return `<div class="cell-warning">${cell}</div>`;
+      }
+      return warnEmpty(cell);
+    }
 
-    console.log(this.props);
-    console.log('----^ ^ ^ ^ ^ this.props ^ ^ ^ ^ ^----');
+    function imageFormatter(cell) {
+      return `<img width="280" src="/images/collection/${cell}" />`;
+    }
+
+    function editLink(cell) {
+      return `<a href="${cell}">Edit</a>`
+    }
 
     /**
      * Display data table using Fixed Data Table component
      */
     return (
-      <BootstrapTable data={imageFiles} striped={true} hover={true}>
-        <TableHeaderColumn isKey={true} dataSort={true} dataField="filename">Filename</TableHeaderColumn>
-        <TableHeaderColumn dataSort={true} dataField="place">Place</TableHeaderColumn>
-        <TableHeaderColumn dataSort={true} dataField="width">Width</TableHeaderColumn>
-        <TableHeaderColumn dataSort={true} dataField="height">Height</TableHeaderColumn>
+      <BootstrapTable data={imageFiles} striped hover>
+        <TableHeaderColumn isKey dataSort dataField="filename">Filename</TableHeaderColumn>
+        <TableHeaderColumn
+          dataSort dataField="place"
+          dataFormat={warnEmpty}
+        >Place</TableHeaderColumn>
+        <TableHeaderColumn
+          dataSort dataField="width" dataFormat={dimensionFormatter}
+        >Width</TableHeaderColumn>
+        <TableHeaderColumn
+          dataSort dataField="height" dataFormat={dimensionFormatter}
+        >Height</TableHeaderColumn>
+        <TableHeaderColumn dataSort dataField="filename">Filename</TableHeaderColumn>
+        <TableHeaderColumn
+          dataSort dataField="filename" width="300"
+          dataFormat={imageFormatter}
+        >Filename</TableHeaderColumn>
+        <TableHeaderColumn
+          dataSort dataField="slug" dataFormat={editLink}
+        >Filename</TableHeaderColumn>
       </BootstrapTable>
     );
   }
