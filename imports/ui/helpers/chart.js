@@ -112,7 +112,6 @@ d3Chart._drawMap = function (el, props, state) {
 
 };
 
-
 /**
  * Draw the details page, when a user selects a location
  * @param clicked The clicked DOM element

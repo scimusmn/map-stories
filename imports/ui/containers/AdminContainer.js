@@ -1,6 +1,7 @@
 /**
  * Container for the admin view where we control and manage image data
  */
+// import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import { Loading } from '../components/loading.js';
