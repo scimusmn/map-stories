@@ -6,11 +6,11 @@ import App from '../layouts/App.jsx';
 /**
  * Create a container for the App
  *
- * This is a Meteor idiom that seperates the Meteor/React data interface
+ * This is a Meteor idiom that separates the Meteor/React data interface
  * from the React presentation template.
  *
  * We load the Meteor data into the React props which are then passed along
- * to the App comopnent.
+ * to the App component.
  */
 export default createContainer(() => {
   const publicHandle = Meteor.subscribe('Places.public');
