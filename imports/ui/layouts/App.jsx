@@ -1,9 +1,4 @@
 import React from 'react';
-import { Navigation } from '../components/navigation.jsx';
-import { Images } from '../../api/images/images.js';
-import { Places } from '../../api/places/places.js';
-
-import ListPlaces from '../components/ListPlaces.jsx';
 
 /**
  * Highest level presentational component
@@ -14,7 +9,7 @@ export default class App extends React.Component {
   render() {
 
     // Load data from props
-    const { children, places, images } = this.props;
+    const { children } = this.props;
 
     // Presentation layout
     // We removed the <Navigation /> componet until the UI is better developed
