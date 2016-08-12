@@ -77,8 +77,9 @@ class AdminList extends React.Component {
     return (
       <BootstrapTable data={imageFiles} striped={true} hover={true}>
         <TableHeaderColumn isKey={true} dataSort={true} dataField="filename">Filename</TableHeaderColumn>
-        <TableHeaderColumn dataField="width">Width</TableHeaderColumn>
-        <TableHeaderColumn dataField="height">Height</TableHeaderColumn>
+        <TableHeaderColumn dataSort={true} dataField="place">Place</TableHeaderColumn>
+        <TableHeaderColumn dataSort={true} dataField="width">Width</TableHeaderColumn>
+        <TableHeaderColumn dataSort={true} dataField="height">Height</TableHeaderColumn>
       </BootstrapTable>
     );
 
