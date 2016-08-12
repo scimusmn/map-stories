@@ -11,7 +11,6 @@ import { App } from '../../ui/layouts/App.jsx';
 import { Index } from '../../ui/components/index.jsx';
 
 import { NotFound } from '../../ui/components/notFound.jsx';
-import ListPlaces from '../../ui/components/ListPlaces.jsx';
 
 export const renderRoutes = () => (
   <Router history={ browserHistory }>
