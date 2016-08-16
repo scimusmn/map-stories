@@ -67,7 +67,7 @@ class AdminList extends React.Component {
     }
 
     function editLink(cell) {
-      return `<a href="/image/${cell}/edit">Edit</a>`;
+      return `<a class="btn btn-default" href="/image/${cell}/edit">Edit</a>`;
     }
 
     /**

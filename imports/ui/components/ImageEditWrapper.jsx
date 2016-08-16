@@ -15,10 +15,13 @@ export default class ImageEditWrapper extends React.Component {
     };
   }
 
-  selectedImage(props) {
+  lookupImage(props) {
     const routeSlug = props.routeParams.slug;
-    const selectedImage = _.find(props.images, { slug: routeSlug });
-    return `/images/collection/${selectedImage.filename}`;
+    return _.find(props.images, { slug: routeSlug });
+  }
+
+  selectedImagePath(props) {
+    return `/images/collection/${this.lookupImage(props).filename}`;
   }
 
   render() {
@@ -49,6 +52,10 @@ export default class ImageEditWrapper extends React.Component {
                     <i className="fa fa-dashboard fa-fw" />
                     Back to application
                   </a>
+                  <a href="/admin" className="active">
+                    <i className="fa fa-list" />
+                    Image list
+                  </a>
                 </li>
               </ul>
             </div>
@@ -63,13 +70,13 @@ export default class ImageEditWrapper extends React.Component {
           </div>
           <div className="row">
             <div className="col-lg-8">
-              <ImageEditForm />
+              <ImageEditForm selectedImage={this.lookupImage(this.props)} />
             </div>
             <div className="col-lg-4">
               <img
                 className="img-responsive"
                 alt="TODO: fill me in"
-                src={this.selectedImage(this.props)}
+                src={this.selectedImagePath(this.props)}
               />
             </div>
           </div>
