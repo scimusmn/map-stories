@@ -1,5 +1,7 @@
 import React from 'react';
 
+const _ = require('lodash');
+
 export default class ImageEditForm extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +24,10 @@ export default class ImageEditForm extends React.Component {
   }
 
   handleDefault(key) {
+    if (!_.has(this.props.selectedImage, key)) {
+      return '';
+    }
+
     if (key === 'desc') {
       return this.props.selectedImage[key].join('\n\n');
     }

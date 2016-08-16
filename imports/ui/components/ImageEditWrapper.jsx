@@ -24,6 +24,10 @@ export default class ImageEditWrapper extends React.Component {
     return `/images/collection/${this.lookupImage(props).filename}`;
   }
 
+  selectedImageFilename(props) {
+    return this.lookupImage(props).filename;
+  }
+
   render() {
     return (
       <div id="wrapper">
@@ -78,6 +82,7 @@ export default class ImageEditWrapper extends React.Component {
                 alt="TODO: fill me in"
                 src={this.selectedImagePath(this.props)}
               />
+              <p>Filename: {this.selectedImageFilename(this.props)}</p>
             </div>
           </div>
         </div>
