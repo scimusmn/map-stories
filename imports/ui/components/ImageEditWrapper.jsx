@@ -1,6 +1,9 @@
 import React from 'react';
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '/node_modules/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css';
+import ImageEditForm from '/imports/ui/components/ImageEditForm';
+
+const _ = require('lodash');
 
 export default class ImageEditWrapper extends React.Component {
   constructor(props) {
@@ -10,6 +13,12 @@ export default class ImageEditWrapper extends React.Component {
       images: props.images,
       places: props.places,
     };
+  }
+
+  selectedImage(props) {
+    const routeSlug = props.routeParams.slug;
+    const selectedImage = _.find(props.images, { slug: routeSlug });
+    return `/images/collection/${selectedImage.filename}`;
   }
 
   render() {
@@ -28,9 +37,6 @@ export default class ImageEditWrapper extends React.Component {
               data-target=".navbar-collapse"
             >
               <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
             </button>
             <a className="navbar-brand" href="index.html">Edit image content</a>
           </div>
@@ -40,7 +46,7 @@ export default class ImageEditWrapper extends React.Component {
               <ul className="nav in" id="side-menu">
                 <li>
                   <a href="/" className="active">
-                    <i className="fa fa-dashboard fa-fw"></i>
+                    <i className="fa fa-dashboard fa-fw" />
                     Back to application
                   </a>
                 </li>
@@ -50,9 +56,22 @@ export default class ImageEditWrapper extends React.Component {
         </nav>
 
         <div id="page-wrapper">
-          <div className="admin-table-header">Header content for the table</div>
-          <div className="admin-table-content">
-            Test
+          <div className="row">
+            <div className="col-lg-12">
+              <h1>Edit image</h1>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-8">
+              <ImageEditForm />
+            </div>
+            <div className="col-lg-4">
+              <img
+                className="img-responsive"
+                alt="TODO: fill me in"
+                src={this.selectedImage(this.props)}
+              />
+            </div>
           </div>
         </div>
 

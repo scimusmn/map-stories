@@ -2,6 +2,7 @@ import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import _ from 'lodash';
 import '/node_modules/react-bootstrap-table/css/react-bootstrap-table.min.css';
+import $ from 'jquery';
 
 class AdminList extends React.Component {
 
