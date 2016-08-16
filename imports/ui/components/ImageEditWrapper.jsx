@@ -1,9 +1,8 @@
 import React from 'react';
-import AdminList from '/imports/ui/components/AdminList';
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '/node_modules/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css';
 
-export default class AdminListWrapper extends React.Component {
+export default class ImageEditWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,13 +50,9 @@ export default class AdminListWrapper extends React.Component {
         </nav>
 
         <div id="page-wrapper">
-          <div className="admin-table-header">Images</div>
+          <div className="admin-table-header">Header content for the table</div>
           <div className="admin-table-content">
-            <AdminList
-              imageFiles={this.props.imageFiles}
-              images={this.props.images}
-              places={this.props.places}
-            />
+            Test
           </div>
         </div>
 
@@ -66,13 +61,13 @@ export default class AdminListWrapper extends React.Component {
   }
 }
 
-AdminListWrapper.propTypes = {
+ImageEditWrapper.propTypes = {
   places: React.PropTypes.array,
   images: React.PropTypes.array,
   imageFiles: React.PropTypes.array,
 };
 
-AdminListWrapper.contextTypes = {
+ImageEditWrapper.contextTypes = {
   router: React.PropTypes.object,
 };
 

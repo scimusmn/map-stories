@@ -66,7 +66,7 @@ class AdminList extends React.Component {
     }
 
     function editLink(cell) {
-      return `<a href="${cell}">Edit</a>`
+      return `<a href="/image/${cell}/edit">Edit</a>`;
     }
 
     /**
@@ -91,8 +91,8 @@ class AdminList extends React.Component {
           dataFormat={imageFormatter}
         >Filename</TableHeaderColumn>
         <TableHeaderColumn
-          dataSort dataField="slug" dataFormat={editLink}
-        >Filename</TableHeaderColumn>
+          dataField="slug" dataFormat={editLink}
+        >Actions</TableHeaderColumn>
       </BootstrapTable>
     );
   }
