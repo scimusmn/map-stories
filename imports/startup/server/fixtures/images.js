@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { Images } from '../../../api/images/images.js';
-import _ from 'lodash';
 import sizeOf from 'image-size';
+import _ from 'lodash';
+import { Images } from '../../../api/images/images.js';
 
 
 // If the database is empty on server start, create some sample data.
