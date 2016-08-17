@@ -94,11 +94,8 @@ export default class ImageEditForm extends React.Component {
             />
 
             <p className="help-block">
-              Place name.
-              This links the image up with the place.
-              It must match the name on the homepage exactly.
+              Select the place where this image will appear on the map.
             </p>
-            <p className="help-block">TODO: Make this a drop-down list.</p>
           </div>
         </div>
 
