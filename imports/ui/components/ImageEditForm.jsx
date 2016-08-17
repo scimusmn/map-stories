@@ -1,4 +1,6 @@
 import React from 'react';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 const _ = require('lodash');
 
@@ -13,6 +15,7 @@ export default class ImageEditForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.selectChange = this.selectChange.bind(this);
   }
 
   handleChange(event) {
@@ -34,7 +37,18 @@ export default class ImageEditForm extends React.Component {
     return this.props.selectedImage[key];
   }
 
+  selectChange(val) {
+    this.setState({
+      selectValue: val,
+    });
+  }
+
   render() {
+    const options = [
+      { value: 'one', label: 'One' },
+      { value: 'two', label: 'Two' },
+    ];
+
     return (
       <form className="form-horizontal edit-image" onSubmit={this.handleSubmit} >
 
@@ -58,13 +72,14 @@ export default class ImageEditForm extends React.Component {
         <div className="form-group">
           <label htmlFor="editImagePlace" className="control-label col-md-2">Image place</label>
           <div className="col-md-10">
-            <input
-              id="editImagePlace"
-              type="text"
-              ref={ref => { this.placeInput = ref; }}
-              className="form-control col-md-10"
-              defaultValue={this.handleDefault('place')}
+
+            <Select
+              name="form-field-name"
+              options={options}
+              value={this.state.selectValue}
+              onChange={this.selectChange}
             />
+
             <p className="help-block">
               Place name.
               This links the image up with the place.
