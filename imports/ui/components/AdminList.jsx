@@ -5,6 +5,8 @@ import '/node_modules/react-bootstrap-table/css/react-bootstrap-table.min.css';
 import $ from 'jquery';
 import { Link } from 'react-router';
 
+const s = require('underscore.string');
+
 class AdminList extends React.Component {
 
   constructor(props) {
@@ -66,8 +68,18 @@ class AdminList extends React.Component {
       return `<img width="280" src="/images/collection/${cell}" />`;
     }
 
-    function editLink(cell) {
-      return `<a class="btn btn-default" href="/image/${cell}/edit">Edit</a>`;
+    function editLink(cell, row) {
+      let slug = '';
+      let query = {};
+      if (cell == null) {
+        slug = s.slugify(s.dasherize(s.strLeftBack(row.filename, '.')));
+        query = { filename: row.filename };
+      } else {
+        slug = cell;
+      }
+      const url = `/image/${slug}/edit`;
+
+      return <Link to={{ pathname: url, query }}>Edit</Link>;
     }
 
     /**
