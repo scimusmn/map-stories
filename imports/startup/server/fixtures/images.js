@@ -3,11 +3,8 @@ import sizeOf from 'image-size';
 import _ from 'lodash';
 import { Images } from '../../../api/images/images.js';
 
-
-// If the database is empty on server start, create some sample data.
-
+// Start with our existing image data
 Meteor.startup(() => {
-  Images.remove({});
   if (Images.find().count() === 0) {
 
     const data = [
