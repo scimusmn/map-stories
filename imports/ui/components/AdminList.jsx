@@ -34,20 +34,19 @@ class AdminList extends React.Component {
      * If the filename exists in the database, copy over the
      * relevant data and display in in the table.
      */
+    let mergedImageFiles = {};
     _.each(imageFiles, file => {
-      const matchedImage = _.filter(images, image => {
-        return image.filename === file.filename;
-      });
+      const matchedImage = _.filter(images, image => image.filename === file.filename);
 
       if (!_.isEmpty(matchedImage)) {
         delete matchedImage[0].filename;
         delete matchedImage[0]._id;
-        file = _.assign(file, matchedImage[0]);
+        mergedImageFiles = _.assign(file, matchedImage[0]);
       }
     });
 
     // Add mutated object back to state
-    this.state.imageFiles = imageFiles;
+    this.state.imageFiles = mergedImageFiles;
 
     function warnEmpty(cell) {
       if (cell == null) {
