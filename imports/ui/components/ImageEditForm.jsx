@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import updateImage from '/imports/api/images/methods';
 
 const _ = require('lodash');
 
@@ -41,6 +42,7 @@ export default class ImageEditForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    updateImage.call();
   }
 
   handleDefault(key) {
