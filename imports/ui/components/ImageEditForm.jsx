@@ -154,8 +154,6 @@ export default class ImageEditForm extends React.Component {
 
 ImageEditForm.propTypes = {
   places: React.PropTypes.array,
-  images: React.PropTypes.array,
-  imageFiles: React.PropTypes.array,
   selectedImage: React.PropTypes.object,
 };
 
