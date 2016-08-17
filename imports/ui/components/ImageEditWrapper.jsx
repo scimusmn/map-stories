@@ -85,7 +85,7 @@ export default class ImageEditWrapper extends React.Component {
           </div>
           <div className="row">
             <div className="col-lg-8">
-              <ImageEditForm selectedImage={this.lookupImage(this.props)} />
+              <ImageEditForm places={this.props.places} selectedImage={this.lookupImage(this.props)} />
             </div>
             <div className="col-lg-4">
               <img

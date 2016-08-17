@@ -7,15 +7,32 @@ const _ = require('lodash');
 export default class ImageEditForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      imageFiles: props.imageFiles,
-      images: props.images,
       places: props.places,
       selectedImage: props.selectedImage,
     };
 
+    // If an image's place is already assigned, set it in the select list
+    const defaultPlace = _.find(props.places, place => place.name === props.selectedImage.place);
+    if (!_.isUndefined(defaultPlace)) {
+      this.state.selectValue = defaultPlace.slug;
+    }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.selectChange = this.selectChange.bind(this);
+  }
+
+  getPlaces(props) {
+    const options = [];
+    _.each(props.places, place => {
+      options.push({
+        value: place.slug,
+        label: place.name,
+      });
+    });
+
+    return options;
   }
 
   handleChange(event) {
@@ -44,10 +61,6 @@ export default class ImageEditForm extends React.Component {
   }
 
   render() {
-    const options = [
-      { value: 'one', label: 'One' },
-      { value: 'two', label: 'Two' },
-    ];
 
     return (
       <form className="form-horizontal edit-image" onSubmit={this.handleSubmit} >
@@ -75,7 +88,7 @@ export default class ImageEditForm extends React.Component {
 
             <Select
               name="form-field-name"
-              options={options}
+              options={this.getPlaces(this.props)}
               value={this.state.selectValue}
               onChange={this.selectChange}
             />
