@@ -1,4 +1,5 @@
 import { appDurations, appSizes } from '/imports/ui/helpers/settings';
+import _ from 'lodash';
 
 /**
  * Draw a line between the circle and the picture
@@ -101,10 +102,23 @@ function drawImageLabel(projection, place, placeImage) {
     displayDimension = sizes.maxWidth;
   }
 
+  let backgroundSize = '';
+  if (placeImage.width > placeImage.height) {
+    const backgroundWidth = (
+      (placeImage.width * sizes.maxWidth) / placeImage.height
+    );
+    backgroundSize = `${backgroundWidth}px ${sizes.maxWidth}px`;
+  } else {
+    backgroundSize = '100%';
+  }
+  console.log(backgroundSize);
+  console.log('----^ ^ ^ ^ ^ backgroundSize ^ ^ ^ ^ ^----');
+
   var $placeLabelBackground = $('<div/>')
     .attr('id', placeImage.slug)
     .addClass('place-label-background')
     .css('background-image', 'url(' + backgroundImage + ')')
+    .css('background-size', backgroundSize)
     .css('width', '0px')
     .css('height', '0px');
 
@@ -116,8 +130,10 @@ function drawImageLabel(projection, place, placeImage) {
     left: center.x2,
     top: center.y2,
   }, dur.default, function () {
+    const labelRotation = _.sample(['-3', '3']);
     var $placeLabelText = $('<div/>')
       .addClass('place-label-text')
+      .css({ transform: `rotate(${labelRotation}deg)` })
       .html(place.name);
     $placeLabelBackground.append($placeLabelText);
     $placeLabelText
