@@ -17,29 +17,26 @@ Meteor.startup(() => {
     collectionImages,
     // Handle the async file read process inside of Meteor's fiber
     Meteor.bindEnvironment(
-      function (err, imageFiles) {
-
+      (err, imageFiles) => {
         /**
          * If the image file is an allowed file type, insert it into the
          * ImageFiles db collection
          */
-        _.each(imageFiles, function (imageFile) {
+        _.each(imageFiles, imageFile => {
           const allowedTypes = [
             'image/jpeg',
             'image/png',
           ];
-          const mimeType = mime.lookup(collectionImages + imageFile);
+          const filePath = collectionImages + imageFile;
+          const mimeType = mime.lookup(filePath);
           if (_.includes(allowedTypes, mimeType)) {
             const imageFileObject = { filename: imageFile };
             ImageFiles.insert(imageFileObject);
           } else {
             console.log(mimeType);
           }
-
         });
-
       }
     )
   );
-
 });
