@@ -100,7 +100,7 @@ class AdminList extends React.Component {
         >Height</TableHeaderColumn>
         <TableHeaderColumn dataSort dataField="filename">Filename</TableHeaderColumn>
         <TableHeaderColumn
-          dataSort dataField="filename" width="300"
+          dataField="filename" width="300"
           dataFormat={imageFormatter}
         >Filename</TableHeaderColumn>
         <TableHeaderColumn
