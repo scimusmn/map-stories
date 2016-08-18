@@ -2,14 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { ImageFiles } from '/imports/api/imageFiles/imageFiles';
 import fs from 'fs';
 import _ from 'lodash';
+import sizeOf from 'image-size';
 import mime from 'mime';
 
 // Path to our images folder
-const collectionImages = process.env.PWD + '/public/images/collection/';
+const collectionImages = `${process.env.PWD}/public/images/collection/`;
 
 // Read the files in the collections folder and build a collection
 Meteor.startup(() => {
-
   // Clear out the ImageFiles collection before reading from the directory
   ImageFiles.remove({});
 
