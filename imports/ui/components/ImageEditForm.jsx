@@ -112,16 +112,31 @@ export default class ImageEditForm extends React.Component {
         </div>
 
         <div className="form-group">
+          <label htmlFor="editImageOrder" className="control-label col-md-2">Order</label>
+          <div className="col-md-10">
+            <input
+              id="editImageOrder"
+              name="order"
+              type="text"
+              className="form-control col-md-10"
+              defaultValue={this.handleDefault('order')}
+              onChange={this.handleChange}
+            />
+            <p className="help-block">
+              Order in the dock. Lower numbers display left.
+            </p>
+          </div>
+        </div>
+
+        <div className="form-group">
           <label htmlFor="editImagePlace" className="control-label col-md-2">Image place</label>
           <div className="col-md-10">
-
             <Select
               name="place"
               options={this.getPlaces(this.props)}
               value={this.state.selectValue}
               onChange={this.handleSelectPlaceChange}
             />
-
             <p className="help-block">
               Select the place where this image will appear on the map.
             </p>
