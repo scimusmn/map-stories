@@ -19,13 +19,17 @@ export default class ImageEditWrapper extends React.Component {
     const routeSlug = props.routeParams.slug;
     let selectedImage = _.find(props.images, { slug: routeSlug });
     if (selectedImage == null) {
+      const imageFile = _.find(
+        props.imageFiles,
+        { filename: props.location.query.filename }
+      );
       selectedImage = {
         filename: props.location.query.filename,
-        height: null,
         name: '',
         place: '',
         slug: routeSlug,
-        width: null,
+        width: imageFile.width,
+        height: imageFile.height,
       };
     }
     return selectedImage;
