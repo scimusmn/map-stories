@@ -89,7 +89,7 @@ class AdminList extends React.Component {
       }
       const url = `/image/${slug}/edit`;
 
-      return <Link to={{ pathname: url, query }}>Edit</Link>;
+      return <Link className="btn btn-default btn-lg" to={{ pathname: url, query }}>Edit</Link>;
     }
 
     /**
