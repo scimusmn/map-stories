@@ -1,4 +1,5 @@
 import { appSizes, appDurations } from '/imports/ui/helpers/settings';
+import _ from 'lodash';
 
 const sizes = appSizes();
 const dur = appDurations();
@@ -45,8 +46,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .prepend($highlightImg)
         .prepend($highlightZoom);
 
-      // Populate image caption
-      if (selectedPlaceImage.caption != '') {
+      if (selectedPlaceImage.caption != '' && _.has(selectedPlaceImage, 'caption')) {
         $('#caption-content')
           .show()
           .html(selectedPlaceImage.caption);
@@ -60,12 +60,10 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .html(selectedPlaceImage.credit);
 
       // Populate main text block
-      _.each(selectedPlaceImage.desc, function (paragraph) {
-        let $paragraph = $('<p/>')
-          .html(paragraph);
-        $('#text-content')
-          .append($paragraph);
-      });
+      let $paragraph = $('<p/>')
+        .html(selectedPlaceImage.desc);
+      $('#text-content')
+        .append($paragraph);
 
       // Fade in location content
       $('#location-content')
@@ -242,17 +240,15 @@ export function highlightImage(clicked, state) {
       // Replace image and text content
       $('#text-content')
         .empty();
-      _.each(selectedDockImage.desc, function (paragraph) {
-        let $paragraph = $('<p/>')
-          .html(paragraph);
-        $('#text-content')
-          .append($paragraph);
-      });
+      let $paragraph = $('<p/>')
+        .html(selectedDockImage.desc);
+      $('#text-content')
+        .append($paragraph);
 
       $('#credit-content')
         .html(selectedDockImage.credit);
 
-      if (selectedDockImage.caption != '') {
+      if (selectedDockImage.caption != '' && _.has(selectedDockImage, 'caption')) {
         $('#caption-content')
           .show()
           .html(selectedDockImage.caption);
