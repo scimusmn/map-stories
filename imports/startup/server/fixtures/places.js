@@ -72,8 +72,10 @@ Meteor.startup(() => {
       },
     ];
 
-  data.forEach((place) => {
-    place.slug = _.kebabCase(place.name);
-    Places.insert(place);
-  });
+    data.forEach((place) => {
+      const mutatedPlace = place;
+      mutatedPlace.slug = _.kebabCase(place.name);
+      Places.insert(mutatedPlace);
+    });
+  }
 });
