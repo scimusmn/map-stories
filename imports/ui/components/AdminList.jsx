@@ -52,14 +52,14 @@ class AdminList extends React.Component {
 
     function warnEmpty(cell) {
       if (cell == null) {
-        return '<div class="cell-warning">-</div>';
+        return '<div class="cell-error">-</div>';
       }
       return cell;
     }
 
     function dimensionFormatter(cell) {
       if (cell <= 300) {
-        return `<div class="cell-warning">${cell}</div>`;
+        return `<div class="cell-warning">${cell}<br/>Image too small</div>`;
       }
       return warnEmpty(cell);
     }
