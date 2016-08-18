@@ -102,7 +102,7 @@ class AdminList extends React.Component {
         <TableHeaderColumn
           dataField="filename" width="300"
           dataFormat={imageFormatter}
-        >Filename</TableHeaderColumn>
+        >Image</TableHeaderColumn>
         <TableHeaderColumn
           dataField="slug" dataFormat={editLink}
         >Actions</TableHeaderColumn>
