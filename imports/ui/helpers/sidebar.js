@@ -1,6 +1,7 @@
 import { appSizes, appDurations } from '/imports/ui/helpers/settings';
 import _ from 'lodash';
 
+const s = require('underscore.string');
 const sizes = appSizes();
 const dur = appDurations();
 
@@ -60,8 +61,16 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
         .html(selectedPlaceImage.credit);
 
       // Populate main text block
+      const lines = s.lines(selectedPlaceImage.desc);
+      let description = '';
+      _.each(lines, line => {
+        if (line !== '') {
+          description = `${description}<p>${line}</p>`;
+        }
+      });
+
       let $paragraph = $('<p/>')
-        .html(selectedPlaceImage.desc);
+        .html(description);
       $('#text-content')
         .append($paragraph);
 
@@ -238,10 +247,18 @@ export function highlightImage(clicked, state) {
     .fadeOut((dur.default / 2), function () {
 
       // Replace image and text content
+      const lines = s.lines(selectedDockImage.desc);
+      let description = '';
+      _.each(lines, line => {
+        if (line !== '') {
+          description = `${description}<p>${line}</p>`;
+        }
+      });
+
       $('#text-content')
         .empty();
       let $paragraph = $('<p/>')
-        .html(selectedDockImage.desc);
+        .html(description);
       $('#text-content')
         .append($paragraph);
 
