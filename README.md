@@ -8,7 +8,8 @@ Developed using Meteor and React
 
 * Clone the repo
 * Add the image in `public/images/collection`
-* m reset; m --settings settings.json
-* `mongoimport -h 127.0.0.1:3001 --db meteor --collection Images --type json --file public/data/images-6.json`
-
-
+* `cp settings.default.json settings.json`
+* Fill out info in the settings.json
+* `meteor npm install`
+* `meteor reset; meteor --settings settings.json`
+* `mongoimport -h 127.0.0.1:3001 --db meteor --collection Images --type json --file public/data/images.json`
