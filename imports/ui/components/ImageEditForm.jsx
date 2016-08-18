@@ -3,13 +3,11 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import { submitImage, updateImage } from '../../api/images/methods';
 
-
 const _ = require('lodash');
 
 export default class ImageEditForm extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       places: props.places,
       selectedImage: props.selectedImage,
