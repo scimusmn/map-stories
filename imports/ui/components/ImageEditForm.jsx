@@ -1,7 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import updateImage from '/imports/api/images/methods';
+import { submitImage, updateImage } from '../../api/images/methods';
+
 
 const _ = require('lodash');
 
@@ -20,8 +21,9 @@ export default class ImageEditForm extends React.Component {
       this.state.selectValue = defaultPlace.slug;
     }
 
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.selectChange = this.selectChange.bind(this);
+    this.handleSelectPlaceChange = this.handleSelectPlaceChange.bind(this);
   }
 
   getPlaces(props) {
@@ -38,11 +40,27 @@ export default class ImageEditForm extends React.Component {
 
   handleChange(event) {
     event.preventDefault();
+
+    // Update the selected image object with the changed value for the right
+    // form element
+    const selectedImage = this.state.selectedImage;
+    selectedImage[event.target.name] = event.target.value;
+
+    // Update state
+    this.setState({ selectedImage });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    updateImage.call();
+    const updatedImage = this.state.selectedImage;
+    if (_.has(updatedImage, '_id')) {
+      const _id = updatedImage._id;
+      delete updatedImage._id;
+      updateImage.call({ _id, updatedImage });
+    } else {
+      submitImage.call({ updatedImage });
+    }
+    this.context.router.push('/admin');
   }
 
   handleDefault(key) {
@@ -50,20 +68,31 @@ export default class ImageEditForm extends React.Component {
       return '';
     }
 
-    if (key === 'desc') {
-      return this.props.selectedImage[key].join('\n\n');
-    }
     return this.props.selectedImage[key];
   }
 
-  selectChange(val) {
+  /**
+   * The react-select module doesn't pass along an event object
+   * This prevents us from getting the name of the select item, so we
+   * just have to create a function that's specific to each select.
+   * @param val
+   */
+  handleSelectPlaceChange(val) {
+    // Update the selected image object with the changed value for the right
+    // form element
+    const selectedImage = this.state.selectedImage;
+
+    // Tie this specifically to the place item
+    selectedImage.place = val.label;
+
+    // Update state
     this.setState({
+      selectedImage,
       selectValue: val,
     });
   }
 
   render() {
-
     return (
       <form className="form-horizontal edit-image" onSubmit={this.handleSubmit} >
 
@@ -72,8 +101,8 @@ export default class ImageEditForm extends React.Component {
           <div className="col-md-10">
             <input
               id="editImageName"
+              name="name"
               type="text"
-              ref={ref => { this.nameInput = ref; }}
               className="form-control col-md-10"
               defaultValue={this.handleDefault('name')}
               onChange={this.handleChange}
@@ -89,10 +118,10 @@ export default class ImageEditForm extends React.Component {
           <div className="col-md-10">
 
             <Select
-              name="form-field-name"
+              name="place"
               options={this.getPlaces(this.props)}
               value={this.state.selectValue}
-              onChange={this.selectChange}
+              onChange={this.handleSelectPlaceChange}
             />
 
             <p className="help-block">
@@ -111,10 +140,11 @@ export default class ImageEditForm extends React.Component {
           <div className="col-md-10">
             <textarea
               id="editImageDescription"
-              ref={ref => { this.descTextArea = ref; }}
+              name="desc"
               className="form-control col-md-10"
               rows="15"
               defaultValue={this.handleDefault('desc')}
+              onChange={this.handleChange}
             />
             <p className="help-block">Primary description of the image.</p>
           </div>
@@ -125,10 +155,11 @@ export default class ImageEditForm extends React.Component {
           <div className="col-md-10">
             <input
               id="editImageCaption"
+              name="caption"
               type="text"
-              ref={ref => { this.captionInput = ref; }}
               className="form-control col-md-10"
               defaultValue={this.handleDefault('caption')}
+              onChange={this.handleChange}
             />
             <p className="help-block">Optional caption to display below the image</p>
           </div>
@@ -139,10 +170,11 @@ export default class ImageEditForm extends React.Component {
           <div className="col-md-10">
             <input
               id="editImageCredit"
+              name="credit"
               type="text"
-              ref={ref => { this.creditInput = ref; }}
               className="form-control col-md-10"
               defaultValue={this.handleDefault('credit')}
+              onChange={this.handleChange}
             />
             <p className="help-block">Optional caption to display below the image</p>
           </div>
