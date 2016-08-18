@@ -31,6 +31,12 @@ Meteor.startup(() => {
           const mimeType = mime.lookup(filePath);
           if (_.includes(allowedTypes, mimeType)) {
             const imageFileObject = { filename: imageFile };
+
+            // Add dimension details to the database for better sizing on screen
+            const dimensions = sizeOf(filePath);
+            imageFileObject.width = dimensions.width;
+            imageFileObject.height = dimensions.height;
+
             ImageFiles.insert(imageFileObject);
           } else {
             console.log(mimeType);
