@@ -57,6 +57,16 @@ class AdminList extends React.Component {
       return cell;
     }
 
+    /**
+     * Shorten long description text
+     * @param cell
+     * @returns {*}
+     */
+    function previewText(cell) {
+      let mutatedCell = warnEmpty(cell);
+      return s.truncate(mutatedCell, 15);
+    }
+
     function dimensionFormatter(cell) {
       if (cell <= 300) {
         return `<div class="cell-warning">${cell}<br/>Image too small</div>`;
@@ -85,8 +95,13 @@ class AdminList extends React.Component {
     /**
      * Display data table using Fixed Data Table component
      */
+    const tableOptions = {
+      defaultSortName: 'place',
+      defaultSortOrder: 'desc',
+    };
+
     return (
-      <BootstrapTable data={imageFiles} striped hover>
+      <BootstrapTable data={imageFiles} striped hover options={tableOptions}>
         <TableHeaderColumn isKey dataSort dataField="filename">Filename</TableHeaderColumn>
         <TableHeaderColumn
           dataSort dataField="place"
@@ -99,6 +114,15 @@ class AdminList extends React.Component {
           dataSort dataField="height" dataFormat={dimensionFormatter}
         >Height</TableHeaderColumn>
         <TableHeaderColumn dataSort dataField="filename">Filename</TableHeaderColumn>
+        <TableHeaderColumn
+          dataSort dataField="desc"
+        >Description</TableHeaderColumn>
+        <TableHeaderColumn
+          dataSort dataField="caption"
+        >Caption</TableHeaderColumn>
+        <TableHeaderColumn
+          dataSort dataField="credit" dataFormat={previewText}
+        >Credit</TableHeaderColumn>
         <TableHeaderColumn
           dataField="filename" width="300"
           dataFormat={imageFormatter}
