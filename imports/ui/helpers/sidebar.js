@@ -142,6 +142,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
     const rotationStart = -8;
     var imageRotation = 0;
 
+    // With only two images use the start and finish rotations
     if (dockImages == 2 &&  i == 0) {
       imageRotation = rotationStart;
     }
@@ -150,6 +151,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
       imageRotation = rotationStart + rotationRange;
     }
 
+    // Fan the images out at intervals with more than 2 images
     if (dockImages > 2) {
       imageRotation = rotationStart + ((rotationRange / (dockImages - 1)) * i);
     }
