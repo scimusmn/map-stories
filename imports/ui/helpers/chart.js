@@ -13,6 +13,41 @@ const sizes = appSizes();
 const dur = appDurations();
 
 /**
+ * Draw the details page, when a user selects a location
+ * @param clicked The clicked DOM element
+ * @param {object} state Meteor data via React state
+ */
+function drawDetailPage(clicked, state) {
+  // Selected place ID
+  const selectedPlaceId = $(clicked).attr('id');
+
+  // ID of the image in the selected place
+  // This will be highlighted in the sidebar
+  const selectedPlaceImageId = $(clicked)
+    .children('.place-label-background')
+    .attr('id');
+
+  // Get Meteor data object for the selected place
+  const selectedPlace = _.find(state.places, (o) => o.slug === selectedPlaceId);
+
+  // Animate out the places that were not clicked
+  hidePlaces(
+    selectedPlaceId,
+    mapProjection(state.settings),
+    state.places,
+  );
+
+  // Center the map on the selected location
+  zoomMap(state, selectedPlace);
+
+  // Expand the sidebar and add clicked content
+  expandSidebar(state, selectedPlace, selectedPlaceImageId);
+
+  // Draw the home button
+  drawHomeButton();
+}
+
+/**
  * Create the D3 chart object
  */
 const d3Chart = {};
@@ -108,44 +143,6 @@ d3Chart.drawMap = (el, props, state) => {
     state.images,
   );
 };
-
-/**
- * Draw the details page, when a user selects a location
- * @param clicked The clicked DOM element
- * @param {object} state Meteor data via React state
- */
-function drawDetailPage(clicked, state) {
-
-  // Selected place ID
-  let selectedPlaceId = $(clicked).attr('id');
-
-  // ID of the image in the selected place
-  // This will be highlighted in the sidebar
-  let selectedPlaceImageId = $(clicked)
-    .children('.place-label-background')
-    .attr('id');
-
-  // Get Meteor data object for the selected place
-  let selectedPlace = _.find(state.places, function (o) {
-    return o.slug == selectedPlaceId;
-  });
-
-  // Animate out the places that were not clicked
-  hidePlaces(
-    selectedPlaceId,
-    mapProjection(state.settings),
-    state.places,
-  );
-
-  // Center the map on the selected location
-  zoomMap(state, selectedPlace);
-
-  // Expand the sidebar and add clicked content
-  expandSidebar(state, selectedPlace, selectedPlaceImageId);
-
-  // Draw the home button
-  drawHomeButton();
-}
 
 /**
  * Zoom and pan the background map to a selected location
