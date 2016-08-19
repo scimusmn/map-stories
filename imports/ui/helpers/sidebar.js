@@ -120,13 +120,32 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
 
   const dockImages = _.size(placeImages);
 
+  let adjustedWidth = 0;
+  let adjustmentRatio = -0.5;
+  if (_.size(placeImages) > 5) {
+    adjustmentRatio = (-1 / 2);
+  }
+  if (_.size(placeImages) > 8) {
+    adjustmentRatio = (-5 / 9);
+  }
+  if (_.size(placeImages) > 10) {
+    adjustmentRatio = (-6 / 9);
+  }
+  if (_.size(placeImages) > 11) {
+    adjustmentRatio = (-4 / 5);
+  }
   _.each(placeImages, function (image, i) {
 
     var _marginLeft = marginLeft;
     if (i == 0) {
       _marginLeft = 0;
+    } else {
+      _marginLeft = adjustedWidth * adjustmentRatio;
     }
 
+    // Discover the image thumbnails' width
+    var ratio = image.width / image.height;
+    adjustedWidth = sizes.thumbHieght * ratio;
     // Dock Image container
     var marginTop = 0;
     let $thumbDiv = $('<div/>')
