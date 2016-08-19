@@ -132,7 +132,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
     adjustmentRatio = (-6 / 9);
   }
   if (_.size(placeImages) > 11) {
-    adjustmentRatio = (-4 / 5);
+    adjustmentRatio = -0.83;
   }
   _.each(placeImages, function (image, i) {
 
