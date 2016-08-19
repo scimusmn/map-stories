@@ -8,6 +8,7 @@ import { Loading } from '../components/loading.js';
 import { Images } from '../../api/images/images.js';
 import { ImageFiles } from '../../api/imageFiles/imageFiles';
 import { Places } from '../../api/places/places.js';
+import ThenNow from '../../api/thenNow/thenNow';
 import ImageEditWrapper from '../components/ImageEditWrapper';
 
 /**
@@ -20,7 +21,8 @@ const composer = (props, onData) => {
     const places = Places.find({}).fetch();
     const images = Images.find({}).fetch();
     const imageFiles = ImageFiles.find({}).fetch();
-    onData(null, { places, images, imageFiles });
+    const thenNow = ThenNow.find({}).fetch();
+    onData(null, { places, images, imageFiles, thenNow });
   }
 };
 
