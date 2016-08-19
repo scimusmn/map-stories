@@ -3,6 +3,19 @@ import _ from 'lodash';
 import $ from 'jquery';
 
 /**
+ * Define the SVG line points for each location
+ */
+function linePoints(projection, place) {
+  const sizes = appSizes();
+  const line = {};
+  line.x1 = projection([place.long, place.lat])[0];
+  line.y1 = projection([place.long, place.lat])[1];
+  line.x2 = line.x1 + place.offsetX + (sizes.maxWidth / 2);
+  line.y2 = line.y1 + place.offsetY + (sizes.maxWidth / 2);
+  return line;
+}
+
+/**
  * Draw a line between the circle and the picture
  *
  * The line helps people know which picture goes with which spot
@@ -31,16 +44,6 @@ function drawLine(el, projection, place) {
     .attr('x1', line.x2)
     .attr('y1', line.y2)
     .attr('opacity', 1);
-}
-
-function linePoints(projection, place) {
-  const sizes = appSizes();
-  const line = {};
-  line.x1 = projection([place.long, place.lat])[0];
-  line.y1 = projection([place.long, place.lat])[1];
-  line.x2 = line.x1 + place.offsetX + (sizes.maxWidth / 2);
-  line.y2 = line.y1 + place.offsetY + (sizes.maxWidth / 2);
-  return line;
 }
 
 /**
@@ -186,20 +189,6 @@ export function drawPlaces(el, projection, places, images) {
 }
 
 /**
- * Hide places that weren't clicked
- *
- * @param elemId
- * @param projection
- * @param places
- * @param maxWidth
- */
-export function hidePlaces(elemId, projection, places, maxWidth) {
-  _.each(places, (place) => {
-    hidePlace(elemId, projection, place, maxWidth);
-  });
-}
-
-/**
  * Hide a single place
  *
  * @param elemId
@@ -283,3 +272,16 @@ function hidePlace(elemId, projection, place, maxWidth) {
   });
 }
 
+/**
+ * Hide places that weren't clicked
+ *
+ * @param elemId
+ * @param projection
+ * @param places
+ * @param maxWidth
+ */
+export function hidePlaces(elemId, projection, places, maxWidth) {
+  _.each(places, (place) => {
+    hidePlace(elemId, projection, place, maxWidth);
+  });
+}
