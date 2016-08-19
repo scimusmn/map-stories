@@ -161,12 +161,14 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
       .empty()
       .attr('id', 'dock-' + image.slug)
       .addClass('image-thumbnail')
+      // Disabling rotation to handle spacing
       .css('transform', 'rotate(' + imageRotation + 'deg)')
+
       .attr('height', thumbHeight)
       .attr('src', 'images/collection/' + image.filename);
 
     // Identify the active image in the dock
-    if (image.slug == selectedPlaceImage.slug) {
+    if (image.slug === selectedPlaceImage.slug) {
       $thumbImg
         .addClass('active')
         .css('margin-top', sizes.highlightedDockImageMargin);
