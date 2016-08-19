@@ -6,6 +6,8 @@ import {
   collapseSidebar, drawSidebar, expandSidebar, highlightImage,
 } from '/imports/ui/helpers/sidebar';
 import { zoomImage, hideZoomImage } from '/imports/ui/helpers/zoom';
+import $ from 'jquery';
+import _ from 'lodash';
 
 const sizes = appSizes();
 const dur = appDurations();
@@ -13,7 +15,7 @@ const dur = appDurations();
 /**
  * Create the D3 chart object
  */
-let d3Chart = {};
+const d3Chart = {};
 d3Chart.create = function (el, props, state) {
 
   /**
