@@ -96,8 +96,6 @@ function drawImageLabel(projection, place, placeImage) {
     .addClass('place-label')
     .css(yStyle[0], yStyle[1])
     .css(xStyle[0], xStyle[1]);
-  console.log(placeImage.filename);
-  console.log('----^ ^ ^ ^ ^ placeImage.filename ^ ^ ^ ^ ^----');
   var backgroundImage = '/images/collection/' + placeImage.filename;
   let displayDimension = placeImage.width;
   if (placeImage.width >= sizes.maxWidth) {
