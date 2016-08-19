@@ -1,5 +1,6 @@
 import { appDurations, appSizes } from '/imports/ui/helpers/settings';
 import _ from 'lodash';
+import $ from 'jquery';
 
 /**
  * Draw a line between the circle and the picture
@@ -12,12 +13,12 @@ import _ from 'lodash';
  */
 function drawLine(el, projection, place) {
   const dur = appDurations();
-  var placeGroup = d3.select(el).selectAll('.map-points')
+  const placeGroup = d3.select(el).selectAll('.map-points')
     .append('g')
-    .attr('id', 'line-' + place.slug)
+    .attr('id', `line-${place.slug}`)
     .classed('place-line', true);
 
-  var line = linePoints(projection, place);
+  const line = linePoints(projection, place);
   placeGroup.append('line')
     .attr('x1', line.x1)
     .attr('y1', line.y1)
@@ -34,7 +35,7 @@ function drawLine(el, projection, place) {
 
 function linePoints(projection, place) {
   const sizes = appSizes();
-  var line = {};
+  const line = {};
   line.x1 = projection([place.long, place.lat])[0];
   line.y1 = projection([place.long, place.lat])[1];
   line.x2 = line.x1 + place.offsetX + (sizes.maxWidth / 2);
@@ -54,18 +55,18 @@ function linePoints(projection, place) {
  */
 function drawCircle(el, projection, place) {
   const sizes = appSizes();
-  var placeGroup = d3.select(el).selectAll('.map-points')
+  const placeGroup = d3.select(el).selectAll('.map-points')
     .append('g')
-    .attr('id', 'circle-' + place.slug)
+    .attr('id', `circle-${place.slug}`)
     .classed('place-circle', true);
   placeGroup.append('circle')
     .attr('r', '5px')
-    .attr('id', 'circle-' + place.slug + '-base')
+    .attr('id', `circle-${place.slug}-base`)
     .attr('stroke-width', 4)
     .attr('stroke', '#062926')
     .classed('map-circle', true);
-  var line = linePoints(projection, place, sizes.maxWidth);
-  placeGroup.attr('transform', 'translate(' + line.x1 + ',' + line.y1 + ')');
+  const line = linePoints(projection, place, sizes.maxWidth);
+  placeGroup.attr('transform', `translate(${line.x1},${line.y1})`);
 }
 
 /**
@@ -81,22 +82,22 @@ function drawImageLabel(projection, place, placeImage) {
   const sizes = appSizes();
   const dur = appDurations();
 
-  var center = {};
+  const center = {};
   center.x1 = projection([place.long, place.lat])[0];
   center.y1 = projection([place.long, place.lat])[1];
   center.x2 = projection([place.long, place.lat])[0] + place.offsetX;
   center.y2 = projection([place.long, place.lat])[1] + place.offsetY;
 
   // Parent group div for picture and the labels
-  var xStyle = ['left', center.x1 + 'px'];
-  var yStyle = ['top', center.y1 + 'px'];
+  const xStyle = ['left', `${center.x1}px`];
+  const yStyle = ['top', `${center.y1}px`];
 
-  var $newDiv = $('<div/>')
+  const $newDiv = $('<div/>')
     .attr('id', place.slug)
     .addClass('place-label')
     .css(yStyle[0], yStyle[1])
     .css(xStyle[0], xStyle[1]);
-  var backgroundImage = '/images/collection/' + placeImage.filename;
+  const backgroundImage = `/images/collection/${placeImage.filename}`;
   let displayDimension = placeImage.width;
   if (placeImage.width >= sizes.maxWidth) {
     displayDimension = sizes.maxWidth;
@@ -112,10 +113,10 @@ function drawImageLabel(projection, place, placeImage) {
     backgroundSize = '100%';
   }
 
-  var $placeLabelBackground = $('<div/>')
+  const $placeLabelBackground = $('<div/>')
     .attr('id', placeImage.slug)
     .addClass('place-label-background')
-    .css('background-image', 'url(' + backgroundImage + ')')
+    .css('background-image', `url(${backgroundImage})`)
     .css('background-size', backgroundSize)
     .css('width', '0px')
     .css('height', '0px');
@@ -127,9 +128,9 @@ function drawImageLabel(projection, place, placeImage) {
     opacity: 1,
     left: center.x2,
     top: center.y2,
-  }, dur.default, function () {
+  }, dur.default, () => {
     const labelRotation = _.sample(['-3', '3']);
-    var $placeLabelText = $('<div/>')
+    const $placeLabelText = $('<div/>')
       .addClass('place-label-text')
       .css({ transform: `rotate(${labelRotation}deg)` })
       .html(place.name);
@@ -141,10 +142,9 @@ function drawImageLabel(projection, place, placeImage) {
   });
 
   $placeLabelBackground.animate({
-    width: displayDimension + 'px',
-    height: displayDimension + 'px',
+    width: `${displayDimension}px`,
+    height: `${displayDimension}px`,
   }, dur.default);
-
 }
 
 function drawPlace(el, projection, place, placeImage) {
@@ -173,19 +173,15 @@ export function drawPlaces(el, projection, places, images) {
   d3.selectAll('.place-circle')
     .remove();
 
-  _.each(places, function (place, i) {
+  _.each(places, (place, i) => {
     // Find the images for this location
-    const placeImages = _.filter(images, function (o) {
-      if (o.place == place.name) {
-        return true;
-      }
-    });
+    const placeImages = _.filter(images, (o) => o.place === place.name);
 
     // Select a random image
     const placeImage = _.sample(placeImages);
-    setTimeout(function () {
+    setTimeout(() => {
       drawPlace(el, projection, place, placeImage);
-    }, dur.stagger * (i + 1 - 0.9));
+    }, dur.stagger * (i + 0.1));
   });
 }
 
@@ -198,10 +194,9 @@ export function drawPlaces(el, projection, places, images) {
  * @param maxWidth
  */
 export function hidePlaces(elemId, projection, places, maxWidth) {
-  _.each(places, function (place) {
+  _.each(places, (place) => {
     hidePlace(elemId, projection, place, maxWidth);
   });
-
 }
 
 /**
@@ -217,20 +212,20 @@ function hidePlace(elemId, projection, place, maxWidth) {
   const sizes = appSizes();
 
   // Fade out the divs, that weren't clicked
-  let $filteredPlaces = $('.place-label');
+  const $filteredPlaces = $('.place-label');
   $filteredPlaces.animate({
     opacity: 0,
-  }, 300, function () {
+  }, 300, () => {
     $filteredPlaces.remove();
   });
 
   // Fade out the SVG elements, that weren't clicked
-  let shapes = ['line', 'circle'];
-  _.each(shapes, function (shape) {
-    let placeShape = d3.selectAll('#' + shape + '-' + place.slug);
+  const shapes = ['line', 'circle'];
+  _.each(shapes, (shape) => {
+    const placeShape = d3.selectAll(`#${shape}-${place.slug}`);
 
     // Leave the circle for the clicked element in place
-    if (placeShape.attr('id') != 'circle-' + elemId) {
+    if (placeShape.attr('id') !== `circle-${elemId}`) {
       placeShape
         .select(shape)
         .transition()
@@ -239,58 +234,52 @@ function hidePlace(elemId, projection, place, maxWidth) {
       placeShape
         .remove();
     } else {
-
       // Move the clicked highlight circle
-      var circleGroup = '#circle-' + elemId;
-      var line = linePoints(projection, place, maxWidth);
+      const circleGroup = `#circle-${elemId}`;
+      const line = linePoints(projection, place, maxWidth);
+      const translationX = ((sizes.screenWidth - sizes.infoWidthExpanded) / 2);
       d3.select(circleGroup)
         .transition()
         .duration(dur.bgZoom)
-        .attr('transform', 'translate(' +
-          ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) +
-          ',' + line.y1 + ')');
+        .attr('transform', `translate(${translationX},${line.y1})`);
 
       /**
        * Animate selected map point circle
        */
 
       // Add a second stroke
-      d3.select('#circle-' + elemId)
+      d3.select(`#circle-${elemId}`)
         .append('circle')
-        .attr('id', 'circle-' + elemId + '-stroke')
+        .attr('id', `circle-${elemId}-stroke`)
         .attr('r', '5px')
         .attr('stroke-width', 4)
         .attr('stroke', '#33444C');
-      var circlePathBase = '#circle-' + elemId + '-base';
-      var circlePathStroke = '#circle-' + elemId + '-stroke';
+      const circlePathBase = `#circle-${elemId}-base`;
+      const circlePathStroke = `#circle-${elemId}-stroke`;
 
-      setTimeout(
-        function () {
-          d3.select(circlePathBase)
-            .transition()
-            .duration(dur.bounce)
-            .attr('r', '45px')
-            .attr('stroke-width', 9)
-            .attr('stroke', '#0083c0')
-            .attr('fill-opacity', .1)
-            .transition()
-            .duration(dur.bounce)
-            .attr('r', '30px');
+      setTimeout(() => {
+        d3.select(circlePathBase)
+          .transition()
+          .duration(dur.bounce)
+          .attr('r', '45px')
+          .attr('stroke-width', 9)
+          .attr('stroke', '#0083c0')
+          .attr('fill-opacity', 0.1)
+          .transition()
+          .duration(dur.bounce)
+          .attr('r', '30px');
 
-          d3.select(circlePathStroke)
-            .transition()
-            .duration(dur.bounce)
-            .attr('r', '45px')
-            .attr('stroke-width', 6)
-            .attr('fill-opacity', .1)
-            .transition()
-            .duration(dur.bounce)
-            .attr('r', '30px');
-        },
-
-      dur.bgZoom - 500);
+        d3.select(circlePathStroke)
+          .transition()
+          .duration(dur.bounce)
+          .attr('r', '45px')
+          .attr('stroke-width', 6)
+          .attr('fill-opacity', 0.1)
+          .transition()
+          .duration(dur.bounce)
+          .attr('r', '30px');
+      }, dur.bgZoom - 500);
     }
   });
-
 }
 

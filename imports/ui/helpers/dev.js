@@ -8,8 +8,7 @@
  * @param  {object} projection D3 map projection object
  */
 function drawCounties(el, props, projection) {
-
-  var svg = d3.select(el).append('svg')
+  const svg = d3.select(el).append('svg')
     .attr('class', 'd3-dev')
     .attr('width', props.width)
     .attr('height', props.height);
@@ -18,10 +17,9 @@ function drawCounties(el, props, projection) {
   svg.append('g')
     .attr('class', 'd3-map');
 
-  var path = d3.geo.path().projection(projection);
-  var mapG = d3.select(el).selectAll('.d3-map');
-  d3.json('/data/counties.json', function (error, counties) {
-    //noinspection JSUnresolvedVariable
+  const path = d3.geo.path().projection(projection);
+  const mapG = d3.select(el).selectAll('.d3-map');
+  d3.json('/data/counties.json', (error, counties) => {
     mapG.append('path')
       .datum(topojson.feature(counties, counties.objects.counties))
       .attr('d', path)
@@ -31,8 +29,7 @@ function drawCounties(el, props, projection) {
 
 export function drawDev(el, props, projection) {
   // Draw county boundaries in dev mode
-  //noinspection JSUnresolvedVariable
-  if (Meteor.settings.public.dev == 'true') {
+  if (Meteor.settings.public.dev === 'true') {
     drawCounties(el, props, projection);
   }
 }
