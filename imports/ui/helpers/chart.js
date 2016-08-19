@@ -16,12 +16,11 @@ const dur = appDurations();
  * Create the D3 chart object
  */
 const d3Chart = {};
-d3Chart.create = function (el, props, state) {
-
+d3Chart.create = function createChart(el, props, state) {
   /**
    * Set up the homepage map
    */
-  this._drawMap(el, props, state);
+  this.drawMap(el, props, state);
 
   /**
    * Set up the homepage sidebar
@@ -35,43 +34,41 @@ d3Chart.create = function (el, props, state) {
    * looking for elements that are animating into the page
    * over time (animation).
    */
-  $(document).on('click', '.place-label', function () {
+  $(document).on('click', '.place-label', function handleHomeClicks() {
     drawDetailPage(this, state);
   });
 
   /**
    * Handle click on the detail page home button
    */
-  $(document).on('click', '.home-button', function () {
+  $(document).on('click', '.home-button', () => {
     reDrawHomePage(el, state);
   });
 
   /**
    * Handle click on the dock images
    */
-  $(document).on('click', '.image-thumbnail:not(.active)', function () {
-    highlightImage(this, state);
+  $(document).on('click', '.image-thumbnail:not(.active)', (e) => {
+    highlightImage(e.target, state);
   });
 
   /**
    * Handle click on the highlight images
    */
-  $(document).on('click', '.image-highlight', function () {
-    zoomImage(this, state);
+  $(document).on('click', '.image-highlight', (e) => {
+    zoomImage(e.target, state);
   });
 
   /**
    * Handle close click for image highlights
    */
-  $(document).on('click', '.zoom-image-container', function (e) {
-    var $test = $(e.target);
+  $(document).on('click', '.zoom-image-container', (e) => {
+    const $test = $(e.target);
     if (!($test).is('.zoom-image')) {
       hideZoomImage(this, state);
-    } else {
-      return false;
     }
+    return false;
   });
-
 };
 
 /**
@@ -81,9 +78,8 @@ d3Chart.create = function (el, props, state) {
  * @param state
  * @private
  */
-d3Chart._drawMap = function (el, props, state) {
-  const sizes = appSizes();
-  let svg = d3.select(el).append('svg')
+d3Chart.drawMap = (el, props, state) => {
+  const svg = d3.select(el).append('svg')
     .attr('class', 'd3')
     .attr('width', props.width)
     .attr('height', props.height);
@@ -111,7 +107,6 @@ d3Chart._drawMap = function (el, props, state) {
     state.places,
     state.images,
   );
-
 };
 
 /**
@@ -158,9 +153,8 @@ function drawDetailPage(clicked, state) {
  * @param selectedPlace
  */
 function zoomMap(state, selectedPlace) {
-
-  let projection = mapProjection(state.settings);
-  let line = {};
+  const projection = mapProjection(state.settings);
+  const line = {};
   line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
   line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
 
@@ -178,11 +172,6 @@ function zoomMap(state, selectedPlace) {
       )
     )
     .attr('y', (line.y1 * -1));
-
-  // Use in the future if you draw a bigger map
-  // that can accommodate the overflow in the Y axis
-  // .attr('y', ((line.y1 * -2) + (screenHeight / 2)));
-
 }
 
 /**
@@ -190,7 +179,7 @@ function zoomMap(state, selectedPlace) {
  */
 function drawHomeButton() {
   // Add home button
-  let $homeButton = $('<div/>')
+  const $homeButton = $('<div/>')
     .addClass('home-button')
     .html('Home');
   $('.Chart')
@@ -238,10 +227,10 @@ function reDrawHomePage(el, state) {
  * @param props
  * @param state
  */
-d3Chart.update = function (el, props, state) {
+d3Chart.update = function updateD3Chart(el, props, state) {
   const mapPath = d3.select('path.states');
   mapPath.remove();
-  this._drawMap(el, props, state);
+  this.drawMap(el, props, state);
 };
 
 export default d3Chart;
