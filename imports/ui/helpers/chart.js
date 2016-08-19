@@ -13,6 +13,80 @@ const sizes = appSizes();
 const dur = appDurations();
 
 /**
+ * Draw homepage on return from the detail view
+ * @param el
+ * @param state
+ */
+function reDrawHomePage(el, state) {
+  collapseSidebar();
+
+  // Reset the background map
+  d3.select('#background-image')
+    .transition()
+    .duration(300)
+    .attr('width', sizes.screenWidth)
+    .attr('height', sizes.screenHeight)
+    .attr('x', 0)
+    .attr('y', 0);
+
+  // Remove home button
+  $('div.home-button').remove();
+
+  drawPlaces(
+    el,
+    mapProjection(state.settings),
+    state.places,
+    state.images,
+  );
+}
+
+/**
+ * Draw home button
+ */
+function drawHomeButton() {
+  // Add home button
+  const $homeButton = $('<div/>')
+    .addClass('home-button')
+    .html('Home');
+  $('.Chart')
+    .append($homeButton);
+
+  // Position home button in center of map panel
+  $homeButton.css(
+    'left',
+    ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) -
+    ($homeButton.outerWidth() / 2)
+  );
+}
+
+/**
+ * Zoom and pan the background map to a selected location
+ * @param state
+ * @param selectedPlace
+ */
+function zoomMap(state, selectedPlace) {
+  const projection = mapProjection(state.settings);
+  const line = {};
+  line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
+  line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
+
+  // Zoom and position background image
+  d3.select('#background-image')
+    .transition()
+    .duration(dur.bgZoom)
+    .attr('width', sizes.screenWidth * 2)
+    .attr('height', sizes.screenHeight * 2)
+    .attr(
+      'x',
+      (
+        (line.x1 * -2) +
+        ((sizes.screenWidth - sizes.infoWidthExpanded) / 2)
+      )
+    )
+    .attr('y', (line.y1 * -1));
+}
+
+/**
  * Draw the details page, when a user selects a location
  * @param clicked The clicked DOM element
  * @param {object} state Meteor data via React state
@@ -144,79 +218,6 @@ d3Chart.drawMap = (el, props, state) => {
   );
 };
 
-/**
- * Zoom and pan the background map to a selected location
- * @param state
- * @param selectedPlace
- */
-function zoomMap(state, selectedPlace) {
-  const projection = mapProjection(state.settings);
-  const line = {};
-  line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
-  line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
-
-  // Zoom and position background image
-  d3.select('#background-image')
-    .transition()
-    .duration(dur.bgZoom)
-    .attr('width', sizes.screenWidth * 2)
-    .attr('height', sizes.screenHeight * 2)
-    .attr(
-      'x',
-      (
-        (line.x1 * -2) +
-        ((sizes.screenWidth - sizes.infoWidthExpanded) / 2)
-      )
-    )
-    .attr('y', (line.y1 * -1));
-}
-
-/**
- * Draw home button
- */
-function drawHomeButton() {
-  // Add home button
-  const $homeButton = $('<div/>')
-    .addClass('home-button')
-    .html('Home');
-  $('.Chart')
-    .append($homeButton);
-
-  // Position home button in center of map panel
-  $homeButton.css(
-    'left',
-    ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) -
-    ($homeButton.outerWidth() / 2)
-  );
-}
-
-/**
- * Draw homepage on return from the detail view
- * @param el
- * @param state
- */
-function reDrawHomePage(el, state) {
-  collapseSidebar();
-
-  // Reset the background map
-  d3.select('#background-image')
-    .transition()
-    .duration(300)
-    .attr('width', sizes.screenWidth)
-    .attr('height', sizes.screenHeight)
-    .attr('x', 0)
-    .attr('y', 0);
-
-  // Remove home button
-  $('div.home-button').remove();
-
-  drawPlaces(
-    el,
-    mapProjection(state.settings),
-    state.places,
-    state.images,
-  );
-}
 
 /**
  * Update the D3 chart when the React props change
