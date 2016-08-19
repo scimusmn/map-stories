@@ -3,7 +3,7 @@ import { drawPlaces, hidePlaces } from '/imports/ui/helpers/drawPlaces';
 import { mapProjection } from '/imports/ui/helpers/mapProjection';
 import { appDurations, appSizes } from '/imports/ui/helpers/settings';
 import {
-  collapseSidebar, drawSidebar, expandSidebar, highlightImage
+  collapseSidebar, drawSidebar, expandSidebar, highlightImage,
 } from '/imports/ui/helpers/sidebar';
 import { zoomImage, hideZoomImage } from '/imports/ui/helpers/zoom';
 

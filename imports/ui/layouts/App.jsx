@@ -7,7 +7,6 @@ import React from 'react';
  */
 export default class App extends React.Component {
   render() {
-
     // Load data from props
     const { children } = this.props;
 
