@@ -77,7 +77,6 @@ modules@0.6.5
 modules-runtime@0.6.5
 mongo@1.1.9_1
 mongo-id@1.0.5
-mrt:topojson@1.6.8
 msavin:jetsetter@2.0.0
 msavin:mongol@2.0.1
 npm-bcrypt@0.8.6_3
