@@ -1,4 +1,5 @@
 import { appSizes, appDurations } from '/imports/ui/helpers/settings';
+import { mapProjection } from '/imports/ui/helpers/mapProjection';
 import _ from 'lodash';
 
 const s = require('underscore.string');
@@ -7,6 +8,14 @@ const dur = appDurations();
 
 export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
   let $mapSidebar = $('#map-sidebar');
+
+  // Find if there are any then and now images
+  let thenNow = _.find(state.thenNow, function (thenNowImage) {
+    return thenNowImage.place === selectedPlace.name;
+  });
+  if (!_.isUndefined(thenNow)) {
+    drawThenNowIcon(thenNow, state);
+  }
 
   let selectedPlaceImage = _.find(state.images, function (image) {
     return image.slug == selectedPlaceImageId;
@@ -97,7 +106,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
   });
 
   placeImages = _.sortBy(placeImages, function (o) {
-    return o.order;
+    return parseInt(o.order);
   });
 
   // Total width of the dock thumbnails
@@ -120,38 +129,43 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
 
   const dockImages = _.size(placeImages);
 
-  let adjustedWidth = 0;
-  let adjustmentRatio = -0.5;
+  let adjustmentRatio = 0.5;
+  let cumulativeLeft = 100;
   if (_.size(placeImages) > 5) {
-    adjustmentRatio = (-1 / 2);
+    cumulativeLeft = 100;
+    adjustmentRatio = 0.5;
   }
   if (_.size(placeImages) > 8) {
-    adjustmentRatio = (-5 / 9);
+    cumulativeLeft = 50;
+    adjustmentRatio = 0.55;
   }
   if (_.size(placeImages) > 10) {
-    adjustmentRatio = (-6 / 9);
+    cumulativeLeft = 50;
+    adjustmentRatio = 0.75;
   }
   if (_.size(placeImages) > 11) {
-    adjustmentRatio = -0.83;
+    cumulativeLeft = -50;
+    adjustmentRatio = 0.20;
   }
-  _.each(placeImages, function (image, i) {
 
-    var _marginLeft = marginLeft;
-    if (i == 0) {
-      _marginLeft = 0;
-    } else {
-      _marginLeft = adjustedWidth * adjustmentRatio;
-    }
+  _.each(placeImages, function (image, i) {
 
     // Discover the image thumbnails' width
     var ratio = image.width / image.height;
-    adjustedWidth = sizes.thumbHieght * ratio;
+
+    if (i !== 0) {
+      const previousI = (i - 1);
+      const prevRatio = placeImages[previousI].width / placeImages[previousI].height;
+      const prevImageAdjustedWidth = sizes.thumbHieght * prevRatio;
+      cumulativeLeft += prevImageAdjustedWidth;
+    }
+
     // Dock Image container
     var marginTop = 0;
     let $thumbDiv = $('<div/>')
       // .css('margin-left', Math.floor(sizes.dockMargin * dimensionMultiplier))
-      .css('margin-left', _marginLeft)
-      .css('margin-right', Math.floor(sizes.dockMargin * dimensionMultiplier))
+      .css('left', cumulativeLeft * adjustmentRatio)
+      // .css('margin-right', Math.floor(sizes.dockMargin * dimensionMultiplier))
       .css('margin-top', marginTop)
       .css('margin-bottom', 0)
       .empty();
@@ -180,9 +194,7 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
       .empty()
       .attr('id', 'dock-' + image.slug)
       .addClass('image-thumbnail')
-      // Disabling rotation to handle spacing
       .css('transform', 'rotate(' + imageRotation + 'deg)')
-
       .attr('height', thumbHeight)
       .attr('src', 'images/collection/' + image.filename);
 
@@ -231,6 +243,11 @@ export function collapseSidebar() {
         });
 
     });
+
+  // Fade out the then and now button
+  $('#then-now-button')
+    .fadeOut(dur.default)
+    .html('');
 }
 
 /**
@@ -333,5 +350,41 @@ export function highlightImage(clicked, state) {
   // None of the jquery plugins seem to work properly.
   // .css('box-shadow', '6px 6px 20px #222222')
   // .css('box-shadow', 'none');
+
+}
+
+function drawThenNowIcon(selectedThenNow, state) {
+  const svg = d3.select('.Chart').append('svg')
+    .attr('class', 'svg-detail')
+    .attr('width', `${sizes.screenWidth}px`)
+    .attr('height', `${sizes.screenHeight}px`);
+
+  // Add a group for the map
+  const thenGroup = svg.append('g')
+    .attr('class', 'then-now');
+
+  const projection = mapProjection(state.settings);
+  const point = projection([selectedThenNow.long, selectedThenNow.lat]);
+  console.log(point);
+  console.log('----^ ^ ^ ^ ^ point ^ ^ ^ ^ ^----');
+
+  thenGroup.append('circle')
+    .attr('r', '5px')
+    // .attr('id', `circle-${place.slug}-base`)
+    .attr('stroke-width', 4)
+    .attr('stroke', '#062926')
+    .classed('map-circle', true);
+
+  thenGroup
+    .attr('transform', `translate(${point[0]},${point[1]})`);
+
+  const $thenNowButton = $('<img/>')
+    // .attr('height', imageHeight)
+    .addClass('then-now-button')
+    .attr('src', `images/then-now/${selectedThenNow.thumbFilename}`);
+
+  $('#then-now-button')
+    .fadeIn(dur.default)
+    .append($thenNowButton);
 
 }

@@ -15,6 +15,7 @@ export default class ListPlaces extends React.Component {
     this.state = {
       images: props.images,
       places: props.places,
+      thenNow: props.thenNow,
       data: [
         { id: '5fbmzmtc', x: 13, y: 30, z: 6 },
         { id: 's4f8phwm', x: 14.2, y: 30, z: 9 },
@@ -50,9 +51,11 @@ export default class ListPlaces extends React.Component {
         <Chart
           places={this.state.places}
           images={this.state.images}
+          thenNow={this.state.thenNow}
           settings={this.state.settings}
           data={this.state.data}
           domain={this.state.domain} />
+        <div id="then-now-button"></div>
         <div id="map-sidebar-background" className="map-sidebar-home"></div>
         <div id="map-sidebar" className="map-sidebar-home">
           <h3 id="default-heading">
@@ -99,6 +102,7 @@ export default class ListPlaces extends React.Component {
 ListPlaces.propTypes = {
   places: React.PropTypes.array,
   images: React.PropTypes.array,
+  thenNow: React.PropTypes.array,
 };
 
 ListPlaces.contextTypes = {

@@ -9,6 +9,7 @@ var Chart = React.createClass({
   propTypes: {
     places: React.PropTypes.array,
     images: React.PropTypes.array,
+    thenNow: React.PropTypes.array,
     settings: React.PropTypes.object,
     data: React.PropTypes.array,
     domain: React.PropTypes.object,
@@ -31,6 +32,7 @@ var Chart = React.createClass({
     return {
       places: this.props.places,
       images: this.props.images,
+      thenNow: this.props.thenNow,
       settings: this.props.settings,
       data: this.props.data,
       domain: this.props.domain,
