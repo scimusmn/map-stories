@@ -3,6 +3,8 @@ import { mapProjection } from '/imports/ui/helpers/mapProjection';
 import _ from 'lodash';
 
 const s = require('underscore.string');
+const d3 = require('d3');
+
 const sizes = appSizes();
 const dur = appDurations();
 
