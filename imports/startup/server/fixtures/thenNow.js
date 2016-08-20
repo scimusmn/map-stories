@@ -8,9 +8,12 @@ Meteor.startup(() => {
     console.log('Loading then now data');
     const data = [
       {
+        lat: 44.973497,
+        long: -93.237940,
         place: 'Bohemian Flats',
-        thenFilename: 'then.jpg',
-        nowFilename: 'now.jpg',
+        thenFilename: 'bohemian-flats-1880.jpg',
+        nowFilename: 'bohemian-flats-2016.jpg',
+        thumbFilename: 'bohemian-flats-thumb.jpg',
         thenYear: '1880',
         nowYear: '2016',
         thisCredit: 'Emil Hilgarde / Minnesota Historical Society / Public domain',
@@ -18,9 +21,12 @@ Meteor.startup(() => {
       },
 
       {
+        lat: 44.948428,
+        long: -93.201635,
         place: 'Lock and Dam #1',
-        thenFilename: 'then.jpg',
-        nowFilename: 'now.jpg',
+        thenFilename: 'lock-and-dam-1-1912.jpg',
+        nowFilename: 'lock-and-dam-1-2016.jpg',
+        thumbFilename: 'lock-and-dam-1-thumb.jpg',
         thenYear: '1912',
         nowYear: '2016',
         thisCredit: 'Minnesota Historical Society / Public domain',
@@ -28,9 +34,12 @@ Meteor.startup(() => {
       },
 
       {
+        lat: 44.931100,
+        long: -93.101758,
         place: 'Saint Paul',
-        thenFilename: 'then.jpg',
-        nowFilename: 'now.jpg',
+        thenFilename: 'saint-paul-1929.jpg',
+        nowFilename: 'saint-paul-2016.jpg',
+        thumbFilename: 'saint-paul-thumb.jpg',
         thenYear: '1929',
         nowYear: '2016',
         thisCredit: 'Charles P. Gibson / Minnesota Historical Society / Public domain',
@@ -47,6 +56,3 @@ Meteor.startup(() => {
     });
   }
 });
-
-
-
