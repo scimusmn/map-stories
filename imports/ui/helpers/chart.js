@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { drawDev } from '/imports/ui/helpers/dev';
 import { drawPlaces, hidePlaces } from '/imports/ui/helpers/drawPlaces';
 import { mapProjection } from '/imports/ui/helpers/mapProjection';
@@ -8,6 +9,8 @@ import {
 import { zoomImage, hideZoomImage } from '/imports/ui/helpers/zoom';
 import $ from 'jquery';
 import _ from 'lodash';
+
+const d3 = require('d3');
 
 const sizes = appSizes();
 const dur = appDurations();

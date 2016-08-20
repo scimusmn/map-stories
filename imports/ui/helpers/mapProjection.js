@@ -1,3 +1,4 @@
+const d3 = require('d3');
 
 // Set up map projection
 export function mapProjection(settings) {

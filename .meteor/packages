@@ -24,7 +24,6 @@ accounts-ui
 aldeed:collection2
 meteortoys:allthings
 less
-d3js:d3
 fortawesome:fontawesome
 underscorestring:underscore.string
 mdg:validated-method

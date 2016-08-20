@@ -1,3 +1,5 @@
+const d3 = require('d3');
+
 /**
  * Draw county boundaries on map
  *

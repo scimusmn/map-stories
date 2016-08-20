@@ -2,6 +2,8 @@ import { appDurations, appSizes } from '/imports/ui/helpers/settings';
 import _ from 'lodash';
 import $ from 'jquery';
 
+const d3 = require('d3');
+
 /**
  * Define the SVG line points for each location
  */
