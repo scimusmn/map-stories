@@ -210,8 +210,6 @@ d3Chart.create = function createChart(el, props, state) {
 
       $('.now-zoom-image')
         .css('clip', `rect(0px, ${imgW}px, ${imgH}px, ${mouseX}px)`);
-      console.log(mouseX);
-      console.log('----^ ^ ^ ^ ^ mouseX ^ ^ ^ ^ ^----');
     }
     return false;
   });
