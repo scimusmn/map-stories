@@ -81,7 +81,6 @@ export function zoomImage(clicked, state) {
 }
 
 export function zoomThenNow(clicked, state) {
-  console.log('Clicked');
   const selectedThenNow = _.find(state.thenNow, (thenNowImage) => {
     return thenNowImage._id === clicked.id.replace('then-now-', '');
   });
