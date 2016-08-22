@@ -35,6 +35,8 @@ function reDrawHomePage(el, state) {
   // Remove home button
   $('div.home-button').remove();
 
+  console.log(state.settings);
+  console.log('----^ ^ ^ ^ ^ state.settings ^ ^ ^ ^ ^----');
   drawPlaces(
     el,
     mapProjection(state.settings),
@@ -68,9 +70,13 @@ function drawHomeButton() {
  * @param selectedPlace
  */
 function zoomMap(state, selectedPlace) {
+  console.log(state.settings);
+  console.log('----^ ^ ^ ^ ^ state.settings ^ ^ ^ ^ ^----');
   const projection = mapProjection(state.settings);
   const line = {};
   line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
+  console.log(line.x1);
+  console.log('----^ ^ ^ ^ ^ line.x1 ^ ^ ^ ^ ^----');
   line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
 
   // Zoom and position background image

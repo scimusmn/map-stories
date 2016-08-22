@@ -347,12 +347,6 @@ export function highlightImage(clicked, state) {
       }, dur.default / 4);
     });
 
-  // TODO: Figure out a way to animate box-shadow
-  // Changing the box shadow without an animated transition is distracting
-  // None of the jquery plugins seem to work properly.
-  // .css('box-shadow', '6px 6px 20px #222222')
-  // .css('box-shadow', 'none');
-
 }
 
 function drawThenNowIcon(selectedThenNow, state) {
@@ -365,10 +359,20 @@ function drawThenNowIcon(selectedThenNow, state) {
   const thenGroup = svg.append('g')
     .attr('class', 'then-now');
 
+
+
+  // const line = linePoints(projection, place, maxWidth);
+  // const translationX = ((sizes.screenWidth - sizes.infoWidthExpanded) / 2);
+  // d3.select(circleGroup)
+  //   .transition()
+  //   .duration(dur.bgZoom)
+  //   .attr('transform', `translate(${translationX},${line.y1})`);
+
+
+
   const projection = mapProjection(state.settings);
+
   const point = projection([selectedThenNow.long, selectedThenNow.lat]);
-  console.log(point);
-  console.log('----^ ^ ^ ^ ^ point ^ ^ ^ ^ ^----');
 
   thenGroup.append('circle')
     .attr('r', '5px')
