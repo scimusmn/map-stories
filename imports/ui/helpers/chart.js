@@ -194,23 +194,6 @@ d3Chart.create = function createChart(el, props, state) {
   /**
    * Handle close click on the Then and Now zoom
    */
-  $(document).on('click', '.then-now-zoom-image-container', (e) => {
-    const $test = $(e.target);
-    if (!($test).is('.then-now-zoom-image')) {
-      hideZoomThenNow(this, state);
-    }
-    if (($test).is('.then-now-zoom-image')) {
-      const mouseX = e.pageX - $test.offset().left;
-
-      const imgW = $('.now-zoom-image').outerWidth();
-      const imgH = $('.now-zoom-image').outerHeight();
-
-      $('.now-zoom-image')
-        .css('clip', `rect(0px, ${imgW}px, ${imgH}px, ${mouseX}px)`);
-    }
-    return false;
-  });
-
 };
 
 /**

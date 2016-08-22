@@ -125,6 +125,7 @@ export function zoomThenNow(clicked, state) {
 
   let $thenNowZoomCloseContainer = $('<div/>')
     .addClass('then-now-zoom-image-close-container')
+    .attr('id', 'then-now-zoom-slider')
     .css('margin-left', imageLeftMargin)
     .css('margin-top', imageTopMargin)
     .css('width', imageWidth)
@@ -145,6 +146,23 @@ export function zoomThenNow(clicked, state) {
     .append($thenNowImageContainer);
   $($thenNowImageContainer)
     .fadeIn(dur.default);
+
+  document.getElementById('then-now-zoom-slider');
+  document.addEventListener('mousemove', function(e) {
+    const $test = $(e.target);
+    // if (!($test).is('.then-now-zoom-image')) {
+    //   hideZoomThenNow(this, state);
+    // }
+    if (($test).is('.then-now-zoom-image')) {
+      const mouseX = e.pageX - $test.offset().left;
+
+      const imgW = $('.now-zoom-image').outerWidth();
+      const imgH = $('.now-zoom-image').outerHeight();
+
+      $('.now-zoom-image')
+        .css('clip', `rect(0px, ${imgW}px, ${imgH}px, ${mouseX}px)`);
+    }
+  });
 }
 
 
