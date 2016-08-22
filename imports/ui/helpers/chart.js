@@ -243,7 +243,7 @@ d3Chart.drawMap = (el, props, state) => {
     .attr('class', 'map-points');
 
   // Draw development tools if enabled
-  drawDev(el, props, mapProjection(state.settings));
+  // drawDev(el, props, mapProjection(state.settings));
 
   // Draw all of the places on the map
   drawPlaces(
