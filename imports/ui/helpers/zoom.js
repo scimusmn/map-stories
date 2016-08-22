@@ -142,7 +142,7 @@ export function zoomThenNow(clicked, state) {
     .append($thenNowZoomClose);
   $($thenNowImageContainer)
     .append($thenNowZoomCloseContainer);
-  $('body')
+  $('#then-now')
     .append($thenNowImageContainer);
   $($thenNowImageContainer)
     .fadeIn(dur.default);
