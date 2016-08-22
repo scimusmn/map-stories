@@ -18,6 +18,10 @@ Meteor.startup(() => {
         nowYear: '2016',
         thisCredit: 'Emil Hilgarde / Minnesota Historical Society / Public domain',
         nowCredit: '',
+        offsetX: 30,
+        offsetY: -225,
+        width: 1539,
+        height: 1196,
       },
 
       {
@@ -31,6 +35,8 @@ Meteor.startup(() => {
         nowYear: '2016',
         thisCredit: 'Minnesota Historical Society / Public domain',
         nowCredit: '',
+        width: 1550,
+        height: 1004,
       },
 
       {
@@ -44,6 +50,8 @@ Meteor.startup(() => {
         nowYear: '2016',
         thisCredit: 'Charles P. Gibson / Minnesota Historical Society / Public domain',
         nowCredit: '',
+        width: 1619,
+        height: 955,
       },
 
     ];

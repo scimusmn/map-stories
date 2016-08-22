@@ -6,7 +6,7 @@ import { appDurations, appSizes } from '/imports/ui/helpers/settings';
 import {
   collapseSidebar, drawSidebar, expandSidebar, highlightImage,
 } from '/imports/ui/helpers/sidebar';
-import { zoomImage, hideZoomImage } from '/imports/ui/helpers/zoom';
+import { zoomImage, hideZoomImage, zoomThenNow, hideZoomThenNow } from '/imports/ui/helpers/zoom';
 import $ from 'jquery';
 import _ from 'lodash';
 
@@ -70,14 +70,13 @@ function drawHomeButton() {
  * @param selectedPlace
  */
 function zoomMap(state, selectedPlace) {
-  console.log(state.settings);
-  console.log('----^ ^ ^ ^ ^ state.settings ^ ^ ^ ^ ^----');
   const projection = mapProjection(state.settings);
   const line = {};
   line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
+  line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
+
   console.log(line.x1);
   console.log('----^ ^ ^ ^ ^ line.x1 ^ ^ ^ ^ ^----');
-  line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
 
   // Zoom and position background image
   d3.select('#background-image')
@@ -187,6 +186,36 @@ d3Chart.create = function createChart(el, props, state) {
     }
     return false;
   });
+
+  /**
+   * Handle clicks on the Then and Now buttons
+   */
+  $(document).on('click', '.then-now-button', (e) => {
+    zoomThenNow(e.target, state);
+  });
+
+  /**
+   * Handle close click on the Then and Now zoom
+   */
+  $(document).on('click', '.then-now-zoom-image-container', (e) => {
+    const $test = $(e.target);
+    if (!($test).is('.then-now-zoom-image')) {
+      hideZoomThenNow(this, state);
+    }
+    if (($test).is('.then-now-zoom-image')) {
+      const mouseX = e.pageX - $test.offset().left;
+
+      const imgW = $('.now-zoom-image').outerWidth();
+      const imgH = $('.now-zoom-image').outerHeight();
+
+      $('.now-zoom-image')
+        .css('clip', `rect(0px, ${imgW}px, ${imgH}px, ${mouseX}px)`);
+      console.log(mouseX);
+      console.log('----^ ^ ^ ^ ^ mouseX ^ ^ ^ ^ ^----');
+    }
+    return false;
+  });
+
 };
 
 /**

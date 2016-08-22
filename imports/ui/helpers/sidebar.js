@@ -247,7 +247,7 @@ export function collapseSidebar() {
     });
 
   // Fade out the then and now button
-  $('#then-now-button')
+  $('#then-now')
     .fadeOut(dur.default)
     .html('');
 }
@@ -355,41 +355,46 @@ function drawThenNowIcon(selectedThenNow, state) {
     .attr('width', `${sizes.screenWidth}px`)
     .attr('height', `${sizes.screenHeight}px`);
 
-  // Add a group for the map
+  // Add a group for the then-now point
   const thenGroup = svg.append('g')
     .attr('class', 'then-now');
 
-
-
-  // const line = linePoints(projection, place, maxWidth);
-  // const translationX = ((sizes.screenWidth - sizes.infoWidthExpanded) / 2);
-  // d3.select(circleGroup)
-  //   .transition()
-  //   .duration(dur.bgZoom)
-  //   .attr('transform', `translate(${translationX},${line.y1})`);
-
-
-
+  // Translate lat long to map pixels
   const projection = mapProjection(state.settings);
-
   const point = projection([selectedThenNow.long, selectedThenNow.lat]);
 
+  // Adjust position for translated map
+  const transX = ((sizes.screenWidth - sizes.infoWidthExpanded) / 2);
+
+  // Draw circle
   thenGroup.append('circle')
     .attr('r', '5px')
-    // .attr('id', `circle-${place.slug}-base`)
     .attr('stroke-width', 4)
     .attr('stroke', '#062926')
-    .classed('map-circle', true);
+    .classed('map-circle', true)
+    .attr('transform', `translate(${transX},${point[1]})`);
 
-  thenGroup
-    .attr('transform', `translate(${point[0]},${point[1]})`);
+  // selectedThenNow.offsetX = 100;
+  // selectedThenNow.offsetY = -200;
+
+  // Temp disabled while positioning
+  // const buttonPosX = transX - selectedThenNow.offsetX;
+  // const buttonPosY = point[1] - selectedThenNow.offsetY;
+
+  const buttonPosX = transX + -140;
+  const buttonPosY = point[1] + 150;
 
   const $thenNowButton = $('<img/>')
     // .attr('height', imageHeight)
     .addClass('then-now-button')
-    .attr('src', `images/then-now/${selectedThenNow.thumbFilename}`);
+    .attr('src', `images/then-now/${selectedThenNow.thumbFilename}`)
+    .css('width', 175)
+    .css('height', 175)
+    .css('left', buttonPosX)
+    .css('top', buttonPosY)
+    .attr('id', `then-now-${selectedThenNow._id}`);
 
-  $('#then-now-button')
+  $('#then-now')
     .fadeIn(dur.default)
     .append($thenNowButton);
 

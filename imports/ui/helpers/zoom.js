@@ -1,4 +1,5 @@
 import { appSizes, appDurations } from '/imports/ui/helpers/settings';
+import _ from 'lodash';
 
 const sizes = appSizes();
 const dur = appDurations();
@@ -78,3 +79,82 @@ export function zoomImage(clicked, state) {
     .fadeIn(dur.default);
 
 }
+
+export function zoomThenNow(clicked, state) {
+  console.log('Clicked');
+  const selectedThenNow = _.find(state.thenNow, (thenNowImage) => {
+    return thenNowImage._id === clicked.id.replace('then-now-', '');
+  });
+
+  // Fit the image on the screen by max height
+  var imageWidth = selectedThenNow.width;
+  var imageHeight = selectedThenNow.height;
+  var imageTopMargin = sizes.zoomTopMargin;
+  var maxZoomHeight = (sizes.screenHeight - (sizes.zoomTopMargin * 2));
+  if (selectedThenNow.height >= maxZoomHeight) {
+    imageWidth = (imageWidth * maxZoomHeight) / imageHeight;
+    imageHeight = maxZoomHeight;
+  } else {
+    imageTopMargin = ((sizes.screenHeight - imageHeight) / 2);
+  }
+  var imageLeftMargin = ((sizes.screenWidth - imageWidth) / 2);
+
+  // Define then image
+  var $thenImage = $('<img/>')
+    .attr('height', imageHeight)
+    .addClass('then-zoom-image')
+    .addClass('then-now-zoom-image')
+    .attr('src', 'images/then-now/' + selectedThenNow.thenFilename);
+  const imageMiddle = (imageWidth / 2);
+  var $nowImage = $('<img/>')
+    .attr('height', imageHeight)
+    .addClass('now-zoom-image')
+    .addClass('then-now-zoom-image')
+    .css('clip', `rect(0px, ${imageWidth}px, ${imageHeight}px, ${imageMiddle}px)`)
+    .attr('src', 'images/then-now/' + selectedThenNow.nowFilename);
+
+  var $thenDate = $('<div/>')
+    .addClass('then-date')
+    .html(selectedThenNow.thenYear);
+
+  // Define close button
+  let $thenNowZoomClose = $('<i/>')
+    .addClass('fa fa-times ')
+    .attr('aria-hidden', 'true');
+
+  let $thenNowZoomCloseContainer = $('<div/>')
+    .addClass('then-now-zoom-image-close-container')
+    .css('margin-left', imageLeftMargin)
+    .css('margin-top', imageTopMargin)
+    .css('width', imageWidth)
+    .css('height', imageHeight);
+
+  // Add image to page
+  var $thenNowImageContainer = $('<div/>')
+    .addClass('then-now-zoom-image-container')
+    .hide();
+  $($thenNowZoomCloseContainer)
+    .append($thenImage)
+    .append($thenDate)
+    .append($nowImage)
+    .append($thenNowZoomClose);
+  $($thenNowImageContainer)
+    .append($thenNowZoomCloseContainer);
+  $('body')
+    .append($thenNowImageContainer);
+  $($thenNowImageContainer)
+    .fadeIn(dur.default);
+}
+
+
+/**
+ * Hide the zoom then now
+ */
+export function hideZoomThenNow(clicked, state) {
+  $('.then-now-zoom-image-container')
+    .fadeOut(dur.default, function () {
+      $(this)
+        .remove();
+    });
+}
+

@@ -55,7 +55,7 @@ export default class ListPlaces extends React.Component {
           settings={this.state.settings}
           data={this.state.data}
           domain={this.state.domain} />
-        <div id="then-now-button"></div>
+        <div id="then-now"></div>
         <div id="map-sidebar-background" className="map-sidebar-home"></div>
         <div id="map-sidebar" className="map-sidebar-home">
           <h3 id="default-heading">

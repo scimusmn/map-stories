@@ -125,17 +125,22 @@ h3 {
  * Then Now
  * ----------------------------------------------------------------------------
  */
-#then-now-button{
+#then-now {
   position: absolute;
-  top: 30px;
-  left: 40px;
-  background: white;
-  display: none;
+  top: 0;
+  left: 0;
 }
 
-#then-now-button img {
-  border: 5px solid #FFF;
-  box-shadow: 6px 6px 20px #222222;
+.then-now-button {
+  position: relative;
+  border: 4px solid #062926;
+  color: #FFF;
+  font-family: national-bold, sans-serif;
+  text-align: center;
+  box-shadow: 0 4px 10px 3px rgba(0,0,0,0.45);
+  border-radius: 50%;
+  animation: animatedBackground 40s linear infinite;
+  background-position: center;
 }
 
 /**
@@ -190,12 +195,12 @@ h3 {
 
 #map-sidebar .bierstadt-albert-falls-of-niagara-from-below p,
 #map-sidebar .h-d7-51-p55 p,
-#map-sidebar .m-h5-9-m-p4-2-r40 p {
+#map-sidebar .m-h5-9-m-p4-2-r40 p,
+#map-sidebar .i35-bridge-collapse-4crop p {
   font-size: 28px;
 }
 
-#map-sidebar .m-h5-9-m-p4-2-p51 p,
-#map-sidebar .i35-bridge-collapse-4crop p {
+#map-sidebar .m-h5-9-m-p4-2-p51 p {
   font-size: 30px;
 }
 
@@ -289,6 +294,7 @@ h3 {
   -webkit-text-stroke-color: #CCC;
 }
 
+.then-now-zoom-image-container,
 .zoom-image-container {
   z-index: 9999;
   position: absolute;
@@ -300,13 +306,24 @@ h3 {
   background: rgba(0, 0, 0, .8);
 }
 
+.then-now-zoom-image-close-container,
 .zoom-image-close-container {
   position: relative;
 }
 
+.then-now-zoom-image-container img,
 .zoom-image-container img {
   border: solid #FFF 10px;
 }
+
+.now-zoom-image {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.then-now-zoom-image-container i,
 .zoom-image-container i {
   position: absolute;
   bottom: 10px;
@@ -314,6 +331,15 @@ h3 {
   font-size: 60px;
   background: rgba(0, 0, 0, .6);
   padding: 20px;
+}
+
+.then-date {
+  position: absolute;
+  font-size: 50px;
+  color: #FFF;
+  left: 40px;
+  bottom: 20px;
+  font-family: national-bold, sans-serif;
 }
 
 /**
