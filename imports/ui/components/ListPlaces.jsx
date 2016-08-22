@@ -27,6 +27,8 @@ export default class ListPlaces extends React.Component {
         mapY: 45.1215,
       },
     };
+    this.handleChange = this.handleChange.bind(this);
+
   }
 
   handleChange(event) {
@@ -37,11 +39,6 @@ export default class ListPlaces extends React.Component {
     debounce(1000, () => {
       this.setState({ settings: settings });
     })();
-  }
-
-  // Future handler for click events
-  clickPlace(event, place) {
-    console.log('event: ', event);
   }
 
   render() {
@@ -83,13 +80,13 @@ export default class ListPlaces extends React.Component {
           <form className="dev-map-details-form">
             <h4>Change map details</h4>
             Zoom: <input type="text" data-tag="mapScale" ref="mapScale"
-                         onChange={this.handleChange.bind(this)}
+                         onChange={this.handleChange}
                          defaultValue={this.state.settings.mapScale}/><br/>
             X: <input type="text" data-tag="mapX" ref="mapX"
-                      onChange={this.handleChange.bind(this)}
+                      onChange={this.handleChange}
                       defaultValue={this.state.settings.mapX}/><br/>
             Y: <input type="text" data-tag="mapY" ref="mapY"
-                      onChange={this.handleChange.bind(this)}
+                      onChange={this.handleChange}
                       defaultValue={this.state.settings.mapY}/><br/>
           </form>
         </div>
