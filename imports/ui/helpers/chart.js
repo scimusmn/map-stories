@@ -75,9 +75,6 @@ function zoomMap(state, selectedPlace) {
   line.x1 = projection([selectedPlace.long, selectedPlace.lat])[0];
   line.y1 = projection([selectedPlace.long, selectedPlace.lat])[1];
 
-  console.log(line.x1);
-  console.log('----^ ^ ^ ^ ^ line.x1 ^ ^ ^ ^ ^----');
-
   // Zoom and position background image
   d3.select('#background-image')
     .transition()
