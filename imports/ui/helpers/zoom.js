@@ -118,6 +118,10 @@ export function zoomThenNow(clicked, state) {
     .addClass('then-date')
     .html(selectedThenNow.thenYear);
 
+  var $nowDate = $('<div/>')
+    .addClass('now-date')
+    .html(selectedThenNow.nowYear);
+
   // Define close button
   let $thenNowZoomClose = $('<i/>')
     .addClass('fa fa-times ')
@@ -139,6 +143,7 @@ export function zoomThenNow(clicked, state) {
     .append($thenImage)
     .append($thenDate)
     .append($nowImage)
+    .append($nowDate)
     .append($thenNowZoomClose);
   $($thenNowImageContainer)
     .append($thenNowZoomCloseContainer);
@@ -150,9 +155,6 @@ export function zoomThenNow(clicked, state) {
   document.getElementById('then-now-zoom-slider');
   document.addEventListener('mousemove', function(e) {
     const $test = $(e.target);
-    // if (!($test).is('.then-now-zoom-image')) {
-    //   hideZoomThenNow(this, state);
-    // }
     if (($test).is('.then-now-zoom-image')) {
       const mouseX = e.pageX - $test.offset().left;
 

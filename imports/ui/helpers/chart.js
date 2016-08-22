@@ -192,6 +192,16 @@ d3Chart.create = function createChart(el, props, state) {
   });
 
   /**
+   * Handle clicks on the Then and Now close button
+   */
+  $(document).on('click', '#then-now-zoom-slider', (e) => {
+    const $test = $(e.target);
+    if (!($test).is('.then-now-zoom-image-close-container')) {
+      hideZoomThenNow(this, state);
+    }
+  });
+
+  /**
    * Handle close click on the Then and Now zoom
    */
 };
