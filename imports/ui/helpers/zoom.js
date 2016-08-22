@@ -99,17 +99,19 @@ export function zoomThenNow(clicked, state) {
   }
   var imageLeftMargin = ((sizes.screenWidth - imageWidth) / 2);
 
-  // Define then image
+  // Define the Then image
   var $thenImage = $('<img/>')
     .attr('height', imageHeight)
     .addClass('then-zoom-image')
     .addClass('then-now-zoom-image')
+    .attr('draggable', false)
     .attr('src', 'images/then-now/' + selectedThenNow.thenFilename);
   const imageMiddle = (imageWidth / 2);
   var $nowImage = $('<img/>')
     .attr('height', imageHeight)
     .addClass('now-zoom-image')
     .addClass('then-now-zoom-image')
+    .attr('draggable', false)
     .css('clip', `rect(0px, ${imageWidth}px, ${imageHeight}px, ${imageMiddle}px)`)
     .attr('src', 'images/then-now/' + selectedThenNow.nowFilename);
 
