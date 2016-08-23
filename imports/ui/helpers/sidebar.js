@@ -395,11 +395,11 @@ function drawThenNowIcon(selectedThenNow, state) {
   const $placeLabelText = $('<div/>')
     .addClass('then-now-label-text')
     .css({ transform: `rotate(${labelRotation}deg)` })
-    .css('left', buttonPosX)
+    .css('left', (buttonPosX - 20))
     .css('top', buttonPosY + 155)
-    .css('width', 175)
-    .css('height', 49)
-    .html('Then & Now');
+    .css('width', 225)
+    .css('height', 85)
+    .html(`${selectedThenNow.place}<br/>Then & Now`);
 
   // Animate in
   setTimeout(() => {

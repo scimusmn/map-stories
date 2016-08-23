@@ -42,8 +42,8 @@ Meteor.startup(() => {
       },
 
       {
-        lat: 44.931100,
-        long: -93.101758,
+        lat: 44.932219,
+        long: -93.102900,
         place: 'Saint Paul',
         thenFilename: 'saint-paul-1929.jpg',
         nowFilename: 'saint-paul-2016.jpg',
