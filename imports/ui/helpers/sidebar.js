@@ -393,12 +393,19 @@ function drawThenNowIcon(selectedThenNow, state) {
     .attr('id', `then-now-${selectedThenNow._id}`)
 
   const labelRotation = _.sample(['-3', '3']);
+  let labelWidth = 225;
+  let labelLeft = (buttonPosX - 20);
+  if (selectedThenNow.place === 'Saint Anthony Falls') {
+    labelWidth = 275;
+    labelLeft = (buttonPosX - 60);
+  }
+
   const $placeLabelText = $('<div/>')
     .addClass('then-now-label-text')
     .css({ transform: `rotate(${labelRotation}deg)` })
-    .css('left', (buttonPosX - 20))
+    .css('left', labelLeft)
     .css('top', buttonPosY + 155)
-    .css('width', 225)
+    .css('width', labelWidth)
     .css('height', 85)
     .html(`${selectedThenNow.place}<br/>Then & Now`);
 
