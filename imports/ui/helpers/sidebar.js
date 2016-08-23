@@ -61,6 +61,105 @@ function drawDakotaPlaceNames(selectedPlace, dakota, state) {
       labelRotation = -3;
     }
 
+    if (placeName.englishPlaceName === 'Saint Paul') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Spirit Island') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Saint Anthony Falls') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Nicollet Island') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Little Crow’s Village') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Carver’s Cave') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Saint Croix River') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Fort Snelling') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Pike Island') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Minnesota River') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    if (placeName.englishPlaceName === 'Meeting of the Rivers') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
     setTimeout(function () {
       dakotaGroup.append('line')
         .attr('x1', transX)
@@ -130,12 +229,10 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
   // Find if there are any Dakota place names
   const dakota = [];
   _.each(state.dakota, (dakotaPlaceName) => {
-    if(dakotaPlaceName.place === selectedPlace.name) {
+    if (dakotaPlaceName.place === selectedPlace.name) {
       dakota.push(dakotaPlaceName);
     }
   });
-  console.log(dakota);
-  console.log('----^ ^ ^ ^ ^ dakota ^ ^ ^ ^ ^----');
 
   if (!_.isUndefined(dakota)) {
     drawDakotaPlaceNames(selectedPlace, dakota, state);
@@ -538,6 +635,7 @@ function drawThenNowIcon(selectedThenNow, state) {
     labelLeft = (buttonPosX - 60);
   }
 
+  let labelRotation = _.sample(['-3', '3']);
   const $placeLabelText = $('<div/>')
     .addClass('then-now-label-text')
     .css({ transform: `rotate(${labelRotation}deg)` })
