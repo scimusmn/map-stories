@@ -17,8 +17,8 @@ Meteor.startup(() => {
         dakotaPlaceName: 'Bdote',
         nameFilename: 'mendota-name.mp4',
         explainFilename: 'mendota-explain.mp4',
-        offsetX: 0,
-        offsetY: 0,
+        offsetX: -100,
+        offsetY: -200,
       },
 
       {

@@ -27,47 +27,100 @@ function drawDakotaPlaceNames(selectedPlace, dakota, state) {
     // Adjust position for translated map
     const transX = ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) - adjustedPoint[0];
 
-    // Draw circle
-    dakotaGroup.append('circle')
-      .attr('r', '0')
-      .attr('opacity', 0)
-      .attr('stroke-width', 4)
-      .attr('stroke', '#062926')
-      .classed('map-circle', true)
-      .attr('id', `dakota-map-circle-${placeName.slug}`)
-      .attr('transform', `translate(${transX},${point[1]})`)
-      .transition()
-      .duration(2500)
-      .attr('opacity', 1)
-      .attr('r', '5px');
-
-    const labelPosX = (transX + placeName.offsetX);
-    const labelPosY = (point[1] + placeName.offsetY);
-
-    const labelRotation = _.sample(['-3', '3']);
+    let labelPosX = (transX + 800);
+    let labelPosY = (point[1] + 800);
     let labelWidth = 225;
+    let lineOffsetX = 0;
+    let lineOffsetY = 0;
+    let labelRotation = _.sample(['-3', '3']);
+
+    if (placeName.englishPlaceName === 'Mendota') {
+      labelPosX = (transX + -130);
+      labelPosY = (point[1] + -250);
+      labelWidth = 170;
+      lineOffsetX = 120;
+      lineOffsetY = 140;
+      labelRotation = 3;
+    }
+
+    if (placeName.englishPlaceName === 'Black Dog\'s village') {
+      labelPosX = (transX + -190);
+      labelPosY = (point[1] + 0);
+      labelWidth = 250;
+      lineOffsetX = 200;
+      lineOffsetY = 70;
+      labelRotation = 3;
+    }
+
+    if (placeName.englishPlaceName === 'Pilot Knob') {
+      labelPosX = (transX - 80);
+      labelPosY = (point[1] - 40);
+      labelWidth = 210;
+      lineOffsetX = 200;
+      lineOffsetY = 100;
+      labelRotation = -3;
+    }
+
+    setTimeout(function () {
+      dakotaGroup.append('line')
+        .attr('x1', transX)
+        .attr('y1', point[1])
+        .attr('x2', transX)
+        .attr('y2', point[1])
+        .attr('opacity', 0)
+        .classed('map-line', true)
+        .transition()
+        .duration(600)
+        .attr('x1', (labelPosX + lineOffsetX))
+        .attr('y1', (labelPosY + lineOffsetY))
+        .attr('opacity', 1);
+
+      // Draw circle
+      dakotaGroup.append('circle')
+        .attr('r', '0')
+        .attr('opacity', 0)
+        .attr('stroke-width', 4)
+        .attr('stroke', '#062926')
+        .classed('map-circle', true)
+        .attr('id', `dakota-map-circle-${placeName.slug}`)
+        .attr('transform', `translate(${transX},${point[1]})`)
+        .transition()
+        .duration(300)
+        .attr('opacity', 1)
+        .attr('r', '5px');
+
+    }, 800);
+
     let labelLeft = (labelPosX - 20);
+
+    const $dakotaIcon = $('<div/>')
+      .addClass('dakota-audio-icon')
+      .html('<i class="fa fa-volume-up" aria-hidden="true"></i>');
 
     const $dakotaLabelText = $('<div/>')
       .addClass('dakota-label-text')
       .css({ transform: `rotate(${labelRotation}deg)` })
-      .css('left', labelLeft)
-      .css('top', labelPosY + 155)
+      .css('left', labelPosX + 60)
+      .css('top', labelPosY + 60)
       .css('width', labelWidth)
-      .css('height', 85)
+      .css('height', 90)
       .html(`<span class="dakota">${placeName.dakotaPlaceName}</span><br/><span class="english">${placeName.englishPlaceName}</span>`);
 
-    // Attach label
-    $('#dakota-place-names')
-      .fadeIn(dur.default)
-      .append($dakotaLabelText);
-
-    // Fade it in
     $dakotaLabelText
-      .animate({
-        opacity: 1,
-      }, 500);
+      .prepend($dakotaIcon);
 
+    setTimeout(function () {
+      // Attach label
+      $('#dakota-place-names')
+        .fadeIn(dur.default)
+        .append($dakotaLabelText);
+
+      // Fade it in
+      $dakotaLabelText
+        .animate({
+          opacity: 1,
+        }, 500);
+      }, 500);
   });
 }
 
@@ -324,6 +377,11 @@ export function collapseSidebar() {
   $('#then-now')
     .fadeOut(dur.default)
     .html('');
+
+  // Fade out the Dakota Place Names
+  $('#dakota-place-names')
+    .fadeOut(dur.default)
+    .html('');
 }
 
 /**
@@ -466,7 +524,6 @@ function drawThenNowIcon(selectedThenNow, state) {
     .css('top', (point[1]))
     .attr('id', `then-now-${selectedThenNow._id}`)
 
-  const labelRotation = _.sample(['-3', '3']);
   let labelWidth = 225;
   let labelLeft = (buttonPosX - 20);
   if (selectedThenNow.place === 'Saint Anthony Falls') {
