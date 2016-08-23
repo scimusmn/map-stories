@@ -6,7 +6,7 @@ import { appDurations, appSizes } from '/imports/ui/helpers/settings';
 import {
   collapseSidebar, drawSidebar, expandSidebar, highlightImage,
 } from '/imports/ui/helpers/sidebar';
-import { zoomImage, hideZoomImage, zoomThenNow, hideZoomThenNow } from '/imports/ui/helpers/zoom';
+import { zoomImage, hideZoomImage, zoomThenNow, hideZoomThenNow, playDakota } from '/imports/ui/helpers/zoom';
 import $ from 'jquery';
 import _ from 'lodash';
 
@@ -202,8 +202,13 @@ d3Chart.create = function createChart(el, props, state) {
   });
 
   /**
-   * Handle close click on the Then and Now zoom
+   * Handle clicks on the Dakota place name buttons
    */
+  $(document).on('click', '.dakota-label-text', (e) => {
+    console.log(e);
+    console.log('----^ ^ ^ ^ ^ e ^ ^ ^ ^ ^----');
+    playDakota(e.target, state);
+  });
 };
 
 /**

@@ -199,6 +199,7 @@ function drawDakotaPlaceNames(selectedPlace, dakota, state) {
     const $dakotaLabelText = $('<div/>')
       .addClass('dakota-label-text')
       .css({ transform: `rotate(${labelRotation}deg)` })
+      .attr('id', `dakota-${placeName._id}`)
       .css('left', labelPosX + 60)
       .css('top', labelPosY + 60)
       .css('width', labelWidth)
@@ -220,7 +221,9 @@ function drawDakotaPlaceNames(selectedPlace, dakota, state) {
           opacity: 1,
         }, 500);
       }, 500);
+
   });
+
 }
 
 export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {

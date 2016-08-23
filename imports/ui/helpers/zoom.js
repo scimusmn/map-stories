@@ -188,3 +188,15 @@ export function hideZoomThenNow(clicked, state) {
     });
 }
 
+/**
+ * Play Dakota audio content
+ */
+export function playDakota(clicked, state) {
+  const $clickedLabel = $(clicked).closest('.dakota-label-text');
+
+  const selectedDakota = _.find(state.dakota, (dakotaPlace) => {
+    return dakotaPlace._id === $clickedLabel[0].id.replace('dakota-', '');
+  });
+
+}
+
