@@ -8,21 +8,53 @@ const d3 = require('d3');
 const sizes = appSizes();
 const dur = appDurations();
 
-function drawDakotaPlaceNames(dakota, state) {
-  console.log('Dakota place names will be built here');
+function drawDakotaPlaceNames(selectedPlace, dakota, state) {
+  const projection = mapProjection(state.settings);
+  const selectedPlacePoint = projection([selectedPlace.long, selectedPlace.lat]);
+
+  const svg = d3.select('.d3');
+  _.each(dakota, (placeName) => {
+
+    const point = projection([placeName.long, placeName.lat]);
+
+    const adjustedPoint = []
+    _.each(point, (coor, i) => { adjustedPoint.push((selectedPlacePoint[i] - coor)); });
+
+    // Add a group for the then-now point
+    const dakotaGroup = svg.append('g')
+      .attr('class', 'dakota-place');
+
+    // Adjust position for translated map
+    const transX = ((sizes.screenWidth - sizes.infoWidthExpanded) / 2) - adjustedPoint[0];
+
+    // Draw circle
+    dakotaGroup.append('circle')
+      .attr('r', '0')
+      .attr('opacity', 0)
+      .attr('stroke-width', 4)
+      .attr('stroke', '#062926')
+      .classed('map-circle', true)
+      .attr('id', `dakota-map-circle-${placeName.slug}`)
+      .attr('transform', `translate(${transX},${point[1]})`)
+      .transition()
+      .duration(2500)
+      .attr('opacity', 1)
+      .attr('r', '5px');
+  });
 }
 
 export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
   let $mapSidebar = $('#map-sidebar');
 
   // Find if there are any Dakota place names
-  const dakota = _.find(state.dakota, function (dakotaPlaceName) {
-    console.log(dakotaPlaceName.place);
-    console.log('----^ ^ ^ ^ ^ dakotaPlaceName.place ^ ^ ^ ^ ^----');
-    return dakotaPlaceName.place === selectedPlace.name;
-  });
+  const dakota = _.each(state.dakota, (dakotaPlaceName) =>
+    _.find(dakotaPlaceName, (object) =>
+      object.place === selectedPlace.name
+    )
+  );
+
   if (!_.isUndefined(dakota)) {
-    drawDakotaPlaceNames(dakota, state);
+    drawDakotaPlaceNames(selectedPlace, dakota, state);
   }
 
   // Find if there are any then and now images
