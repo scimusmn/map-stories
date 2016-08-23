@@ -145,9 +145,6 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
 
   const dockImages = _.size(placeImages);
 
-  console.log(_.size(placeImages));
-  console.log('----^ ^ ^ ^ ^ _.size(placeImages) ^ ^ ^ ^ ^----');
-
   let adjustmentRatio = 0.5;
   let cumulativeLeft = 100;
   if (_.size(placeImages) > 5) {
@@ -459,3 +456,4 @@ function drawThenNowIcon(selectedThenNow, state) {
       }, dur.default);
   }, 1000);
 }
+
