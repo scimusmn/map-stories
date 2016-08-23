@@ -96,6 +96,15 @@ export function zoomThenNow(clicked, state) {
   } else {
     imageTopMargin = ((sizes.screenHeight - imageHeight) / 2);
   }
+  var thenNowRatio = selectedThenNow.width / selectedThenNow.height;
+  var thenNowWidth = thenNowRatio * imageHeight;
+  console.log(thenNowWidth);
+  console.log('----^ ^ ^ ^ ^ thenNowWidth ^ ^ ^ ^ ^----');
+  if (thenNowWidth > 1820) {
+    imageHeight = (1820 / thenNowRatio);
+    imageWidth = 1820;
+  }
+
   var imageLeftMargin = ((sizes.screenWidth - imageWidth) / 2);
 
   // Define the Then image
