@@ -50,6 +50,7 @@ export default class ListPlaces extends React.Component {
           places={this.state.places}
           images={this.state.images}
           thenNow={this.state.thenNow}
+          dakota={this.state.dakota}
           settings={this.state.settings}
           data={this.state.data}
           domain={this.state.domain} />
