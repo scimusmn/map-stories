@@ -128,11 +128,14 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
   let $mapSidebar = $('#map-sidebar');
 
   // Find if there are any Dakota place names
-  const dakota = _.each(state.dakota, (dakotaPlaceName) =>
-    _.find(dakotaPlaceName, (object) =>
-      object.place === selectedPlace.name
-    )
-  );
+  const dakota = [];
+  _.each(state.dakota, (dakotaPlaceName) => {
+    if(dakotaPlaceName.place === selectedPlace.name) {
+      dakota.push(dakotaPlaceName);
+    }
+  });
+  console.log(dakota);
+  console.log('----^ ^ ^ ^ ^ dakota ^ ^ ^ ^ ^----');
 
   if (!_.isUndefined(dakota)) {
     drawDakotaPlaceNames(selectedPlace, dakota, state);
@@ -382,6 +385,10 @@ export function collapseSidebar() {
   $('#dakota-place-names')
     .fadeOut(dur.default)
     .html('');
+  $('.dakota-place')
+    .fadeOut(dur.default)
+    .html('');
+
 }
 
 /**
