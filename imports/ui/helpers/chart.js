@@ -6,7 +6,9 @@ import { appDurations, appSizes } from '/imports/ui/helpers/settings';
 import {
   collapseSidebar, drawSidebar, expandSidebar, highlightImage,
 } from '/imports/ui/helpers/sidebar';
-import { zoomImage, hideZoomImage, zoomThenNow, hideZoomThenNow, playDakota } from '/imports/ui/helpers/zoom';
+import {
+  zoomImage, hideZoomImage, zoomThenNow, hideZoomThenNow, playDakota, hideDakota
+} from '/imports/ui/helpers/zoom';
 import $ from 'jquery';
 import _ from 'lodash';
 
@@ -209,6 +211,14 @@ d3Chart.create = function createChart(el, props, state) {
     console.log('----^ ^ ^ ^ ^ e ^ ^ ^ ^ ^----');
     playDakota(e.target, state);
   });
+
+  $(document).on('click', '.dakota-container', (e) => {
+    const $test = $(e.target);
+    if (!($test).is('.dakota-stage')) {
+      hideDakota(this, state);
+    }
+  });
+
 };
 
 /**

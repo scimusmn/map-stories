@@ -176,7 +176,6 @@ export function zoomThenNow(clicked, state) {
   });
 }
 
-
 /**
  * Hide the zoom then now
  */
@@ -198,5 +197,32 @@ export function playDakota(clicked, state) {
     return dakotaPlace._id === $clickedLabel[0].id.replace('dakota-', '');
   });
 
+  let $dakotaContainer = $('<div/>')
+    .addClass('dakota-container');
+
+  let $dakotaStage = $('<div/>')
+    .addClass('dakota-stage');
+
+  let $close = $('<i/>')
+    .addClass('fa fa-times ')
+    .attr('aria-hidden', 'true');
+
+  $dakotaStage
+    .append($close);
+
+  $dakotaContainer
+    .append($dakotaStage)
+
+  $('#dakota-place-names')
+    .append($dakotaContainer)
+
+}
+
+export function hideDakota(clicked, state) {
+  $('.dakota-container')
+    .fadeOut(dur.default, function () {
+      $(this)
+        .remove();
+    });
 }
 

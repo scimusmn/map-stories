@@ -312,6 +312,7 @@ h3 {
   -webkit-text-stroke-color: #CCC;
 }
 
+.dakota-container,
 .then-now-zoom-image-container,
 .zoom-image-container {
   z-index: 9999;
@@ -341,6 +342,7 @@ h3 {
   opacity: 1;
 }
 
+.dakota-container i,
 .then-now-zoom-image-container i,
 .zoom-image-container i {
   position: absolute;
@@ -531,4 +533,19 @@ form.edit-image {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Dakota player
+ * ----------------------------------------------------------------------------
+ */
+.dakota-stage {
+  z-index: 999;
+  position: relative;
+  background: @tan;
+  margin: 40px auto;
+  border: 8px solid #EEE;
+  width: 80%;
+  height: 600px;
 }
