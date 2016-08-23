@@ -366,6 +366,9 @@ function drawThenNowIcon(selectedThenNow, state) {
   // Adjust position for translated map
   const transX = ((sizes.screenWidth - sizes.infoWidthExpanded) / 2);
 
+  const buttonPosX = (transX + selectedThenNow.offsetX);
+  const buttonPosY = (point[1] + selectedThenNow.offsetY);
+
   // Draw circle
   thenGroup.append('circle')
     .attr('r', '0')
@@ -380,8 +383,6 @@ function drawThenNowIcon(selectedThenNow, state) {
     .attr('r', '5px');
 
   // Then and now image button
-  const buttonPosX = (transX + selectedThenNow.offsetX);
-  const buttonPosY = (point[1] + selectedThenNow.offsetY);
   const $thenNowButton = $('<img/>')
     .addClass('then-now-button')
     .attr('src', `images/then-now/${selectedThenNow.thumbFilename}`)
@@ -403,6 +404,19 @@ function drawThenNowIcon(selectedThenNow, state) {
 
   // Animate in
   setTimeout(() => {
+    // Draw line
+    thenGroup.append('line')
+      .attr('x1', transX)
+      .attr('y1', point[1])
+      .attr('x2', transX)
+      .attr('y2', point[1])
+      .attr('opacity', 0)
+      .classed('map-line', true)
+      .transition()
+      .duration(300)
+      .attr('x1', buttonPosX + (175 / 2))
+      .attr('y1', buttonPosY + (175 / 2))
+      .attr('opacity', 1);
     $('#then-now')
       .fadeIn(dur.default)
       .append($thenNowButton)
