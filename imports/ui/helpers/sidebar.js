@@ -40,6 +40,34 @@ function drawDakotaPlaceNames(selectedPlace, dakota, state) {
       .duration(2500)
       .attr('opacity', 1)
       .attr('r', '5px');
+
+    const labelPosX = (transX + placeName.offsetX);
+    const labelPosY = (point[1] + placeName.offsetY);
+
+    const labelRotation = _.sample(['-3', '3']);
+    let labelWidth = 225;
+    let labelLeft = (labelPosX - 20);
+
+    const $dakotaLabelText = $('<div/>')
+      .addClass('dakota-label-text')
+      .css({ transform: `rotate(${labelRotation}deg)` })
+      .css('left', labelLeft)
+      .css('top', labelPosY + 155)
+      .css('width', labelWidth)
+      .css('height', 85)
+      .html(`<span class="dakota">${placeName.dakotaPlaceName}</span><br/><span class="english">${placeName.englishPlaceName}</span>`);
+
+    // Attach label
+    $('#dakota-place-names')
+      .fadeIn(dur.default)
+      .append($dakotaLabelText);
+
+    // Fade it in
+    $dakotaLabelText
+      .animate({
+        opacity: 1,
+      }, 500);
+
   });
 }
 
