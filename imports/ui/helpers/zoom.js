@@ -141,8 +141,8 @@ export function zoomThenNow(clicked, state) {
     .hide();
   $($thenNowZoomCloseContainer)
     .append($thenImage)
-    .append($thenDate)
     .append($nowImage)
+    .append($thenDate)
     .append($nowDate)
     .append($thenNowZoomClose);
   $($thenNowImageContainer)
