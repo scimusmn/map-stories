@@ -8,8 +8,22 @@ const d3 = require('d3');
 const sizes = appSizes();
 const dur = appDurations();
 
+function drawDakotaPlaceNames(dakota, state) {
+  console.log('Dakota place names will be built here');
+}
+
 export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
   let $mapSidebar = $('#map-sidebar');
+
+  // Find if there are any Dakota place names
+  const dakota = _.find(state.dakota, function (dakotaPlaceName) {
+    console.log(dakotaPlaceName.place);
+    console.log('----^ ^ ^ ^ ^ dakotaPlaceName.place ^ ^ ^ ^ ^----');
+    return dakotaPlaceName.place === selectedPlace.name;
+  });
+  if (!_.isUndefined(dakota)) {
+    drawDakotaPlaceNames(dakota, state);
+  }
 
   // Find if there are any then and now images
   let thenNow = _.find(state.thenNow, function (thenNowImage) {
