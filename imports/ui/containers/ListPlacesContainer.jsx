@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import ThenNow from '../../api/thenNow/thenNow';
+import Dakota from '../../api/dakota/dakota';
 import { Loading } from '../components/loading.js';
 import { Images } from '../../api/images/images.js';
 import { Places } from '../../api/places/places.js';
@@ -17,7 +18,8 @@ const composer = (props, onData) => {
     const places = Places.find({}).fetch();
     const images = Images.find({}).fetch();
     const thenNow = ThenNow.find({}).fetch();
-    onData(null, { places, images, thenNow });
+    const dakota = Dakota.find({}).fetch();
+    onData(null, { places, images, thenNow, dakota });
   }
 };
 

@@ -16,6 +16,7 @@ export default class ListPlaces extends React.Component {
       images: props.images,
       places: props.places,
       thenNow: props.thenNow,
+      dakota: props.dakota,
       data: [
         { id: '5fbmzmtc', x: 13, y: 30, z: 6 },
         { id: 's4f8phwm', x: 14.2, y: 30, z: 9 },
