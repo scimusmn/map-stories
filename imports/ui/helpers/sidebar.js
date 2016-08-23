@@ -131,6 +131,9 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
 
   const dockImages = _.size(placeImages);
 
+  console.log(_.size(placeImages));
+  console.log('----^ ^ ^ ^ ^ _.size(placeImages) ^ ^ ^ ^ ^----');
+
   let adjustmentRatio = 0.5;
   let cumulativeLeft = 100;
   if (_.size(placeImages) > 5) {
@@ -142,11 +145,11 @@ export function expandSidebar(state, selectedPlace, selectedPlaceImageId) {
     adjustmentRatio = 0.55;
   }
   if (_.size(placeImages) > 10) {
-    cumulativeLeft = 50;
-    adjustmentRatio = 0.75;
+    cumulativeLeft = 110;
+    adjustmentRatio = 0.38;
   }
   if (_.size(placeImages) > 11) {
-    cumulativeLeft = -50;
+    cumulativeLeft = 180;
     adjustmentRatio = 0.20;
   }
 
