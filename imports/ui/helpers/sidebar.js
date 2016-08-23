@@ -368,34 +368,56 @@ function drawThenNowIcon(selectedThenNow, state) {
 
   // Draw circle
   thenGroup.append('circle')
-    .attr('r', '5px')
+    .attr('r', '0')
+    .attr('opacity', 0)
     .attr('stroke-width', 4)
     .attr('stroke', '#062926')
     .classed('map-circle', true)
-    .attr('transform', `translate(${transX},${point[1]})`);
+    .attr('transform', `translate(${transX},${point[1]})`)
+    .transition()
+    .duration(2500)
+    .attr('opacity', 1)
+    .attr('r', '5px');
 
-  // selectedThenNow.offsetX = 100;
-  // selectedThenNow.offsetY = -200;
-
-  // Temp disabled while positioning
-  // const buttonPosX = transX - selectedThenNow.offsetX;
-  // const buttonPosY = point[1] - selectedThenNow.offsetY;
-
-  const buttonPosX = transX + -140;
-  const buttonPosY = point[1] + 150;
-
+  // Then and now image button
+  const buttonPosX = (transX + selectedThenNow.offsetX);
+  const buttonPosY = (point[1] + selectedThenNow.offsetY);
   const $thenNowButton = $('<img/>')
-    // .attr('height', imageHeight)
     .addClass('then-now-button')
     .attr('src', `images/then-now/${selectedThenNow.thumbFilename}`)
-    .css('width', 175)
-    .css('height', 175)
+    .css('width', 0)
+    .css('height', 0)
+    .css('left', (transX))
+    .css('top', (point[1]))
+    .attr('id', `then-now-${selectedThenNow._id}`)
+
+  const labelRotation = _.sample(['-3', '3']);
+  const $placeLabelText = $('<div/>')
+    .addClass('then-now-label-text')
+    .css({ transform: `rotate(${labelRotation}deg)` })
     .css('left', buttonPosX)
-    .css('top', buttonPosY)
-    .attr('id', `then-now-${selectedThenNow._id}`);
+    .css('top', buttonPosY + 155)
+    .css('width', 175)
+    .css('height', 49)
+    .html('Then & Now');
 
-  $('#then-now')
-    .fadeIn(dur.default)
-    .append($thenNowButton);
+  // Animate in
+  setTimeout(() => {
+    $('#then-now')
+      .fadeIn(dur.default)
+      .append($thenNowButton)
+      .append($placeLabelText);
+    $placeLabelText
+      .animate({
+        opacity: 1,
+      }, 500);
 
+    $thenNowButton
+      .animate({
+        left: buttonPosX,
+        top: buttonPosY,
+        width: 175,
+        height: 175,
+      }, dur.default);
+  }, 1000);
 }

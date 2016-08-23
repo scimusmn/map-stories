@@ -32,11 +32,11 @@ function reDrawHomePage(el, state) {
     .attr('x', 0)
     .attr('y', 0);
 
+  $('.then-now').remove();
+
   // Remove home button
   $('div.home-button').remove();
 
-  console.log(state.settings);
-  console.log('----^ ^ ^ ^ ^ state.settings ^ ^ ^ ^ ^----');
   drawPlaces(
     el,
     mapProjection(state.settings),
