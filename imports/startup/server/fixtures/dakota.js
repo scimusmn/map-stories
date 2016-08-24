@@ -57,13 +57,15 @@ if (Dakota.find().count() === 0) {
 
     // Saint Paul
     {
-      lat: 44.910387,
-      long: -93.169493,
+      lat: 44.955019,
+      long: -93.096303,
       place: 'Saint Paul',
       englishPlaceName: 'Saint Paul',
       dakotaPlaceName: 'Imniżaska',
       nameFilename: 'saint-paul-name.mp4',
-      explainFilename: 'saint-paul-explain.mp4',
+      explainFilename: 'saint-paul-explained.mp4',
+      description: 'Imniżaska is where the present city of Saint Paul is. And ' +
+      'Imniżaska means the "white bluffs."',
       offsetX: 0,
       offsetY: 0,
     },
@@ -74,9 +76,11 @@ if (Dakota.find().count() === 0) {
       long: -93.253200,
       place: 'Saint Anthony Falls',
       englishPlaceName: 'Spirit Island',
-      dakotaPlaceName: 'Wanaġi Wait',
+      dakotaPlaceName: 'Wanaġi Wita',
       nameFilename: 'spirit-island-name.mp4',
-      explainFilename: 'spirit-island-explain.mp4',
+      explainFilename: 'spirit-island-explained.mp4',
+      description: 'Wanaġi Wita is Spirit Island. Wanaġi is the spirit and ' +
+      'of course Wita is an island.',
       offsetX: 0,
       offsetY: 0,
     },
@@ -88,7 +92,10 @@ if (Dakota.find().count() === 0) {
       englishPlaceName: 'Saint Anthony Falls',
       dakotaPlaceName: 'Owamni Yemini',
       nameFilename: 'saint-anthony-name.mp4',
-      explainFilename: 'saint-anthony-explain.mp4',
+      explainFilename: 'saint-anthony-explained.mp4',
+      description: 'Owamni Yemini. That\'s at Saint Anthony Falls and it\'s a ' +
+      'description of the falls. It\'s a big falls and it\'s all around. ' +
+      'So Owamni Yemini is a description of Saint Anthony Falls',
       offsetX: 0,
       offsetY: 0,
     },
@@ -100,45 +107,58 @@ if (Dakota.find().count() === 0) {
       englishPlaceName: 'Nicollet Island',
       dakotaPlaceName: 'Wita Waṡte',
       nameFilename: 'nicollet-island-name.mp4',
-      explainFilename: 'nicollet-island-explain.mp4',
+      explainFilename: 'nicollet-island-explained.mp4',
+      description: 'Wita Waṡte is Nicollet Island. And what it translates to ' +
+      'is Wita is island and Waṡte is good. So it translates to "good island."',
       offsetX: 0,
       offsetY: 0,
     },
 
     //  Mounds
     {
-      lat: 44.876075,
-      long: -93.007457,
+      lat: 44.944700,
+      long: -93.049,
       place: 'Mounds Park',
       englishPlaceName: 'Little Crow’s Village',
       dakotaPlaceName: 'Kapoża',
       nameFilename: 'little-crow-name.mp4',
-      explainFilename: 'little-crow-explain.mp4',
+      explainFilename: 'little-crow-explained.mp4',
+      description: 'Kapoża was Little Crow\'s village, but Kapoża means, "this is the band." ' +
+      'They were the ones who traveled lightly, they don\'t carry a bunch of baggage with them ' +
+      'when they move. So they were called Kapoża.',
       offsetX: 0,
       offsetY: 0,
     },
 
     {
-      lat: 44.987637,
-      long: -93.262887,
+      lat: 44.945849,
+      long: -93.059995,
       place: 'Mounds Park',
       englishPlaceName: 'Carver’s Cave',
       dakotaPlaceName: 'Wankan Tipi',
       nameFilename: 'carvers-cave-name.mp4',
-      explainFilename: 'carvers-cave-explain.mp4',
+      explainFilename: 'carvers-cave-explained.mp4',
+      description: 'Wankan Tipi is a mysterious dwelling. Tipi meaning dwelling, ' +
+      'and Wankan is mysterious. It gets its name from the petroglyphs found inside ' +
+      'of Carver\'s Cave. So the translation has nothing to do with Carver, just the cave. ' +
+      'And it\'s Wankan Tipi, the mysterious house, or where the mysterious lives.',
       offsetX: 0,
       offsetY: 0,
     },
 
     // Hastings
     {
-      lat: 44.765451,
-      long: -92.805478,
+      lat: 44.735451,
+      long: -92.75,
       place: 'Hastings',
       englishPlaceName: 'Saint Croix River',
       dakotaPlaceName: 'Okizuwakpa',
       nameFilename: 'saint-croix-name.mp4',
-      explainFilename: 'saint-croix-explain.mp4',
+      explainFilename: 'saint-croix-explained.mp4',
+      description: 'Okizuwakpa is again, the meeting of two rivers. The Saint Croix ' +
+      'River as it drains into the Mississippi River. The one story concerning the ' +
+      'Saint Croix river in that area is the myth, or the story of the fishwoman, ' +
+      'the woman who turned into a fish. And that happened around the Saint Croix River.',
       offsetX: 0,
       offsetY: 0,
     },
@@ -164,7 +184,9 @@ if (Dakota.find().count() === 0) {
       englishPlaceName: 'Pike Island',
       dakotaPlaceName: 'Wita Tanka',
       nameFilename: 'pike-island-name.mp4',
-      explainFilename: 'pike-island-explain.mp4',
+      explainFilename: 'pike-island-explained.mp4',
+      description: 'Wita Tanka. Wita is an island and Tanka is big. ' +
+      'So Pike Island therefore in a Dakota translation would be the "big island."',
       offsetX: 0,
       offsetY: 0,
     },
@@ -176,7 +198,11 @@ if (Dakota.find().count() === 0) {
       englishPlaceName: 'Minnesota River',
       dakotaPlaceName: 'Wakpa Minisota',
       nameFilename: 'minnesota-river-name.mp4',
-      explainFilename: 'minnesota-river-explain.mp4',
+      explainFilename: 'minnesota-river-explained.mp4',
+      description: 'Wakpa Minisota, the Minnesota River. Minisota is the kind of ' +
+      'the "reflection of the skies river." So if the sky was blue, well then the river ' +
+      'would have a blue tint to it and if the sky was grey it would have a ' +
+      'grey tint to it.',
       offsetX: 0,
       offsetY: 0,
     },
@@ -188,7 +214,13 @@ if (Dakota.find().count() === 0) {
       englishPlaceName: 'Meeting of the Rivers',
       dakotaPlaceName: 'Okiżu wakpa',
       nameFilename: 'meeting-rivers-name.mp4',
-      explainFilename: 'meeting-rivers-explain.mp4',
+      explainFilename: 'meeting-rivers-explained.mp4',
+      description: 'Okiżu wakpa is the confluence of the Mississippi and the ' +
+      'Minnesota Rivers. The creation myth of the Mdewakantonwan is that this is where the Dakota ' +
+      'first appeared on Earth as human beings. They descended from the seven fires, or the seven ' +
+      'stars of the Plieades and arrived at the confluence of the MIssissippi and Minnesota river, where ' +
+      'they became Dakota. And the irony about that, is that it\'s the same island where the Dakota people ' +
+      'were held captive after the war of 1862.',
       offsetX: 0,
       offsetY: 0,
     },

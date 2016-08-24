@@ -62,66 +62,66 @@ function drawDakotaPlaceNames(selectedPlace, dakota, state) {
     }
 
     if (placeName.englishPlaceName === 'Saint Paul') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
+      labelPosX = (transX - 180);
+      labelPosY = (point[1] - 240);
       labelWidth = 210;
-      lineOffsetX = 200;
+      lineOffsetX = 181;
       lineOffsetY = 100;
       labelRotation = -3;
     }
 
     if (placeName.englishPlaceName === 'Spirit Island') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
-      labelWidth = 210;
+      labelPosX = (transX - 100);
+      labelPosY = (point[1] + 10);
+      labelWidth = 211;
       lineOffsetX = 200;
       lineOffsetY = 100;
       labelRotation = -3;
     }
 
     if (placeName.englishPlaceName === 'Saint Anthony Falls') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
-      labelWidth = 210;
+      labelPosX = (transX - 140);
+      labelPosY = (point[1] - 280);
+      labelWidth = 260;
       lineOffsetX = 200;
       lineOffsetY = 100;
-      labelRotation = -3;
+      labelRotation = 3;
     }
 
     if (placeName.englishPlaceName === 'Nicollet Island') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
-      labelWidth = 210;
+      labelPosX = (transX - 230);
+      labelPosY = (point[1] - 440);
+      labelWidth = 220;
       lineOffsetX = 200;
       lineOffsetY = 100;
       labelRotation = -3;
     }
 
     if (placeName.englishPlaceName === 'Little Crow’s Village') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
-      labelWidth = 210;
+      labelPosX = (transX - 180);
+      labelPosY = (point[1] + 101);
+      labelWidth = 250;
       lineOffsetX = 200;
       lineOffsetY = 100;
-      labelRotation = -3;
+      labelRotation = 3;
     }
 
     if (placeName.englishPlaceName === 'Carver’s Cave') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
-      labelWidth = 210;
+      labelPosX = (transX - 180);
+      labelPosY = (point[1] - 241);
+      labelWidth = 220;
       lineOffsetX = 200;
       lineOffsetY = 100;
       labelRotation = -3;
     }
 
     if (placeName.englishPlaceName === 'Saint Croix River') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
-      labelWidth = 210;
+      labelPosX = (transX - 321);
+      labelPosY = (point[1] - 380);
+      labelWidth = 250;
       lineOffsetX = 200;
       lineOffsetY = 100;
-      labelRotation = -3;
+      labelRotation = 0;
     }
 
     if (placeName.englishPlaceName === 'Fort Snelling') {
@@ -152,7 +152,7 @@ function drawDakotaPlaceNames(selectedPlace, dakota, state) {
     }
 
     if (placeName.englishPlaceName === 'Meeting of the Rivers') {
-      labelPosX = (transX - 210);
+      labelPosX = (transX - 211);
       labelPosY = (point[1] - 400);
       labelWidth = 260;
       lineOffsetX = 200;

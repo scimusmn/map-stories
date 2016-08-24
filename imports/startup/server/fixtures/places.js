@@ -30,10 +30,10 @@ Meteor.startup(() => {
       },
       {
         name: 'Lock and Dam #1',
-        lat: 44.915270,
+        lat: 44.945270,
         long: -93.200567,
         offsetX: -440,
-        offsetY: -20,
+        offsetY: 30,
       },
       {
         name: 'Fort Snelling',
@@ -44,10 +44,10 @@ Meteor.startup(() => {
       },
       {
         name: 'Saint Paul',
-        lat: 44.892222,
-        long: -93.165278,
-        offsetX: -30,
-        offsetY: -360,
+        lat: 44.95,
+        long: -93.099681,
+        offsetX: -90,
+        offsetY: -250,
       },
       {
         name: 'Mendota',

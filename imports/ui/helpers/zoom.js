@@ -201,6 +201,7 @@ export function playDakota(clicked, state) {
     .addClass('dakota-container');
 
   const $dakotaStage = $('<div/>')
+    .attr('id', `dakota-stage-${selectedDakota.slug}`)
     .addClass('dakota-stage');
 
   const $close = $('<i/>')
