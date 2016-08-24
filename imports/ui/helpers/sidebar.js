@@ -35,7 +35,7 @@ function drawDakotaPlaceNames(selectedPlace, dakota, state) {
     let labelRotation = _.sample(['-3', '3']);
 
     if (placeName.englishPlaceName === 'Mendota') {
-      labelPosX = (transX + -130);
+      labelPosX = (transX + -131);
       labelPosY = (point[1] + -250);
       labelWidth = 170;
       lineOffsetX = 120;
@@ -125,39 +125,39 @@ function drawDakotaPlaceNames(selectedPlace, dakota, state) {
     }
 
     if (placeName.englishPlaceName === 'Fort Snelling') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
+      labelPosX = (transX - 240);
+      labelPosY = (point[1] - 240);
       labelWidth = 210;
-      lineOffsetX = 200;
+      lineOffsetX = 190;
       lineOffsetY = 100;
       labelRotation = -3;
     }
 
     if (placeName.englishPlaceName === 'Pike Island') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
+      labelPosX = (transX - 110);
+      labelPosY = (point[1] + 30);
       labelWidth = 210;
-      lineOffsetX = 200;
+      lineOffsetX = 150;
       lineOffsetY = 100;
       labelRotation = -3;
     }
 
     if (placeName.englishPlaceName === 'Minnesota River') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
-      labelWidth = 210;
-      lineOffsetX = 200;
+      labelPosX = (transX - 160);
+      labelPosY = (point[1] + 24);
+      labelWidth = 280;
+      lineOffsetX = 150;
       lineOffsetY = 100;
-      labelRotation = -3;
+      labelRotation = 3;
     }
 
     if (placeName.englishPlaceName === 'Meeting of the Rivers') {
-      labelPosX = (transX - 80);
-      labelPosY = (point[1] - 40);
-      labelWidth = 210;
+      labelPosX = (transX - 210);
+      labelPosY = (point[1] - 400);
+      labelWidth = 260;
       lineOffsetX = 200;
       lineOffsetY = 100;
-      labelRotation = -3;
+      labelRotation = 3;
     }
 
     setTimeout(function () {

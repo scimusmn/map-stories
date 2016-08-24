@@ -197,24 +197,91 @@ export function playDakota(clicked, state) {
     return dakotaPlace._id === $clickedLabel[0].id.replace('dakota-', '');
   });
 
-  let $dakotaContainer = $('<div/>')
+  const $dakotaContainer = $('<div/>')
     .addClass('dakota-container');
 
-  let $dakotaStage = $('<div/>')
+  const $dakotaStage = $('<div/>')
     .addClass('dakota-stage');
 
-  let $close = $('<i/>')
+  const $close = $('<i/>')
     .addClass('fa fa-times ')
     .attr('aria-hidden', 'true');
 
+  const $dakotaVideoTag = $('<video/>')
+    .attr('id', `dak-vid-${selectedDakota._id}`)
+    .attr('src', `video/${selectedDakota.nameFilename}`)
+    .css('transform', 'rotateY(180deg)')
+    .attr('width', 640)
+    .attr('height', 480);
+
+  const $englishVideoTag = $('<video/>')
+    .attr('id', `eng-vid-${selectedDakota._id}`)
+    .attr('src', `video/${selectedDakota.explainFilename}`)
+    .attr('width', 640)
+    .attr('height', 480);
+
+  const $dakotaVideoStage = $('<div/>')
+    .addClass('dakota-video-stage');
+
+  const $dakotaWord = $('<div/>')
+    .addClass('dakota-title-word')
+    .addClass('dakota-title')
+    .html(selectedDakota.dakotaPlaceName);
+
+  $dakotaVideoStage
+    .append($dakotaVideoTag);
+
+  const $englishVideoStage = $('<div/>')
+    .addClass('english-video-stage');
+
+  const $englishWord = $('<div/>')
+    .addClass('dakota-title-word')
+    .html(selectedDakota.englishPlaceName);
+
+  const $englishDesc = $('<p/>')
+    .addClass('dakota-description')
+    .html(selectedDakota.description);
+
+  $englishVideoStage
+    .append($englishVideoTag);
+
+  const $stageTitle = $('<div/>')
+    .addClass('dakota-stage-title')
+    .html('What do the Dakota people call these places along the Mississippi?');
+
   $dakotaStage
+    .append($stageTitle)
+    .append($dakotaVideoStage)
+    .append($englishVideoStage)
+    .append($dakotaWord)
+    .append($englishWord)
+    .append($englishDesc)
     .append($close);
 
   $dakotaContainer
-    .append($dakotaStage)
+    .append($dakotaStage);
 
   $('#dakota-place-names')
-    .append($dakotaContainer)
+    .append($dakotaContainer);
+
+  // Play Dakota word
+  $(`#dak-vid-${selectedDakota._id}`)[0].play();
+
+  // When that ends play the English explanation
+  const dakVideo = document.getElementById(`dak-vid-${selectedDakota._id}`);
+  dakVideo.onended = function() {
+    console.log('playing english');
+    const $posterImage = $('<img/>')
+      .attr('src', 'video/name.jpg');
+    $('.dakota-video-stage')
+      .children()
+      .fadeOut(dur.default);
+    $('.dakota-video-stage')
+      .append($posterImage)
+      .hide()
+      .fadeIn(dur.default);
+    $(`#eng-vid-${selectedDakota._id}`)[0].play();
+  };
 
 }
 

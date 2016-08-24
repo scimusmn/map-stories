@@ -541,11 +541,62 @@ form.edit-image {
  * ----------------------------------------------------------------------------
  */
 .dakota-stage {
-  z-index: 999;
+  z-index: 99999;
   position: relative;
   background: @tan;
   margin: 40px auto;
   border: 8px solid #EEE;
-  width: 80%;
-  height: 600px;
+  width: 1308px;
+  background: url('images/ricepaper.png');
+}
+
+.dakota-stage-title {
+  width: 1290px;
+  font-family: national-bold, sans-serif;
+  font-size: 40px;
+  background: @drk-blue;
+  opacity: .9;
+  color: @tan;
+  margin-bottom: 10px;
+}
+
+.dakota-video-stage {
+  margin-right: 10px;
+}
+
+.english-video-stage,
+.dakota-video-stage {
+  display: block;
+  float: left;
+  overflow:hidden;
+  height: 460px;
+  max-height: 460px;
+  width: 640px;
+  background: #000;
+}
+
+.english-video-stage video,
+.dakota-video-stage video {
+  margin-top: -10px;
+}
+
+.dakota-title-word {
+  float: left;
+  width: 640px;
+  font-family: national-bold, sans-serif;
+  font-size: 60px;
+  color: @drk-blue;
+  text-align: center;
+}
+
+.dakota-title {
+  font-family: national-semibold-ital, sans-serif;
+}
+
+p.dakota-description {
+  font-size: 40px;
+  font-family: 'national-thin', sans-serif;
+  color: @drk-blue;
+  padding: 10px 250px;
+  text-align: left;
 }
