@@ -63,7 +63,7 @@ export default class ListPlaces extends React.Component {
             to explore<br/>
             the history<br/>
             along the<br/>
-            Mississippi River
+            Mississippi River.
           </h3>
           <div id="sidebar-content">
             <div id="location-content">
