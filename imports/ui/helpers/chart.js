@@ -174,6 +174,16 @@ d3Chart.create = function createChart(el, props, state) {
   $(document).on('click', '.image-highlight', (e) => {
     zoomImage(e.target, state);
   });
+  // Handle zoom icon click
+  $(document).on('click', '.fa-search-plus', (e) => {
+    const target = $('.image-highlight')[0];
+    zoomImage(target, state);
+  });
+  // Handle zoom caption click
+  $(document).on('click', '.image-caption', (e) => {
+    const target = $('.image-highlight')[0];
+    zoomImage(target, state);
+  });
 
   /**
    * Handle close click for image highlights
