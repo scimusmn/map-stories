@@ -23,6 +23,8 @@ const dur = appDurations();
  * @param state
  */
 function reDrawHomePage(el, state) {
+  hideZoomImage();
+
   collapseSidebar();
 
   // Reset the background map
@@ -244,7 +246,7 @@ d3Chart.create = function createChart(el, props, state) {
   $(document).on('click', '.zoom-image-container', (e) => {
     const $test = $(e.target);
     if (!($test).is('.zoom-image')) {
-      hideZoomImage(this, state);
+      hideZoomImage();
     }
     return false;
   });

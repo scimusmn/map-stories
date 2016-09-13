@@ -6,11 +6,8 @@ const dur = appDurations();
 
 /**
  * Hide the zoom image
- *
- * @param clicked
- * @param state
  */
-export function hideZoomImage(clicked, state) {
+export function hideZoomImage() {
   $('.zoom-image-container')
     .fadeOut(dur.default, function () {
       $(this)
