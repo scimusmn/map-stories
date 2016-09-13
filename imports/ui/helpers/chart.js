@@ -138,9 +138,18 @@ d3Chart.create = function createChart(el, props, state) {
    * Screensaver
    */
   function showScreensaver() {
+
     $('#screensaver')
-      .fadeIn(dur.default)
-      .show();
+      .fadeIn(
+        dur.default,
+        () => {
+          const homeButtonVisible = $('.home-button').is(':visible');
+          if (homeButtonVisible) {
+            console.log('returning to the home page');
+            reDrawHomePage(el, state);
+          }
+        }
+      );
   }
 
   function hideScreensaver() {
