@@ -99,6 +99,7 @@ function zoomMap(state, selectedPlace) {
  * @param {object} state Meteor data via React state
  */
 function drawDetailPage(clicked, state) {
+
   // Selected place ID
   const selectedPlaceId = $(clicked).attr('id');
 
@@ -133,6 +134,49 @@ function drawDetailPage(clicked, state) {
  */
 const d3Chart = {};
 d3Chart.create = function createChart(el, props, state) {
+  /**
+   * Screensaver
+   */
+  function showScreensaver() {
+    $('#screensaver')
+      .fadeIn(dur.default)
+      .show();
+  }
+
+  function hideScreensaver() {
+    const $screensaver = $('#screensaver');
+    $screensaver
+      .fadeOut(
+        dur.default,
+        () => $screensaver.hide()
+      );
+  }
+
+  const screensaver = {
+    activate() {
+      showScreensaver();
+      this.timeoutID = undefined;
+    },
+
+    setup() {
+      if (typeof this.timeoutID === 'number') {
+        this.cancel();
+      }
+      this.timeoutID = window.setTimeout((msg) => {
+        this.activate(msg);
+      }, 3000, 'Screensaver activated');
+    },
+
+    cancel() {
+      console.log('Canceling');
+      hideScreensaver();
+      window.clearTimeout(this.timeoutID);
+      this.timeoutID = undefined;
+    },
+
+  };
+  screensaver.setup();
+
   /**
    * Set up the homepage map
    */
@@ -227,6 +271,14 @@ d3Chart.create = function createChart(el, props, state) {
     if (!($test).is('.dakota-stage')) {
       hideDakota(this, state);
     }
+  });
+
+  /**
+   * Reset screensaver timer on any event
+   */
+  $(document).on('click', '', () => {
+    screensaver.cancel();
+    screensaver.setup();
   });
 
 };

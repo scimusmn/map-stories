@@ -54,6 +54,7 @@ export default class ListPlaces extends React.Component {
           settings={this.state.settings}
           data={this.state.data}
           domain={this.state.domain} />
+        <div id="screensaver"></div>
         <div id="dakota-place-names"></div>
         <div id="then-now"></div>
         <div id="map-sidebar-background" className="map-sidebar-home"></div>
