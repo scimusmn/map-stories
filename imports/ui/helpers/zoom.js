@@ -127,9 +127,17 @@ export function zoomThenNow(clicked, state) {
     .addClass('then-date')
     .html(selectedThenNow.thenYear);
 
+  var $thenCredit = $('<div/>')
+    .addClass('then-credit')
+    .html(selectedThenNow.thenCredit);
+
   var $nowDate = $('<div/>')
     .addClass('now-date')
     .html(selectedThenNow.nowYear);
+
+  var $nowCredit = $('<div/>')
+    .addClass('now-credit')
+    .html(selectedThenNow.nowCredit);
 
   // Define close button
   let $thenNowZoomClose = $('<i/>')
@@ -152,7 +160,9 @@ export function zoomThenNow(clicked, state) {
     .append($thenImage)
     .append($nowImage)
     .append($thenDate)
+    .append($thenCredit)
     .append($nowDate)
+    .append($nowCredit)
     .append($thenNowZoomClose);
   $($thenNowImageContainer)
     .append($thenNowZoomCloseContainer);
