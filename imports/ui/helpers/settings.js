@@ -24,6 +24,9 @@ export function appDurations() {
   // Timing for circle bounce
   dur.bounce = 300;
 
+  // Screensaver timeout
+  dur.screensaver = 300000;
+
   return dur;
 }
 

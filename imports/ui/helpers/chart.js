@@ -140,14 +140,12 @@ d3Chart.create = function createChart(el, props, state) {
    * Screensaver
    */
   function showScreensaver() {
-
     $('#screensaver')
       .fadeIn(
         dur.default,
         () => {
           const homeButtonVisible = $('.home-button').is(':visible');
           if (homeButtonVisible) {
-            console.log('returning to the home page');
             reDrawHomePage(el, state);
           }
         }
@@ -175,11 +173,10 @@ d3Chart.create = function createChart(el, props, state) {
       }
       this.timeoutID = window.setTimeout((msg) => {
         this.activate(msg);
-      }, 3000, 'Screensaver activated');
+      }, dur.screensaver, 'Screensaver activated');
     },
 
     cancel() {
-      console.log('Canceling');
       hideScreensaver();
       window.clearTimeout(this.timeoutID);
       this.timeoutID = undefined;
