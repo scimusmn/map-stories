@@ -453,6 +453,7 @@ h3 {
   background: #DDD;
 }
 
+
 /**
  * ----------------------------------------------------------------------------
  * Screensaver
@@ -544,13 +545,47 @@ form.edit-image {
   position: absolute;
   top: 0;
   left: 0;
+  font-weight: bold;
 }
 
 /**
  * ----------------------------------------------------------------------------
- * Dakota player
+ * Dakota specialized characters
+ *
+ * Our font is missing some important Dakota alphabet characters,
+ * so we use some special CSS classes to mash a few letters together to
+ * "create" the missing letters.
  * ----------------------------------------------------------------------------
  */
+.s-dot {
+  margin-left: -4px;
+}
+
+.dakota-title-word .s-dot {
+  margin-left: -11px;
+}
+
+.dakota-description .s-dot {
+  margin-left: -7px;
+}
+
+.h-dot {
+  margin-left: -5px;
+}
+
+.dakota-title-word .h-dot {
+  margin-left: -14px;
+}
+
+.dakota-description .h-dot {
+  margin-left: -10px;
+}
+
+  /**
+   * ----------------------------------------------------------------------------
+   * Dakota player
+   * ----------------------------------------------------------------------------
+   */
 .dakota-stage {
   z-index: 999;
   position: relative;
