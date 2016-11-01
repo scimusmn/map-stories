@@ -168,16 +168,11 @@ export function zoomThenNow(clicked, state) {
   $($thenNowImageContainer)
     .fadeIn(dur.default);
 
-  /**
-   * Make the Then & Now slider work with finger drags as well as single
-   * presses
-   */
-  $(document).on('touchstart touchmove', '', function(e) {
-    var xPos = e.originalEvent.touches[0].pageX;
-
+  document.getElementById('then-now-zoom-slider');
+  document.addEventListener('mousemove', function(e) {
     const $test = $(e.target);
     if (($test).is('.then-now-zoom-image')) {
-      const mouseX = xPos - $test.offset().left;
+      const mouseX = e.pageX - $test.offset().left;
 
       const imgW = $('.now-zoom-image').outerWidth();
       const imgH = $('.now-zoom-image').outerHeight();
