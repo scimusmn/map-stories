@@ -120,6 +120,27 @@ export function zoomThenNow(clicked, state) {
     .css('clip', `rect(0px, ${imageWidth}px, ${imageHeight}px, ${imageMiddle}px)`)
     .attr('src', 'images/then-now/' + selectedThenNow.nowFilename);
 
+  var thenNowBoundaryOffset = 10;
+  var thenNowMsgOffset = 109;
+  if (selectedThenNow.slug === 'saint-anthony-falls-1865-2008') {
+    thenNowBoundaryOffset = 40;
+    thenNowMsgOffset = 80;
+  }
+  if (selectedThenNow.slug === 'bohemian-flats-1880-2016') {
+    thenNowBoundaryOffset = 3;
+    thenNowMsgOffset = 115;
+  }
+
+  var $thenNowBoundary = $('<div/>')
+    .addClass(`then-now-boundary then-now-${selectedThenNow.slug}`)
+    .css('height', imageHeight)
+    .css('left', `${imageMiddle + thenNowBoundaryOffset}px`);
+
+  var $thenNowBoundaryMsg = $('<div/>')
+    .addClass(`then-now-boundary-msg then-now-${selectedThenNow.slug}`)
+    .css('left', `${imageMiddle - thenNowMsgOffset}px`)
+    .html('Touch to move the slider<br>&larr; &nbsp; &nbsp; &rarr;');
+
   var $thenDate = $('<div/>')
     .addClass('then-date')
     .html(selectedThenNow.thenYear);
@@ -156,6 +177,8 @@ export function zoomThenNow(clicked, state) {
   $($thenNowZoomCloseContainer)
     .append($thenImage)
     .append($nowImage)
+    .append($thenNowBoundary)
+    .append($thenNowBoundaryMsg)
     .append($thenDate)
     .append($thenCredit)
     .append($nowDate)
@@ -179,6 +202,32 @@ export function zoomThenNow(clicked, state) {
 
       $('.now-zoom-image')
         .css('clip', `rect(0px, ${imgW}px, ${imgH}px, ${mouseX}px)`);
+
+
+      // var thenNowBoundaryOffset = 10;
+      // var thenNowMsgOffset = 109;
+      // if (selectedThenNow.slug === 'saint-anthony-falls-1865-2008') {
+      //   thenNowBoundaryOffset = 40;
+      //   thenNowMsgOffset = 80;
+      // }
+      $('.then-now-boundary')
+        .css('left', `${mouseX + 10}px`);
+
+      $('.then-now-boundary.then-now-saint-anthony-falls-1865-2008')
+        .css('left', `${mouseX + 40}px`);
+
+      $('.then-now-boundary.then-now-bohemian-flats-1880-2016')
+        .css('left', `${mouseX + 3}px`);
+
+      $('.then-now-boundary-msg')
+        .css('left', `${mouseX - 109}px`);
+
+      $('.then-now-boundary-msg.then-now-saint-anthony-falls-1865-2008')
+        .css('left', `${mouseX - 80}px`);
+
+      $('.then-now-boundary-msg.then-now-bohemian-flats-1880-2016')
+        .css('left', `${mouseX - 115}px`);
+
     }
   });
 }
