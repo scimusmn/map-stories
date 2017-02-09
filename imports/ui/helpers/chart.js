@@ -260,7 +260,10 @@ d3Chart.create = function createChart(el, props, state) {
    */
   $(document).on('click', '.then-now-zoom-image-container', (e) => {
     const $test = $(e.target);
-    if (!($test).is('.then-now-zoom-image')) {
+    if (
+      ($test).is('.then-now-zoom-image-container') ||
+      ($test).is('.fa-times')
+    ) {
       hideZoomThenNow(this, state);
     }
   });
